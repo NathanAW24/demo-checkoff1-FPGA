@@ -3,9 +3,11 @@
   <files>
     <src>adder_autotester.luc</src>
     <src top="true">au_top.luc</src>
+    <src>boolean_autotester.luc</src>
     <src>multiplier_autotester.luc</src>
     <component>pipeline.luc</component>
     <component>counter.luc</component>
+    <src>compare_autotester.luc</src>
     <component>decoder.luc</component>
     <src>shifter.luc</src>
     <src>boolean.luc</src>
@@ -19,6 +21,7 @@
     <component>reset_conditioner.luc</component>
     <component>edge_detector.luc</component>
     <component>button_conditioner.luc</component>
+    <src>shifter_autotester.luc</src>
     <src>seven_seg.luc</src>
     <constraint lib="true">alchitry.acf</constraint>
     <constraint lib="true">io.acf</constraint>

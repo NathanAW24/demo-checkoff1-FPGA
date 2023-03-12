@@ -10,7 +10,7 @@ module multiplier_autotester (
     output out[16]
   ) {
   
-  // 4 dffs for 4 bits
+  // register to store the current test case  number 
   dff current_test_case_register[5](.clk(clk), .rst(rst)); // 15 cases
   
   
