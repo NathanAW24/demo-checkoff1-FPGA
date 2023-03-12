@@ -57,6 +57,7 @@ module adder_autotester (
             alu_unit.b= 16h0000;
             alu_unit.alufn_signal = 6b0;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
                     
             if (alu_unit.out != 16h0000){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -70,6 +71,7 @@ module adder_autotester (
             alu_unit.a = 16h8001;
             alu_unit.b= 16h8000;
             alu_unit.alufn_signal = 6b0;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0001){
@@ -85,6 +87,7 @@ module adder_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b0;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0002){
@@ -101,6 +104,7 @@ module adder_autotester (
             alu_unit.a = 16h0004;
             alu_unit.b= 16hFFFF;
             alu_unit.alufn_signal = 6b0;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0003){
@@ -115,6 +119,7 @@ module adder_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b= 16hF000;
             alu_unit.alufn_signal = 6b0;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16hF001){
@@ -130,6 +135,7 @@ module adder_autotester (
             alu_unit.a = 16h0000;
             alu_unit.b= 16h0000;
             alu_unit.alufn_signal = 6b000001;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0000){
@@ -147,6 +153,7 @@ module adder_autotester (
             alu_unit.a = 16h0002;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b000001;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0001){
@@ -162,6 +169,7 @@ module adder_autotester (
             alu_unit.a = 16h7FFF;
             alu_unit.b= 16h8001;
             alu_unit.alufn_signal = 6b000001;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16hFFFE){
@@ -178,6 +186,7 @@ module adder_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b= 16hFFFF;
             alu_unit.alufn_signal = 6b000001;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0002){
@@ -192,6 +201,7 @@ module adder_autotester (
             alu_unit.a = 16h8000;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b000001;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h7FFF){
@@ -208,6 +218,7 @@ module adder_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b000001;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16hFFFE){
@@ -224,6 +235,7 @@ module adder_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b= 16hFFFF;
             alu_unit.alufn_signal = 6b000001;
+            current_statusPF = 1;
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0000){

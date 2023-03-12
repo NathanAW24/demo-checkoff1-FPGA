@@ -67,6 +67,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0000; 
             alu_unit.b = 16h0000;                       
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
             
             
             // fail test case            
@@ -84,6 +85,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b = 16h0001;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
             
             if (alu_unit.out != 16h0001) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -97,6 +99,7 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hFFFF;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h0001) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -112,6 +115,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0000;
             alu_unit.b = 16h00FF;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h0000) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -127,6 +131,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b = 16h00FF;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h00FF) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -143,6 +148,7 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16h00FF;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16hFF01) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -157,6 +163,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h0) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -172,6 +179,7 @@ module multiplier_autotester (
             alu_unit.a = 16h1;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16hF000) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -186,6 +194,7 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -201,6 +210,7 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -215,6 +225,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0F00;
             alu_unit.b = 16h00F0;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -231,6 +242,7 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFE;
             alu_unit.b = 16hFFF8;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h0010) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -246,6 +258,7 @@ module multiplier_autotester (
             alu_unit.a = 16hFF00;
             alu_unit.b = 16hF0F0;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -261,6 +274,7 @@ module multiplier_autotester (
             alu_unit.a = 16h2;
             alu_unit.b = 16hFFF8;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16hFFF0) {
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -277,6 +291,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0F00;
             alu_unit.b = 16hF0F0;
             current_test_case = current_test_case_register.q;
+            current_statusPF = 1;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
