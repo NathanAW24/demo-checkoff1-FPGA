@@ -1,0 +1,278 @@
+module shifter_autotester (
+    input clk,  // clock
+    input rst,  // reset
+    input button_next_test_case[1], // down btn press 
+    input button_speed_through[1], // up button press 
+    input button_reset,
+    input inv[1],
+    output current_test_case[5],
+    output current_statusPF[2],
+    output out[16]
+  ) {
+  
+  // register to store the current test case  number 
+  dff current_test_case_register[5](.clk(clk) , .rst(rst));
+  
+  // register to set the tester on speed through tests all
+  // test cases at once no waiting for button 
+  dff speed_through[1](.clk(clk) , .rst(rst));
+  
+  // Declare the fsm states
+  fsm state (.clk(clk), .rst(rst)) = {IDLE, TESTING, PASS};
+  fsm track_failure (.clk(clk), .rst(rst)) = {NULL, FAIL_BEFORE};
+  
+  //import alu
+  alu aluUnit; 
+  
+  always {
+    // Declare initial values
+    current_test_case = 5b0;
+    aluUnit.a = 16b0;
+    aluUnit.b = 16b0;
+    aluUnit.inv = inv ; 
+    aluUnit.alufn_signal = 6b0; // default adder 
+    state.d = state.IDLE;
+    current_statusPF = 0 ; 
+    
+    if(button_speed_through){
+      speed_through.d = b1; 
+      }
+    
+    case(state.q){
+      state.IDLE:
+        if(speed_through.q){
+          state.d = state.TESTING; 
+          current_test_case_register.d = current_test_case_register.q + 1;
+        }
+        if(button_next_test_case){
+          state.d = state.TESTING; 
+          current_test_case_register.d = current_test_case_register.q +1 ;
+          }
+        
+       state.TESTING: 
+      
+         case(current_test_case_register.q){
+          // Cases 1 - 4 : TEST SHIFT LEFT
+          // Case 1 : Shift FFFF left by 8 bits
+          5b00001:
+            aluUnit.a = 16hFFFF;
+            aluUnit.b = 16h0008;
+            aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16hFF00){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+          // Case 2 : Shift FFFF left by 0 
+          5b00010:
+            aluUnit.a = 16hFFFF;
+            aluUnit.b = 16h0000;
+            aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16hFFFF){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+            
+            // Case 3 : Shift F0F0 left by 4
+            5b00011:
+            aluUnit.a = 16hF0F0;
+            aluUnit.b = 16h0004;
+            aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16h0F00){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+            // Case 4 : Shift F00F left by 15
+            5b00100:
+            aluUnit.a = 16hF00F;
+            aluUnit.b = 16h000F;
+            aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16h8000){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+            // Cases 5 - 8 : TEST SHIFT RIGHT
+            // Case 5 : Shift FFFF right by 8 bits
+          5b00101:
+            aluUnit.a = 16hFFFF;
+            aluUnit.b = 16h0008;
+            aluUnit.alufn_signal = 6b100001; // Shift Right ALUFn
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16h00FF){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+          // Case 6 : Shift FFFF right by 0 
+          5b00110:
+            aluUnit.a = 16hFFFF;
+            aluUnit.b = 16h0000;
+            aluUnit.alufn_signal = 6b100001; // Shift Right ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16hFFFF){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+            
+            // Case 7 : Shift F0F0 right by 4
+            5b00111:
+            aluUnit.a = 16hF0F0;
+            aluUnit.b = 16h0004;
+            aluUnit.alufn_signal = 6b100001; // Shift Right ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16h0F0F){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+            // Case 8 : Shift F00F right by 15
+            5b01000:
+            aluUnit.a = 16hF00F;
+            aluUnit.b = 16h000F;
+            aluUnit.alufn_signal = 6b100001; // Shift Left ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16h0001){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;
+            
+            
+            // Cases 9 - 13 : TEST SHIFT RIGHT AR
+            // Case 9 : Shift FFFF right arithmetically by 8 bits
+          5b01001:
+            aluUnit.a = 16hFFFF;
+            aluUnit.b = 16h0008;
+            aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetic ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16hFFFF){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+          // Case 10 : Shift FFFF right arithmetically by 0 
+          5b01010:
+            aluUnit.a = 16hFFFF;
+            aluUnit.b = 16h0000;
+            aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16hFFFF){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+            
+            // Case 11 : Shift F0F0 right arithmetically by 4
+            5b01011:
+            aluUnit.a = 16hF0F0;
+            aluUnit.b = 16h0004;
+            aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16hFF0F){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;  
+            
+            // Case 12 : Shift F00F right arithmetically by 15
+            5b01100:
+            aluUnit.a = 16hF00F;
+            aluUnit.b = 16h000F;
+            aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16hFFFF){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;
+            
+            // Case 13 : Shift 1234 right arithmetically by 4
+            5b01101:
+            aluUnit.a = 16h1234;
+            aluUnit.b = 16h0004;
+            aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
+            current_test_case = current_test_case_register.q;
+                    
+            if (aluUnit.out != 16h0123){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            
+            state.d = state.IDLE;
+            
+            // If all no fail, return pass
+            5b01110:
+            state.d = state.PASS;
+          
+        }
+    
+    state.PASS:
+      if(track_failure.q == track_failure.FAIL_BEFORE){
+            current_statusPF = 2 ;
+            }
+      else{
+            current_statusPF = 1;
+            }
+      if(button_reset){
+            state.d = state.IDLE;
+          }
+          
+      }
+    
+    out = aluUnit.out;
+    
+}
