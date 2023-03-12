@@ -1,0 +1,313 @@
+module multiply_tester (
+    input clk,  // clock
+    input rst,  // reset
+    input button_next_test_case[1], // down btn press 
+    input button_speed_through[1], // up button press 
+    input button_reset,
+    input inv[1],
+    output current_test_case[5],
+    output current_statusPF[2], // current status pass-fail, 0 is never start, 1 success, 2 fail
+    output out[16]
+  ) {
+  
+  // 4 dffs for 4 bits
+  dff current_test_case_register[5](.clk(clk), .rst(rst)); // 15 cases
+  
+  
+  // register to set the tester on speed through tests all
+  // test cases at once no waiting for button 
+  dff speed_through[1](.clk(clk) , .rst(rst));
+
+  
+  // Declare the fsm states
+  fsm state (.clk(clk), .rst(rst)) = {IDLE, TESTING, PASS};
+  fsm track_failure (.clk(clk), .rst(rst)) = {NULL, FAIL_BEFORE};
+  
+  // import alu
+  alu alu_unit;
+
+  always {
+    // declare initial values
+    current_test_case = 5b0; // start from first case (5b0)
+    alu_unit.a = 16b0;
+    alu_unit.b = 16b0;
+    alu_unit.inv = inv;
+    alu_unit.alufn_signal = 6b000010; // SIGNAL FOR MULTIPLIER
+    // starts at idle state, before testing
+    state.d = state.IDLE;
+    // status starts from never start
+    current_statusPF = 0;
+    
+    // check if up button is pressed or not
+    if (button_speed_through) {
+      speed_through.d = b1;
+    }
+    
+    case (state.q) {
+    
+      
+      // when it is at IDLE state      
+      state.IDLE:
+        if(speed_through.q){
+          state.d = state.TESTING; 
+          current_test_case_register.d = current_test_case_register.q + 1;
+        }
+        if(button_next_test_case){
+          state.d = state.TESTING; 
+          current_test_case_register.d = current_test_case_register.q +1 ;
+          }
+        
+       
+      // when it is at TESTING state
+      state.TESTING:
+      case(current_test_case_register.q) {
+        
+         //0*0
+          b00001:
+            alu_unit.a = 16h0000; 
+            alu_unit.b = 16h0000;                       
+            current_test_case = current_test_case_register.q;
+            
+            
+            // fail test case            
+            if (alu_unit.out != 16h0000) {
+              // track
+              track_failure.d = track_failure.FAIL_BEFORE;
+              // current status is fail
+              current_statusPF = 2;  
+            }
+            state.d = state.IDLE;
+            
+            
+         // 1*1 (pos*pos)
+          b00010:
+            alu_unit.a = 16h0001;
+            alu_unit.b = 16h0001;
+            current_test_case = current_test_case_register.q;
+            
+            if (alu_unit.out != 16h0001) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+            state.d = state.IDLE;
+            
+         // -1 * -1 (neg * neg)
+          b00011:
+            alu_unit.a = 16hFFFF;
+            alu_unit.b = 16hFFFF;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h0001) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;
+         
+            
+          // 0 * 0x00FF
+          b00100:
+            alu_unit.a = 16h0000;
+            alu_unit.b = 16h00FF;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h0000) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;
+            
+            
+          // 1 * 0x00FF
+          b00101:
+            alu_unit.a = 16h0001;
+            alu_unit.b = 16h00FF;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h00FF) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;
+            
+            
+            
+          // -1 * 0x00FF
+          b00110:
+            alu_unit.a = 16hFFFF;
+            alu_unit.b = 16h00FF;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16hFF01) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;           
+            
+          // 0 & 0xF000
+          b00111: // 7
+            alu_unit.a = 16h0;
+            alu_unit.b = 16hF000;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h0) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;
+            
+            
+          // 1*0xF000
+          b01000: // 8
+            alu_unit.a = 16h1;
+            alu_unit.b = 16hF000;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16hF000) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;
+          
+          // -1*0xF000
+          b01001: // 9
+            alu_unit.a = 16hFFFF;
+            alu_unit.b = 16hF000;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h1000) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;
+             
+         
+          // -1*0xF000
+          b01010://10
+            alu_unit.a = 16hFFFF;
+            alu_unit.b = 16hF000;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h1000) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;          
+
+          // h0F00 * h00F0 = 921600 dec (hE1000)
+          b01011://11
+            alu_unit.a = 16h0F00;
+            alu_unit.b = 16h00F0;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h1000) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;
+
+
+            
+          // 0xFFFE*0xFFFC = -2*-8 = 16 neg*neg no overflow
+          b01100://12
+            alu_unit.a = 16hFFFE;
+            alu_unit.b = 16hFFF8;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h0010) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;       
+            
+            
+          // 0xFF00 * 0xF0F0 = -256*-3856= 987136 dec
+          b01101://13
+            alu_unit.a = 16hFF00;
+            alu_unit.b = 16hF0F0;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h1000) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;                  
+            
+            
+          // 2*0xFFF8 = 2*-8 = -16 pos*neg no overflow
+          b01110://14
+            alu_unit.a = 16h2;
+            alu_unit.b = 16hFFF8;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16hFFF0) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;                 
+            
+            
+            
+          // 2*0xFFF8 = 2*-8 = -16 pos*neg no overflow
+          b01111://15
+            alu_unit.a = 16h0F00;
+            alu_unit.b = 16hF0F0;
+            current_test_case = current_test_case_register.q;
+          
+            if (alu_unit.out != 16h1000) {
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+              
+              }
+          
+            state.d = state.IDLE;               
+            
+            
+            
+         // ***************************
+         // all above test cases passed
+          b10000:
+            state.d = state.PASS;
+      }
+      
+      
+      // when state is at PASS
+      state.PASS:
+        if(track_failure.q == track_failure.FAIL_BEFORE){
+          current_statusPF = 2 ;
+          }else{
+            current_statusPF = 1;
+          }
+        if(button_reset){
+          state.d = state.IDLE;
+        }
+              
+      
+  }
+    out = alu_unit.out;
+
+}
