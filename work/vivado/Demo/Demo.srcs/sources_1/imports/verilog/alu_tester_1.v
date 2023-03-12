@@ -126,9 +126,9 @@ module alu_tester_1 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_b_register_q <= 1'h0;
+      M_a_register_q <= 1'h0;
     end else begin
-      M_b_register_q <= M_b_register_d;
+      M_a_register_q <= M_a_register_d;
     end
   end
   
@@ -144,9 +144,9 @@ module alu_tester_1 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_segs_register_q <= 1'h0;
+      M_result_register_q <= 1'h0;
     end else begin
-      M_segs_register_q <= M_segs_register_d;
+      M_result_register_q <= M_result_register_d;
     end
   end
   
@@ -162,6 +162,15 @@ module alu_tester_1 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
+      M_b_register_q <= 1'h0;
+    end else begin
+      M_b_register_q <= M_b_register_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
       M_alufn_register_q <= 1'h0;
     end else begin
       M_alufn_register_q <= M_alufn_register_d;
@@ -171,18 +180,9 @@ module alu_tester_1 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_a_register_q <= 1'h0;
+      M_segs_register_q <= 1'h0;
     end else begin
-      M_a_register_q <= M_a_register_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_result_register_q <= 1'h0;
-    end else begin
-      M_result_register_q <= M_result_register_d;
+      M_segs_register_q <= M_segs_register_d;
     end
   end
   

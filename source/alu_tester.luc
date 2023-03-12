@@ -8,7 +8,7 @@ module alu_tester (
     output out[16],
     output segment_display[4][4]
   ) {
-    // dff to store all the input/outputs 
+    // dff to store all teh input/outputs 
     dff a_register[16](#INIT(0), .clk(clk), .rst(rst));
     dff b_register[16](#INIT(0), .clk(clk), .rst(rst));
     dff alufn_register[6](#INIT(0), .clk(clk), .rst(rst));
@@ -58,7 +58,7 @@ module alu_tester (
       control.WAITB:
         segs_register.d = {4d15, 4d15, 4d15, 4d1}; // First led displays "A" 
         if(button[1]){
-          alufn_register.d = alufn_sig; // operation that is carried out is the one that is stored here 
+          alufn_register.d = alufn_sig; // operation thta is carried out is the one that is stored here 
           // any changes to the alufn value after the buttton press wil not be reflected 
           // ensure that you set both the alufn and b values correctly here 
           b_register.d = dip_switch;

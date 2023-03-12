@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/ansar/Desktop/Demo/work/vivado/Demo/Demo.runs/synth_1'
+HD_PWD='C:/Users/ansar/Desktop/Demo with  full 16 bit input state machine/Demo/work/vivado/Demo/Demo.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

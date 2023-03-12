@@ -1,0 +1,56 @@
+module auto_tester (
+    input clk,  // clock
+    input rst,  // reset
+    input button[5],
+    input inv[1], 
+    output out[16],
+    //refer to documentattion for each alu test case enumeration 
+    output out_current_test_case[5],
+    output out_current_alu_function[3],
+    // 0: idle
+    // 1: adder
+    // 2: comparator
+    // 3: boolean
+    // 4: shifter
+    // 5: multiplier
+    // 6: error
+    output out_test_statusPF[2]
+    // 0: not done
+    // 1: pass
+    // 2: fail
+  ) {
+  
+  // TODO : load up all the various tester modules 
+  /*
+  
+
+  comparatorTester test_compare(.clk(clk), .rst(rst));
+  booleanTester test_boole(.clk(clk), .rst(rst));
+  shifterTester test_shifter(.clk(clk), .rst(rst));
+  multiplierTester test_multiply(.clk(clk), .rst(rst));  
+     
+  */
+  adder_autotester test_adder(.clk(clk), .rst(rst));
+  
+  // fsm to shift through different alu functions test 
+  fsm tester_fucntion_state(.clk(clk), .rst(rst)) = {IDLE, ADDER, COMPARATOR, BOOLEAN, SHIFTER, MULTIPLIER, ERROR};
+  always { 
+    // TODO : 
+    // 
+    test_adder.button_reset = button[1]; 
+    test_adder.inv = inv;
+    
+    
+    // default values 
+    out_test_statusPF = b00;
+    out_current_alu_function = tester_fucntion_state.q;
+    out = 16b0; 
+    
+    case(tester_fucntion_state.q){
+      tester_fucntion_state.IDLE: 
+        out_test_statusPF = 2b0;
+    
+    }
+    
+  }
+}
