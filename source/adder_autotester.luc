@@ -65,9 +65,183 @@ module adder_autotester (
             }
             state.d =state.IDLE;  
             
-          //fill up the rest of the rest of teh test cases
+          // ADD: pos + pos with overflow
           b00010:
             alu_unit.a = 16h8001;
+            alu_unit.b= 16h8000;
+            alu_unit.alufn_signal = 6b0;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h0001){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE;  
+            
+            
+          // ADD: pos + pos with NO overflow
+          b00011:
+            alu_unit.a = 16h0001;
+            alu_unit.b= 16h0001;
+            alu_unit.alufn_signal = 6b0;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h0002){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE; 
+            
+            
+            
+          // ADD: pos + neg with overflow
+          b00100:
+            alu_unit.a = 16h0004;
+            alu_unit.b= 16hFFFF;
+            alu_unit.alufn_signal = 6b0;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h0003){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE; 
+            
+          // ADD: pos + neg with NO overflow
+          b00101:
+            alu_unit.a = 16h0001;
+            alu_unit.b= 16hF000;
+            alu_unit.alufn_signal = 6b0;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16hF001){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE; 
+            
+            
+          // SUB: 0 - 0
+          b00110:
+            alu_unit.a = 16h0000;
+            alu_unit.b= 16h0000;
+            alu_unit.alufn_signal = 6b000001;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h0000){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE; 
+            
+            
+            
+            
+          // SUB: pos - pos with NO overflow
+          b00111:
+            alu_unit.a = 16h0002;
+            alu_unit.b= 16h0001;
+            alu_unit.alufn_signal = 6b000001;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h0001){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE;    
+            
+            
+          // SUB: pos - neg with overflow
+          b01000:
+            alu_unit.a = 16h7FFF;
+            alu_unit.b= 16h8001;
+            alu_unit.alufn_signal = 6b000001;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16hFFFE){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE;       
+            
+            
+            
+          // SUB: pos - neg with overflow
+          b01001:
+            alu_unit.a = 16h0001;
+            alu_unit.b= 16hFFFF;
+            alu_unit.alufn_signal = 6b000001;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h0002){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE;        
+            
+          // SUB: neg - pos with overflow
+          b01010:
+            alu_unit.a = 16h8000;
+            alu_unit.b= 16h0001;
+            alu_unit.alufn_signal = 6b000001;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h7FFF){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE;      
+            
+            
+            
+          // SUB: neg - pos with NO overflow
+          b01011:
+            alu_unit.a = 16hFFFF;
+            alu_unit.b= 16h0001;
+            alu_unit.alufn_signal = 6b000001;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16hFFFE){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE;      
+            
+            
+            
+          // SUB: neg - pos with NO overflow
+          b01100:
+            alu_unit.a = 16hFFFF;
+            alu_unit.b= 16hFFFF;
+            alu_unit.alufn_signal = 6b000001;
+            current_test_case = current_test_case_register.q;
+                    
+            if (alu_unit.out != 16h0000){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              current_statusPF = 2;
+  
+            }
+            state.d =state.IDLE; 
+            
+            
+          // ***********************************************
+          // TEST PASSED! After everything above run alr
+          b01101:
+            state.d = state.PASS;
+            
+
+            
+            
             
         }
       state.PASS:
