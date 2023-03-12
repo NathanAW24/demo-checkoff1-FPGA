@@ -4,7 +4,7 @@ module auto_tester (
     input button[5],
     input inv[1], 
     output out[16],
-    //refer to documentattion for each alu test case enumeration 
+    //refer to documentation for each alu test case enumeration 
     output out_current_test_case[5],
     output out_current_alu_function[3],
     // 0: idle
@@ -21,36 +21,123 @@ module auto_tester (
   ) {
   
   // TODO : load up all the various tester modules 
-  /*
-  
-
-  comparatorTester test_compare(.clk(clk), .rst(rst));
-  booleanTester test_boole(.clk(clk), .rst(rst));
-  shifterTester test_shifter(.clk(clk), .rst(rst));
-  multiplierTester test_multiply(.clk(clk), .rst(rst));  
-     
-  */
   adder_autotester test_adder(.clk(clk), .rst(rst));
+  compare_autotester test_compare(.clk(clk), .rst(rst));
+  boolean_autotester test_boolean(.clk(clk), .rst(rst));
+  shifter_autotester test_shifter(.clk(clk), .rst(rst));
+  multiplier_autotester test_multiply(.clk(clk), .rst(rst));  
   
   // fsm to shift through different alu functions test 
-  fsm tester_fucntion_state(.clk(clk), .rst(rst)) = {IDLE, ADDER, COMPARATOR, BOOLEAN, SHIFTER, MULTIPLIER, ERROR};
-  always { 
-    // TODO : 
-    // 
-    test_adder.button_reset = button[1]; 
+  fsm tester_function_state(.clk(clk), .rst(rst)) = {IDLE, ADDER, COMPARATOR, BOOLEAN, SHIFTER, MULTIPLIER, ERROR};
+  
+  always {
     test_adder.inv = inv;
+    test_adder.button_reset = button[1];
+    test_adder.button_next_test_case = button[2];
+    test_adder.button_speed_through = button[0];
     
+    test_compare.inv = inv;
+    test_compare.reset_button = button[1];
+    test_compare.button_next_test_case = button[2];
+    test_compare.button_speed_through = button[0];
     
-    // default values 
-    out_test_statusPF = b00;
-    out_current_alu_function = tester_fucntion_state.q;
-    out = 16b0; 
+    test_boolean.inv = inv;
+    test_boolean.button_reset = button[1];
+    test_boolean.button_next_test_case = button[2];
+    test_boolean.button_speed_through = button[0];
     
-    case(tester_fucntion_state.q){
-      tester_fucntion_state.IDLE: 
-        out_test_statusPF = 2b0;
+    test_shifter.inv = inv;
+    test_shifter.button_reset = button[1];
+    test_shifter.button_next_test_case = button[2];
+    test_shifter.button_speed_through = button[0];
     
+    test_multiply.inv = inv;
+    test_multiply.button_reset = button[1];
+    test_multiply.button_next_test_case = button[2];
+    test_multiply.button_speed_through = button[0];
+    
+
+    out_test_statusPF = 2b00;
+    out_current_alu_function = tester_function_state.q;
+    out_current_test_case = 5b00000;
+    out = 16b0;
+
+    // FSM for auto testing
+    case(tester_function_state.q) {
+      tester_function_state.IDLE:
+        out_test_statusPF = 2b00;
+        if (button[3]) {  // pressed left
+          tester_function_state.d = tester_function_state.MULTIPLIER;
+        }
+        else if (button[4]) {  // pressed right
+          tester_function_state.d = tester_function_state.q + 1;
+        }
+        
+      tester_function_state.ADDER:
+        test_adder.inv = inv;
+        out_test_statusPF = test_adder.current_statusPF;
+        out_current_test_case = test_adder.current_test_case;
+        out = test_adder.out;
+        if (button[3]) {  // pressed left
+          tester_function_state.d = tester_function_state.q - 1;
+        }
+        else if (button[4]) {  // pressed right
+          tester_function_state.d = tester_function_state.q + 1;
+        }
+        
+      tester_function_state.COMPARATOR:
+      
+        test_compare.inv = inv;
+        out = test_compare.out;
+        out_test_statusPF = test_compare.current_statusPF;
+        out_current_test_case = test_compare.current_test_case;
+        if (button[3]) {  // pressed left
+          tester_function_state.d = tester_function_state.q - 1;
+        }
+        else if (button[4]) {  // press right
+          tester_function_state.d = tester_function_state.q + 1;
+        }
+        
+      tester_function_state.BOOLEAN:
+        test_boolean.inv = inv;
+        out_test_statusPF = test_boolean.current_statusPF;
+        out_current_test_case = test_boolean.current_test_case;
+        out = test_boolean.out;
+        if (button[3]) {  // pressed left
+          tester_function_state.d = tester_function_state.q - 1;
+        }
+        else if (button[4]) {  // pressed right
+          tester_function_state.d = tester_function_state.q + 1;
+        }
+        
+      tester_function_state.SHIFTER:
+        test_shifter.inv = inv;
+        out_test_statusPF = test_shifter.current_statusPF;
+        out_current_test_case = test_shifter.current_test_case;
+        out = test_shifter.out;
+        if (button[3]) {  // pressed left
+          tester_function_state.d = tester_function_state.q - 1;
+        }
+        else if (button[4]) {  // pressed right
+          tester_function_state.d = tester_function_state.q + 1;
+        }
+        
+      tester_function_state.MULTIPLIER:
+        test_multiply.inv = inv;
+        out_test_statusPF = test_multiply.current_statusPF;
+        out_current_test_case = test_multiply.current_test_case;
+        out = test_multiply.out;
+        if (button[3]) {  // pressed left
+          tester_function_state.d = tester_function_state.q - 1;
+        }
+        else if (button[4]) {  // pressed right
+          tester_function_state.d = tester_function_state.IDLE;
+        }
+        
     }
-    
+ 
+    if (button[1]) {  // pressed middle, go back to idle
+      tester_function_state.d = tester_function_state.IDLE;
+    }
   }
 }

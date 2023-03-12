@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Demo_withautotester" board="Alchitry Au" language="Lucid" version="3">
+<project name="alu_withbugfixes233AM13_3" board="Alchitry Au" language="Lucid" version="3">
   <files>
-    <src>adder_autotester.luc</src>
-    <src top="true">au_top.luc</src>
-    <src>boolean_autotester.luc</src>
-    <src>multiplier_autotester.luc</src>
+    <src>shifter_autotester.luc</src>
     <component>pipeline.luc</component>
     <component>counter.luc</component>
-    <src>compare_autotester.luc</src>
-    <component>decoder.luc</component>
-    <src>shifter.luc</src>
-    <src>boolean.luc</src>
-    <src>alu.luc</src>
-    <src>multiply.luc</src>
-    <src>auto_tester.luc</src>
     <src>adder.luc</src>
-    <src>compare.luc</src>
-    <src>alu_tester.luc</src>
+    <src>boolean.luc</src>
+    <component>decoder.luc</component>
+    <src>multiplier_autotester.luc</src>
+    <src>boolean_autotester.luc</src>
+    <src>multiply.luc</src>
+    <src>shifter.luc</src>
+    <src>auto_tester.luc</src>
+    <src>adder_autotester.luc</src>
+    <src>alu.luc</src>
+    <src top="true">au_top.luc</src>
     <src>multi_seven_seg.luc</src>
+    <src>seven_seg.luc</src>
+    <src>compare_autotester.luc</src>
     <component>reset_conditioner.luc</component>
     <component>edge_detector.luc</component>
+    <src>alu_manual_tester.luc</src>
     <component>button_conditioner.luc</component>
-    <src>shifter_autotester.luc</src>
-    <src>seven_seg.luc</src>
+    <src>compare.luc</src>
     <constraint lib="true">alchitry.acf</constraint>
     <constraint lib="true">io.acf</constraint>
     <constraint lib="true">au.xdc</constraint>

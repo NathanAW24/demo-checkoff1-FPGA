@@ -3,7 +3,7 @@ module adder_autotester (
     input rst,  // reset
     input button_next_test_case[1], // down btn press 
     input button_speed_through[1], // up button press 
-    input button_reset,
+    input button_reset[1],
     input inv[1],
     output current_test_case[5],
     output current_statusPF[2],

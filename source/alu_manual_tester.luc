@@ -1,0 +1,112 @@
+module alu_manual_tester ( // Manual Testing Module
+    input clk,  // clock
+    input rst,  // reset
+    input button[2], // Buttons used set Mode from Input A then Input B
+    input dip[22], 
+    input inv[1],
+    output out[16],
+    output out_segs[4][4], // Answer to display on 4 * 7 segment
+    output out_zvn[3]
+  ) {
+  
+  // Registers to store A,B,answer
+  dff inputA[16](#INIT(0), .clk(clk), .rst(rst));
+  dff inputB[16](#INIT(0), .clk(clk), .rst(rst));
+  dff alufn[6](#INIT(0), .clk(clk), .rst(rst));
+  dff inputInv[1](#INIT(0), .clk(clk), .rst(rst));
+  dff result[16](#INIT(0), .clk(clk), .rst(rst));
+  dff segs[4][4](.clk(clk), .rst(rst));
+  
+  // FSM toggled between button states
+  fsm state(.clk(clk), .rst(rst)) = {
+    WAITA,  // wait for input A
+    WAITB,  // wait for input B
+    WAITALUFN,  // wait for ALUFN signal input
+    GETRESULT  // show result
+  };
+  
+  alu aluUnit;
+  
+
+  always {
+    aluUnit.a = inputA.q;
+    aluUnit.b = inputB.q;
+    aluUnit.alufn_signal = alufn.q;
+    aluUnit.inv = inputInv.q;
+    
+    case (state.q) {
+      state.WAITA:
+        result.d = dip[15:0];
+        segs.d = {b1010,b0000,b0000,b0000}; // Prepare to display A in next cycle
+        
+        if (button[1]) { // If button 1 is pressed, move to next state to inputB
+          inputA.d = dip[15:0];
+          state.d = state.WAITB;
+        }
+        
+        else { // If not button 1 pressed, stay in current state inputA
+          state.d = state.WAITA;
+        }
+        
+      state.WAITB: 
+        result.d = dip[15:0];
+        segs.d = {b0000,b1011,b0000,b0000}; // Prepare to display B in next cycle
+        
+        if (button[1]) { // If button 1 is pressed, move to next state to inputB
+          inputB.d = dip[15:0];
+          state.d = state.WAITALUFN;
+        }
+        
+        else { // If not button 1 pressed, stay in current state inputA
+          state.d = state.WAITB;
+        }
+        
+      state.WAITALUFN: 
+        result.d[15:6] = 0;
+        result.d[5:0] = dip[21:16];
+        segs.d = {b0000,b0000,b1111,b0000}; // Prepare to display B in next cycle
+        
+        if (button[1]) { // If button 1 is pressed, move to next state to inputB
+          alufn.d = dip[21:16];
+          state.d = state.GETRESULT;
+          
+          // Toggle Inverse Bit
+          inputInv.d = inv;
+        }
+        
+        else { // If not down button (button 1) pressed, stay in current state inputALUFN
+          state.d = state.WAITALUFN;
+        }
+        
+      state.GETRESULT:
+        result.d = aluUnit.out;
+        segs.d = {aluUnit.out[15:12],aluUnit.out[11:8],aluUnit.out[7:4],aluUnit.out[3:0]};
+        
+        if (button[1]) {
+          // Reset all data and go back to WAITA state
+          inputA.d = 0;
+          inputB.d = 0;
+          alufn.d = 0;
+          result.d = 0;
+          state.d = state.WAITA;
+        }
+        
+        else {
+           state.d = state.GETRESULT;
+        }
+    }
+    
+    if (button[0]) { // Reset if middle button is pressed
+      inputA.d = 0;
+      inputB.d = 0;
+      alufn.d = 0;
+      result.d = 0;
+      state.d = state.WAITA;
+    
+    }
+    
+    out = result.q; // Capture result from state.GETRESULT
+    out_zvn[2:0] = aluUnit.zvn; // Capture ZVN result
+    out_segs = segs.q; // Capture multisegment result from state.GETRESULT 
+  }
+}
