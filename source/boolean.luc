@@ -1,0 +1,44 @@
+module boolean (
+// Note: a & b are 8-bit inputs. ALUFN is a 6-bit input
+// z, v, n are all 1-bit outputs.
+    input a[16],
+    input b[16],
+    input alufn_signal_3_0[4],
+    output out[16]
+  ) 
+
+{
+  // The signal out is write only and cannot be read.
+  // Hence, a signal s is used as a temp variable for the output.
+  sig s[16]; 
+  
+  always {
+    s = 16b0; 
+
+    
+    case(alufn_signal_3_0){
+   // using a multiplexer and the ALUFN[3:0] as the selecotr signal 
+   // similar implementation to lab 3 ALU 
+      b1000: // AND
+        s = a & b;
+      b1110: // OR
+        s = a | b;
+      b0110: // XOR
+        s = a^b;
+      b1010: //"A"
+        s = a;
+      b1100: //"B"
+        s = b;
+      b0111: //NAND
+       s = ~(a & b);
+      b0001: //NOR
+        s = ~(a | b);
+      1001: // XNOR
+        s = ~(a ^ b); 
+      
+      default: s = 16b0;
+  }
+
+    out = s;
+  }
+}

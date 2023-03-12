@@ -1,0 +1,10 @@
+module multiply (
+    input a[16],
+    input b[16],
+    output out[16]
+  ) {
+
+  always 
+    //output is only 16LSB as specified in the above
+    out = (a * b);
+  }
