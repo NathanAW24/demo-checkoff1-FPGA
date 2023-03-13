@@ -60,6 +60,7 @@ module boolean_autotester (
         if(button_reset){ // ADDED BY ANSAR TO FIX RESET BUTTON
           state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
+          reg_current_out.d = 16b0; // change output register back to 0
         }
         
       // Using a = 16b11000001 and b = 16b11110110 as test case
@@ -74,6 +75,7 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b011010; // A
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
+            reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16b11000001){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -90,6 +92,7 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b011100; // B
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
+            reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16b11110110){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -106,6 +109,7 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b011000; // AND
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
+            reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16b11000000){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -122,6 +126,7 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b010111; // NAND
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
+            reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16b00111111){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -139,6 +144,7 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b011110; // OR
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
+            reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16b11110111){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -155,6 +161,7 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b010001; // NOR
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
+            reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16b00001000){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -171,7 +178,8 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b010110; // XOR
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
-                    
+            reg_current_out.d = aluUnit.out;
+                 
             if (aluUnit.out != 16b00110111){
               track_failure.d = track_failure.FAIL_BEFORE;
               sig_current_statusPF = 2;
@@ -187,7 +195,8 @@ module boolean_autotester (
             aluUnit.alufn_signal = 6b011001; // XNOR
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = 1;
-
+            reg_current_out.d = aluUnit.out;
+                 
                     
             if (aluUnit.out != 16b11001000){
               track_failure.d = track_failure.FAIL_BEFORE;
@@ -210,12 +219,12 @@ module boolean_autotester (
             }
       if(button_reset){
             state.d = state.IDLE;
+            reg_current_out.d = 16b0;
           }
           
       }
     
     //used to display on 7 seg display 
-    reg_current_out.d = aluUnit.out; // ADDED BY ANSAR TO FIX RESET BUTTON
     out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
     current_test_case = current_test_case_register.q;
     current_statusPF = sig_current_statusPF;      

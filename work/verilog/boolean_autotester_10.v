@@ -86,6 +86,7 @@ module boolean_autotester_10 (
         if (button_reset) begin
           M_state_d = IDLE_state;
           M_current_test_case_register_d = 5'h00;
+          M_reg_current_out_d = 16'h0000;
         end
       end
       TESTING_state: begin
@@ -97,6 +98,7 @@ module boolean_autotester_10 (
             M_aluUnit_alufn_signal = 6'h1a;
             current_test_case = M_current_test_case_register_q;
             sig_current_statusPF = 1'h1;
+            M_reg_current_out_d = M_aluUnit_out;
             if (M_aluUnit_out != 16'h00c1) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -109,6 +111,7 @@ module boolean_autotester_10 (
             M_aluUnit_alufn_signal = 6'h1c;
             current_test_case = M_current_test_case_register_q;
             sig_current_statusPF = 1'h1;
+            M_reg_current_out_d = M_aluUnit_out;
             if (M_aluUnit_out != 16'h00f6) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -121,6 +124,7 @@ module boolean_autotester_10 (
             M_aluUnit_alufn_signal = 6'h18;
             current_test_case = M_current_test_case_register_q;
             sig_current_statusPF = 1'h1;
+            M_reg_current_out_d = M_aluUnit_out;
             if (M_aluUnit_out != 16'h00c0) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -133,6 +137,7 @@ module boolean_autotester_10 (
             M_aluUnit_alufn_signal = 6'h17;
             current_test_case = M_current_test_case_register_q;
             sig_current_statusPF = 1'h1;
+            M_reg_current_out_d = M_aluUnit_out;
             if (M_aluUnit_out != 16'h003f) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -147,6 +152,7 @@ module boolean_autotester_10 (
         M_aluUnit_alufn_signal = 6'h1e;
         current_test_case = M_current_test_case_register_q;
         sig_current_statusPF = 1'h1;
+        M_reg_current_out_d = M_aluUnit_out;
         if (M_aluUnit_out != 16'h00f7) begin
           M_track_failure_d = FAIL_BEFORE_track_failure;
           sig_current_statusPF = 2'h2;
@@ -159,6 +165,7 @@ module boolean_autotester_10 (
         M_aluUnit_alufn_signal = 6'h11;
         current_test_case = M_current_test_case_register_q;
         sig_current_statusPF = 1'h1;
+        M_reg_current_out_d = M_aluUnit_out;
         if (M_aluUnit_out != 16'h0008) begin
           M_track_failure_d = FAIL_BEFORE_track_failure;
           sig_current_statusPF = 2'h2;
@@ -171,6 +178,7 @@ module boolean_autotester_10 (
         M_aluUnit_alufn_signal = 6'h16;
         current_test_case = M_current_test_case_register_q;
         sig_current_statusPF = 1'h1;
+        M_reg_current_out_d = M_aluUnit_out;
         if (M_aluUnit_out != 16'h0037) begin
           M_track_failure_d = FAIL_BEFORE_track_failure;
           sig_current_statusPF = 2'h2;
@@ -183,6 +191,7 @@ module boolean_autotester_10 (
         M_aluUnit_alufn_signal = 6'h19;
         current_test_case = M_current_test_case_register_q;
         sig_current_statusPF = 1'h1;
+        M_reg_current_out_d = M_aluUnit_out;
         if (M_aluUnit_out != 16'h00c8) begin
           M_track_failure_d = FAIL_BEFORE_track_failure;
           sig_current_statusPF = 2'h2;
@@ -200,10 +209,10 @@ module boolean_autotester_10 (
         end
         if (button_reset) begin
           M_state_d = IDLE_state;
+          M_reg_current_out_d = 16'h0000;
         end
       end
     endcase
-    M_reg_current_out_d = M_aluUnit_out;
     out = M_reg_current_out_q;
     current_test_case = M_current_test_case_register_q;
     current_statusPF = sig_current_statusPF;
@@ -211,18 +220,18 @@ module boolean_autotester_10 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
+      M_speed_through_q <= 1'h0;
     end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
+      M_speed_through_q <= M_speed_through_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_speed_through_q <= 1'h0;
+      M_reg_current_out_q <= 1'h0;
     end else begin
-      M_speed_through_q <= M_speed_through_d;
+      M_reg_current_out_q <= M_reg_current_out_d;
     end
   end
   
