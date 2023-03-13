@@ -28,7 +28,7 @@ module adder_autotester (
   alu alu_unit; 
   
   // adding a var for test status 
-  sig sig_current_statusPF[2];
+  sig sig_current_statusPF[2]; 
   always {
     // Declare initial values
     //current_test_case = 5b0; removed log 1

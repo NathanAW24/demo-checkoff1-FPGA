@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Mon Mar 13 18:48:04 2023
+| Date             : Mon Mar 13 19:04:39 2023
 | Host             : LAPTOP-P3RR15PA running 64-bit major release  (build 9200)
 | Command          : report_power -file au_top_0_power_routed.rpt -pb au_top_0_power_summary_routed.pb -rpx au_top_0_power_routed.rpx
 | Design           : au_top_0
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.110        |
+| Total On-Chip Power (W)  | 0.109        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.039        |
+| Dynamic (W)              | 0.037        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.5         |
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        3 |       --- |             --- |
-| Slice Logic    |     0.003 |     1329 |       --- |             --- |
-|   LUT as Logic |     0.002 |      697 |     20800 |            3.35 |
+| Slice Logic    |     0.003 |     1327 |       --- |             --- |
+|   LUT as Logic |     0.002 |      716 |     20800 |            3.44 |
 |   CARRY4       |    <0.001 |       51 |      8150 |            0.63 |
-|   Register     |    <0.001 |      330 |     41600 |            0.79 |
+|   Register     |    <0.001 |      316 |     41600 |            0.76 |
 |   Others       |     0.000 |       58 |       --- |             --- |
-| Signals        |     0.003 |     1146 |       --- |             --- |
+| Signals        |     0.003 |     1161 |       --- |             --- |
 | DSPs           |    <0.001 |        2 |        90 |            2.22 |
-| I/O            |     0.029 |       77 |       170 |           45.29 |
+| I/O            |     0.028 |       77 |       170 |           45.29 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.110 |          |           |                 |
+| Total          |     0.109 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,7 +72,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.020 |       0.010 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.019 |       0.009 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.014 |       0.001 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.009 |       0.008 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -141,10 +141,9 @@ Table of Contents
 +-------------------+-----------+
 | Name              | Power (W) |
 +-------------------+-----------+
-| au_top_0          |     0.039 |
+| au_top_0          |     0.037 |
 |   auto            |     0.005 |
 |     test_adder    |     0.001 |
-|     test_compare  |     0.001 |
 |     test_multiply |     0.001 |
 |   manual          |     0.001 |
 +-------------------+-----------+

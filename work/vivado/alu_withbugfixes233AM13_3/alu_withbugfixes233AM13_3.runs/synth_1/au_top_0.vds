@@ -2,8 +2,8 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Mon Mar 13 18:45:11 2023
-# Process ID: 1656
+# Start of session at: Mon Mar 13 19:01:31 2023
+# Process ID: 50332
 # Current directory: A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/synth_1
 # Command line: vivado.exe -log au_top_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source au_top_0.tcl
 # Log file: A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/synth_1/au_top_0.vds
@@ -17,9 +17,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 16116
+INFO: [Synth 8-7075] Helper process launched with PID 36564
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:05 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'au_top_0' [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/au_top_0.v:7]
 	Parameter MANUAL_mode bound to: 1'b0 
@@ -79,7 +79,7 @@ INFO: [Synth 8-6157] synthesizing module 'compare_autotester_9' [A:/FPGA/demo-ch
 	Parameter PASS_state bound to: 2'b10 
 	Parameter NULL_track_failure bound to: 1'b0 
 	Parameter FAIL_BEFORE_track_failure bound to: 1'b1 
-INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_autotester_9.v:93]
+INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_autotester_9.v:94]
 INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_autotester_9.v:76]
 INFO: [Synth 8-6155] done synthesizing module 'compare_autotester_9' (12#1) [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_autotester_9.v:7]
 INFO: [Synth 8-6157] synthesizing module 'boolean_autotester_10' [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/boolean_autotester_10.v:7]
@@ -102,7 +102,7 @@ INFO: [Synth 8-6157] synthesizing module 'shifter_autotester_11' [A:/FPGA/demo-c
 	Parameter PASS_state bound to: 2'b10 
 	Parameter NULL_track_failure bound to: 1'b0 
 	Parameter FAIL_BEFORE_track_failure bound to: 1'b1 
-INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_autotester_11.v:93]
+INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_autotester_11.v:94]
 INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_autotester_11.v:76]
 INFO: [Synth 8-6155] done synthesizing module 'shifter_autotester_11' (14#1) [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_autotester_11.v:7]
 INFO: [Synth 8-6157] synthesizing module 'multiplier_autotester_12' [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiplier_autotester_12.v:7]
@@ -111,7 +111,7 @@ INFO: [Synth 8-6157] synthesizing module 'multiplier_autotester_12' [A:/FPGA/dem
 	Parameter PASS_state bound to: 2'b10 
 	Parameter NULL_track_failure bound to: 1'b0 
 	Parameter FAIL_BEFORE_track_failure bound to: 1'b1 
-INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiplier_autotester_12.v:93]
+INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiplier_autotester_12.v:94]
 INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiplier_autotester_12.v:76]
 INFO: [Synth 8-6155] done synthesizing module 'multiplier_autotester_12' (15#1) [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiplier_autotester_12.v:7]
 INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/auto_tester_2.v:154]
@@ -140,18 +140,18 @@ INFO: [Synth 8-6155] done synthesizing module 'reset_conditioner_6' (21#1) [A:/F
 INFO: [Synth 8-155] case statement is not full and has no default [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/au_top_0.v:158]
 INFO: [Synth 8-6155] done synthesizing module 'au_top_0' (22#1) [A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/au_top_0.v:7]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:09 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:08 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:08 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.039 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.039 . Memory (MB): peak = 1000.086 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -168,26 +168,26 @@ Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.
 Finished Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1000.086 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.012 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:15 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tftg256-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:15 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:06 ; elapsed = 00:00:16 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:21 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'M_state_q_reg' in module 'adder_autotester_8'
 INFO: [Synth 8-802] inferred FSM for state register 'M_state_q_reg' in module 'compare_autotester_9'
@@ -247,7 +247,7 @@ MULTIPLIER_tester_function_state |                              101 |           
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'M_tester_function_state_q_reg' using encoding 'sequential' in module 'auto_tester_2'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:18 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:23 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -273,7 +273,7 @@ Detailed RTL Component Info :
 	   2 Input   18 Bit        Muxes := 1     
 	   2 Input   16 Bit        Muxes := 40    
 	   4 Input   16 Bit        Muxes := 16    
-	   3 Input   16 Bit        Muxes := 20    
+	   3 Input   16 Bit        Muxes := 23    
 	   6 Input   16 Bit        Muxes := 1     
 	   2 Input    8 Bit        Muxes := 5     
 	   5 Input    8 Bit        Muxes := 2     
@@ -308,10 +308,12 @@ Detailed RTL Component Info :
 	  17 Input    2 Bit        Muxes := 1     
 	   6 Input    2 Bit        Muxes := 1     
 	   4 Input    1 Bit        Muxes := 16    
-	   2 Input    1 Bit        Muxes := 74    
-	   3 Input    1 Bit        Muxes := 17    
+	   2 Input    1 Bit        Muxes := 75    
+	   3 Input    1 Bit        Muxes := 20    
 	  13 Input    1 Bit        Muxes := 4     
 	   5 Input    1 Bit        Muxes := 1     
+	  15 Input    1 Bit        Muxes := 1     
+	  17 Input    1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -340,25 +342,27 @@ DSP Report: register manual/M_inputB_q_reg is absorbed into DSP manual/aluUnit/m
 DSP Report: register manual/M_inputA_q_reg is absorbed into DSP manual/aluUnit/multiplyUnit/out0.
 DSP Report: operator manual/aluUnit/multiplyUnit/out0 is absorbed into DSP manual/aluUnit/multiplyUnit/out0.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:37 . Memory (MB): peak = 1000.094 ; gain = 0.000
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:45 . Memory (MB): peak = 1000.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 ROM: Preliminary Mapping	Report
-+-------------------------+--------------+---------------+----------------+
-|Module Name              | RTL Object   | Depth x Width | Implemented As | 
-+-------------------------+--------------+---------------+----------------+
-|compare_autotester_9     | M_alu_unit_b | 32x4          | LUT            | 
-|compare_autotester_9     | M_alu_unit_a | 32x4          | LUT            | 
-|multiplier_autotester_12 | M_alu_unit_b | 32x6          | LUT            | 
-|multiplier_autotester_12 | M_alu_unit_a | 32x5          | LUT            | 
-|compare_autotester_9     | M_alu_unit_a | 32x4          | LUT            | 
-|compare_autotester_9     | M_alu_unit_b | 32x4          | LUT            | 
-|multiplier_autotester_12 | M_alu_unit_a | 32x5          | LUT            | 
-|multiplier_autotester_12 | M_alu_unit_b | 32x6          | LUT            | 
-+-------------------------+--------------+---------------+----------------+
++-------------------------+---------------------+---------------+----------------+
+|Module Name              | RTL Object          | Depth x Width | Implemented As | 
++-------------------------+---------------------+---------------+----------------+
+|compare_autotester_9     | M_reg_current_out_d | 32x1          | LUT            | 
+|compare_autotester_9     | M_alu_unit_b        | 32x4          | LUT            | 
+|compare_autotester_9     | M_alu_unit_a        | 32x4          | LUT            | 
+|multiplier_autotester_12 | M_alu_unit_b        | 32x6          | LUT            | 
+|multiplier_autotester_12 | M_alu_unit_a        | 32x5          | LUT            | 
+|compare_autotester_9     | M_alu_unit_a        | 32x4          | LUT            | 
+|compare_autotester_9     | M_alu_unit_b        | 32x4          | LUT            | 
+|compare_autotester_9     | M_reg_current_out_d | 32x1          | LUT            | 
+|multiplier_autotester_12 | M_alu_unit_a        | 32x5          | LUT            | 
+|multiplier_autotester_12 | M_alu_unit_b        | 32x6          | LUT            | 
++-------------------------+---------------------+---------------+----------------+
 
 
 DSP: Preliminary Mapping	Report (see note below)
@@ -380,19 +384,19 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:49 . Memory (MB): peak = 1006.629 ; gain = 6.535
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:58 . Memory (MB): peak = 1009.539 ; gain = 9.453
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:52 . Memory (MB): peak = 1066.246 ; gain = 66.152
+Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:01:01 . Memory (MB): peak = 1068.973 ; gain = 68.887
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:18 ; elapsed = 00:00:53 . Memory (MB): peak = 1066.246 ; gain = 66.152
+Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:01:02 . Memory (MB): peak = 1068.973 ; gain = 68.887
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -410,37 +414,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -460,30 +464,30 @@ Report Cell Usage:
 |2     |CARRY4  |    51|
 |3     |DSP48E1 |     2|
 |5     |LUT1    |    17|
-|6     |LUT2    |   104|
+|6     |LUT2    |    92|
 |7     |LUT3    |   111|
-|8     |LUT4    |   113|
-|9     |LUT5    |   180|
-|10    |LUT6    |   365|
-|11    |FDRE    |   324|
+|8     |LUT4    |   118|
+|9     |LUT5    |   173|
+|10    |LUT6    |   391|
+|11    |FDRE    |   310|
 |12    |FDSE    |     4|
 |13    |LD      |     2|
 |14    |IBUF    |    32|
 |15    |OBUF    |    45|
 +------+--------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:54 . Memory (MB): peak = 1067.207 ; gain = 67.113
-Synthesis Optimization Complete : Time (s): cpu = 00:00:20 ; elapsed = 00:00:56 . Memory (MB): peak = 1067.207 ; gain = 67.113
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:19 ; elapsed = 00:01:03 . Memory (MB): peak = 1069.043 ; gain = 68.957
+Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:01:06 . Memory (MB): peak = 1069.043 ; gain = 68.957
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.025 . Memory (MB): peak = 1079.281 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.032 . Memory (MB): peak = 1081.133 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 55 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1079.281 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1081.133 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   LD => LDCE: 2 instances
@@ -491,7 +495,7 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 INFO: [Common 17-83] Releasing license: Synthesis
 86 Infos, 7 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:24 ; elapsed = 00:01:05 . Memory (MB): peak = 1079.281 ; gain = 79.188
+synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:01:20 . Memory (MB): peak = 1081.133 ; gain = 81.047
 INFO: [Common 17-1381] The checkpoint 'A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/synth_1/au_top_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file au_top_0_utilization_synth.rpt -pb au_top_0_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Mon Mar 13 18:46:20 2023...
+INFO: [Common 17-206] Exiting Vivado at Mon Mar 13 19:02:56 2023...
