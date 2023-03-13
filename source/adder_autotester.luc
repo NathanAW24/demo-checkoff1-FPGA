@@ -13,6 +13,8 @@ module adder_autotester (
   // register to store the current test case number 
   dff current_test_case_register[5](#INIT(b00000),.clk(clk) , .rst(rst));
   
+  // register to store the current out value in each test cse 
+  dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
 
   // register to set the tester on speed through tests all
   // test cases at once no waiting for button 
@@ -36,6 +38,7 @@ module adder_autotester (
     alu_unit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
     sig_current_statusPF = b00 ; 
+    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
     
     if(button_speed_through){
       speed_through.d = b1; 
@@ -51,6 +54,10 @@ module adder_autotester (
           state.d = state.TESTING; 
           current_test_case_register.d = current_test_case_register.q + b00001 ;
           }
+        if(button_reset){ // ADDED BY ANSAR TO FIX RESET BUTTON
+          state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
+          current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
+        }
         
       state.TESTING: 
         case(current_test_case_register.q){
@@ -61,7 +68,7 @@ module adder_autotester (
             alu_unit.alufn_signal = 6b0;
             current_test_case = current_test_case_register.q;
             sig_current_statusPF = b01;
-                    
+       
             if (alu_unit.out != 16h0000){
               track_failure.d = track_failure.FAIL_BEFORE;
               sig_current_statusPF = b10;
@@ -76,7 +83,8 @@ module adder_autotester (
             alu_unit.alufn_signal = 6b0;
             sig_current_statusPF = b01;
             current_test_case = current_test_case_register.q;
-                    
+
+                  
             if (alu_unit.out != 16h0001){
               track_failure.d = track_failure.FAIL_BEFORE;
               sig_current_statusPF = b10;
@@ -91,6 +99,7 @@ module adder_autotester (
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b0;
             sig_current_statusPF = b01;
+            
             current_test_case = current_test_case_register.q;
                     
             if (alu_unit.out != 16h0002){
@@ -246,12 +255,12 @@ module adder_autotester (
               sig_current_statusPF = b10;
   
             }
-            state.d =state.IDLE; 
+            state.d =state.PASS; 
             
             
           // ***********************************************
           // TEST PASSED! After everything above run alr
-          default: 
+          default:
             current_test_case_register.d = b01101;
             state.d = state.PASS;
            
@@ -263,13 +272,13 @@ module adder_autotester (
             sig_current_statusPF = b01;
           }
         if(button_reset){
-          state.d = state.IDLE;
-          current_test_case_register.d = 5b0; 
-        }
-        
+            state.d = state.IDLE;
+            current_test_case_register.d = 5b0; 
+          }
       }
     //used to display on 7 seg display 
-    out = alu_unit.out ; 
+    reg_current_out.d = alu_unit.out; // ADDED BY ANSAR TO FIX RESET BUTTON
+    out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
     current_test_case = current_test_case_register.q;
     current_statusPF = sig_current_statusPF;
   }

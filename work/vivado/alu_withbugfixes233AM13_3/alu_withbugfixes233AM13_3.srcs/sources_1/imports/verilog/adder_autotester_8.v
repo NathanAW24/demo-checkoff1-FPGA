@@ -20,6 +20,8 @@ module adder_autotester_8 (
   
   reg [4:0] M_current_test_case_register_d, M_current_test_case_register_q = 5'h00;
   
+  reg [15:0] M_reg_current_out_d, M_reg_current_out_q = 1'h0;
+  
   reg [0:0] M_speed_through_d, M_speed_through_q = 1'h0;
   
   
@@ -57,6 +59,7 @@ module adder_autotester_8 (
     M_state_d = M_state_q;
     M_speed_through_d = M_speed_through_q;
     M_current_test_case_register_d = M_current_test_case_register_q;
+    M_reg_current_out_d = M_reg_current_out_q;
     
     M_alu_unit_a = 16'h0000;
     M_alu_unit_b = 16'h0000;
@@ -64,6 +67,7 @@ module adder_autotester_8 (
     M_alu_unit_alufn_signal = 6'h00;
     M_state_d = IDLE_state;
     sig_current_statusPF = 2'h0;
+    M_track_failure_d = NULL_track_failure;
     if (button_speed_through) begin
       M_speed_through_d = 1'h1;
     end
@@ -77,6 +81,10 @@ module adder_autotester_8 (
         if (button_next_test_case) begin
           M_state_d = TESTING_state;
           M_current_test_case_register_d = M_current_test_case_register_q + 5'h01;
+        end
+        if (button_reset) begin
+          M_state_d = IDLE_state;
+          M_current_test_case_register_d = 5'h00;
         end
       end
       TESTING_state: begin
@@ -224,7 +232,7 @@ module adder_autotester_8 (
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
             end
-            M_state_d = IDLE_state;
+            M_state_d = PASS_state;
           end
           default: begin
             M_current_test_case_register_d = 5'h0d;
@@ -244,10 +252,29 @@ module adder_autotester_8 (
         end
       end
     endcase
-    out = M_alu_unit_out;
+    M_reg_current_out_d = M_alu_unit_out;
+    out = M_reg_current_out_q;
     current_test_case = M_current_test_case_register_q;
     current_statusPF = sig_current_statusPF;
   end
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_out_q <= 1'h0;
+    end else begin
+      M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_state_q <= 1'h0;
+    end else begin
+      M_state_q <= M_state_d;
+    end
+  end
+  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -272,15 +299,6 @@ module adder_autotester_8 (
       M_track_failure_q <= 1'h0;
     end else begin
       M_track_failure_q <= M_track_failure_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
-    end else begin
-      M_state_q <= M_state_d;
     end
   end
   
