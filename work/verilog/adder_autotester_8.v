@@ -278,6 +278,15 @@ module adder_autotester_8 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
+      M_track_failure_q <= 1'h0;
+    end else begin
+      M_track_failure_q <= M_track_failure_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
       M_current_test_case_register_q <= 5'h00;
     end else begin
       M_current_test_case_register_q <= M_current_test_case_register_d;
@@ -290,15 +299,6 @@ module adder_autotester_8 (
       M_speed_through_q <= 1'h0;
     end else begin
       M_speed_through_q <= M_speed_through_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_track_failure_q <= 1'h0;
-    end else begin
-      M_track_failure_q <= M_track_failure_d;
     end
   end
   

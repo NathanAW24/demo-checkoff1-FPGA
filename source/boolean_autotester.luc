@@ -13,6 +13,9 @@ module boolean_autotester (
   // register to store the current test case  number 
   dff current_test_case_register[5](.clk(clk) , .rst(rst));
   
+  // register to store the current out value in each test cse 
+  dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
+  
   // register to set the tester on speed through tests all
   // test cases at once no waiting for button 
   dff speed_through[1](.clk(clk) , .rst(rst));
@@ -22,7 +25,10 @@ module boolean_autotester (
   fsm track_failure (.clk(clk), .rst(rst)) = {NULL, FAIL_BEFORE};
   
   //import alu
-  alu aluUnit; 
+  alu aluUnit;
+  
+  // adding a var for test status 
+  sig sig_current_statusPF[2];
   
   always {
     // Declare initial values
@@ -32,7 +38,9 @@ module boolean_autotester (
     aluUnit.inv = inv ; 
     aluUnit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
-    current_statusPF = 0 ; 
+    sig_current_statusPF = b00 ; // THIS ONE CHANGE ALSO
+    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
+
     
     if(button_speed_through){
       speed_through.d = b1; 
@@ -42,13 +50,17 @@ module boolean_autotester (
       state.IDLE:
         if(speed_through.q){
           state.d = state.TESTING; 
-          current_test_case_register.d = current_test_case_register.q + 1;
+          current_test_case_register.d = current_test_case_register.q + b00001;
         }
         
         if(button_next_test_case){
           state.d = state.TESTING; 
-          current_test_case_register.d = current_test_case_register.q +1 ;
-          }
+          current_test_case_register.d = current_test_case_register.q + b00001;
+        }
+        if(button_reset){ // ADDED BY ANSAR TO FIX RESET BUTTON
+          state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
+          current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
+        }
         
       // Using a = 16b11000001 and b = 16b11110110 as test case
         
@@ -61,11 +73,11 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b011010; // A
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
                     
             if (aluUnit.out != 16b11000001){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -77,11 +89,11 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b011100; // B
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
                     
             if (aluUnit.out != 16b11110110){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -93,11 +105,11 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b011000; // AND
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
                     
             if (aluUnit.out != 16b11000000){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -109,11 +121,11 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b010111; // NAND
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
                     
             if (aluUnit.out != 16b00111111){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -126,11 +138,11 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b011110; // OR
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
                     
             if (aluUnit.out != 16b11110111){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -142,11 +154,11 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b010001; // NOR
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
                     
             if (aluUnit.out != 16b00001000){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -158,11 +170,11 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b010110; // XOR
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
                     
             if (aluUnit.out != 16b00110111){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -174,12 +186,12 @@ module boolean_autotester (
             aluUnit.b = 16b11110110;
             aluUnit.alufn_signal = 6b011001; // XNOR
             current_test_case = current_test_case_register.q;
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
 
                     
             if (aluUnit.out != 16b11001000){
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;
+              sig_current_statusPF = 2;
   
             }
             
@@ -191,10 +203,10 @@ module boolean_autotester (
         
         state.PASS:
       if(track_failure.q == track_failure.FAIL_BEFORE){
-            current_statusPF = 2 ;
+            sig_current_statusPF = 2 ;
             }
       else{
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             }
       if(button_reset){
             state.d = state.IDLE;
@@ -202,8 +214,11 @@ module boolean_autotester (
           
       }
     
-    out = aluUnit.out;
-      
+    //used to display on 7 seg display 
+    reg_current_out.d = aluUnit.out; // ADDED BY ANSAR TO FIX RESET BUTTON
+    out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
+    current_test_case = current_test_case_register.q;
+    current_statusPF = sig_current_statusPF;      
       
         
   }

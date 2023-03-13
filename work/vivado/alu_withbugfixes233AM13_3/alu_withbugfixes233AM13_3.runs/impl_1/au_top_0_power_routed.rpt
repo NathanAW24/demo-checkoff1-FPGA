@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Mon Mar 13 15:57:36 2023
-| Host             : LAPTOP-C9N1JGD5 running 64-bit major release  (build 9200)
+| Date             : Mon Mar 13 17:02:09 2023
+| Host             : LAPTOP-P3RR15PA running 64-bit major release  (build 9200)
 | Command          : report_power -file au_top_0_power_routed.rpt -pb au_top_0_power_summary_routed.pb -rpx au_top_0_power_routed.rpx
 | Design           : au_top_0
 | Device           : xc7a35tftg256-1
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.108        |
+| Total On-Chip Power (W)  | 0.109        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.036        |
+| Dynamic (W)              | 0.037        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.5         |
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.002 |        3 |       --- |             --- |
-| Slice Logic    |     0.003 |     1277 |       --- |             --- |
-|   LUT as Logic |     0.003 |      682 |     20800 |            3.28 |
+| Slice Logic    |     0.003 |     1276 |       --- |             --- |
+|   LUT as Logic |     0.003 |      679 |     20800 |            3.26 |
 |   CARRY4       |    <0.001 |       51 |      8150 |            0.63 |
-|   Register     |    <0.001 |      277 |     41600 |            0.67 |
+|   Register     |    <0.001 |      286 |     41600 |            0.69 |
 |   Others       |     0.000 |       58 |       --- |             --- |
-| Signals        |     0.003 |     1145 |       --- |             --- |
+| Signals        |     0.003 |     1143 |       --- |             --- |
 | DSPs           |    <0.001 |        2 |        90 |            2.22 |
-| I/O            |     0.027 |       77 |       170 |           45.29 |
+| I/O            |     0.029 |       77 |       170 |           45.29 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.108 |          |           |                 |
+| Total          |     0.109 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -141,9 +141,8 @@ Table of Contents
 +-------------------+-----------+
 | Name              | Power (W) |
 +-------------------+-----------+
-| au_top_0          |     0.036 |
+| au_top_0          |     0.037 |
 |   auto            |     0.005 |
-|     test_adder    |     0.001 |
 |     test_multiply |     0.002 |
 |       alu_unit    |     0.001 |
 |     test_shifter  |     0.001 |
