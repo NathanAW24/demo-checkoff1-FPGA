@@ -30,38 +30,63 @@ module auto_tester (
   // fsm to shift through different alu functions test 
   fsm tester_function_state(.clk(clk), .rst(rst)) = {IDLE, ADDER, COMPARATOR, BOOLEAN, SHIFTER, MULTIPLIER, ERROR};
   
+  //registers to store the output values // perhaps redundant 
+  // log 1 removed dff for out puts at this level 
+  /*
+  dff reg_test_case_enum[5](.clk(clk), .rst(rst));
+  dff reg_out_test_statusPF[2](#INIT(2b00),.clk(clk), .rst(rst));
+  dff reg_out[16](#INIT(16hFFFF),.clk(clk), .rst(rst));
+  */
   always {
+    // connections for the auto  adder  tester unit 
     test_adder.inv = inv;
     test_adder.button_reset = button[1];
     test_adder.button_next_test_case = button[2];
     test_adder.button_speed_through = button[0];
     
+    // connections for the auto comparator tester unit
     test_compare.inv = inv;
     test_compare.reset_button = button[1];
     test_compare.button_next_test_case = button[2];
     test_compare.button_speed_through = button[0];
     
+    // connections for the auto boolean tester unit    
     test_boolean.inv = inv;
     test_boolean.button_reset = button[1];
     test_boolean.button_next_test_case = button[2];
     test_boolean.button_speed_through = button[0];
     
+    // connections for the auto shifter tester unit    
     test_shifter.inv = inv;
     test_shifter.button_reset = button[1];
     test_shifter.button_next_test_case = button[2];
     test_shifter.button_speed_through = button[0];
     
+    // connections for the auto multiplier tester unit
     test_multiply.inv = inv;
     test_multiply.button_reset = button[1];
     test_multiply.button_next_test_case = button[2];
     test_multiply.button_speed_through = button[0];
     
-
+    /* connections for the auto comparator tester unit
     out_test_statusPF = 2b00;
-    out_current_alu_function = tester_function_state.q;
     out_current_test_case = 5b00000;
-    out = 16b0;
-
+    out = 16hFFFF;
+    */
+    
+    // connections to registers 
+    //log 1 removed dff 
+    /*
+    out_current_alu_function = tester_function_state.q;
+    out_test_statusPF = reg_out_test_statusPF.q;
+    out_current_test_case = reg_test_case_enum.q; 
+    out = reg_out.q;
+    */
+    out_test_statusPF = 2b0;
+    out_current_alu_function = tester_function_state.q; 
+    out = 16b0; 
+    out_current_test_case = 5b0; 
+    
     // FSM for auto testing
     case(tester_function_state.q) {
       tester_function_state.IDLE:
@@ -133,7 +158,6 @@ module auto_tester (
         else if (button[4]) {  // pressed right
           tester_function_state.d = tester_function_state.IDLE;
         }
-        
     }
  
     if (button[1]) {  // pressed middle, go back to idle

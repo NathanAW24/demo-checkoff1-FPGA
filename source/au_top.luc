@@ -34,11 +34,6 @@ module au_top (
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
   }
-  
-  
-  
-  
-  
   always {
     reset_cond.in = ~rst_n; // input raw inverted reset signal
     rst = reset_cond.out;   // conditioned reset
@@ -100,6 +95,8 @@ module au_top (
       mode.AUTO:  
         if(auto.out_current_alu_function == 0){
           io_led[1][7:3] = auto.out_current_alu_function;
+          //log 2 
+          io_led[1][1:0] = b00;
         }else{
           io_led[0][4:0] = auto.out_current_test_case;
           io_led[1][1:0] = auto.out_test_statusPF;

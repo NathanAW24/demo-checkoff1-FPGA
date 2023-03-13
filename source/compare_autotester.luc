@@ -42,8 +42,6 @@ module compare_autotester (
       speed_through.d = b1;
     } 
     
-    
-    
     case(state.q) {
       state.IDLE:
         if(speed_through.q){
@@ -58,7 +56,6 @@ module compare_autotester (
       state.TESTING:
         case(current_test_case_register.q) {
           // all the 25 conditions
-          
           
           // ********************* COMPARE EQUALS
           // test 0 == 0  a=b 
@@ -112,9 +109,7 @@ module compare_autotester (
             
             state.d = state.IDLE;
           
-          
-          
-            
+         
           //test 0xFFFF == 1 neg<pos no overflow
           b00100:
             alu_unit.a = 16hFFFF;
