@@ -1,0 +1,99 @@
+module alu_tester (
+    input clk,  // clock
+    input rst,  // reset
+    input button[2],
+    input dip_switch[16],
+    input alufn_sig[6],
+    input inv[1],
+    output out[16],
+    output segment_display[4][4]
+  ) {
+    // dff to store all teh input/outputs 
+    dff a_register[16](#INIT(0), .clk(clk), .rst(rst));
+    dff b_register[16](#INIT(0), .clk(clk), .rst(rst));
+    dff alufn_register[6](#INIT(0), .clk(clk), .rst(rst));
+    dff inv_register[1](#INIT(0), .clk(clk), .rst(rst));
+    dff result_register[16](#INIT(0), .clk(clk), .rst(rst));
+    dff segs_register[4][4](.clk(clk), .rst(rst));
+  
+    // FSM control to handle teh input A input B and output state
+    fsm control(.clk(clk), .rst(rst)) = {
+      WAITA,  // wait for input A
+      WAITB,  // wait for input B
+      GETRESULT  // show result
+    };
+  
+    // intermediate sig for z v n 
+    sig z[4]; 
+    sig v[4];
+    sig n[4];
+    // implement alu unit 
+     alu alu_unit; 
+    
+  always {
+    // default value for zvn 
+    z = 4b0; 
+    v = 4b0;
+    n = 4b0;
+    // input signals to the alu unit 
+    alu_unit.a = a_register.q; 
+    alu_unit.b = b_register.q; 
+    alu_unit.alufn_signal = alufn_register.q;
+    alu_unit.inv = inv_register.q; 
+    
+    case(control.q){
+    
+      control.WAITA: // state defination for wait A state 
+        result_register.d = dip_switch; // displaying the storing the value of A in the register 
+        segs_register.d = {4d15, 4d15, 4d15, 4d0}; // First led displays "A" 
+        
+        if(button[1]){ // if the down button is pressed initiate state transition
+          a_register.d = dip_switch;
+          control.d = control.WAITB; // state trastition to second state 
+          }
+          else{
+            control.d = control.WAITA; // remain in waitA 
+          }
+        
+      control.WAITB:
+        segs_register.d = {4d15, 4d15, 4d15, 4d1}; // First led displays "A" 
+        if(button[1]){
+          alufn_register.d = alufn_sig; // operation thta is carried out is the one that is stored here 
+          // any changes to the alufn value after the buttton press wil not be reflected 
+          // ensure that you set both the alufn and b values correctly here 
+          b_register.d = dip_switch;
+          control.d = control.GETRESULT;
+          inv_register.d = inv; 
+          }else{
+            control.d = control.WAITB;
+          }
+      control.GETRESULT:
+        result_register.d = alu_unit.out; // leds display result 
+        z[0] = alu_unit.zvn[2];
+        v[0] = alu_unit.zvn[1];
+        n[0] = alu_unit.zvn[0];
+        segs_register.d = {z,v,n,4d8};
+        
+        if(button[1]){ // if button triggered resst to initial state 
+          a_register.d = 0; 
+          b_register.d = 0; 
+          result_register.d = 0; 
+          control.d = 0 ; 
+          control.d = control.WAITA; // reset to initial 
+          }else{
+          control.d = control.GETRESULT; 
+        }
+    }
+    if(button[0]){ // middle button resets all registers
+      a_register.d = 0 ; 
+      b_register.d = 0 ; 
+      alufn_register.d =0 ; 
+      result_register.d = 0 ; 
+      control.d = control.WAITA;  // state trasnition to initial state 
+    }
+    
+    out = result_register.q ; // this value in state waita and waitB reflects teh value of input A 
+    segment_display = segs_register.q; 
+    
+  }
+}

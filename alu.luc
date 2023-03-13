@@ -1,0 +1,128 @@
+module alu (
+    input a[16],
+    input b[16],
+    input inv[1],
+    input alufn_signal[6],
+    output out[16],
+    output zvn[3]
+  ) {
+  
+  // load modules of the varous modules  
+  adder adderUnit;
+  multiply multiplyUnit;
+  boolean booleanUnit;
+  shifter shifterUnit;
+  compare compareUnit; 
+  
+  
+  // carry z,v,n signal from the adder unit to comparator unit
+  sig z;
+  sig v;
+  sig n;
+  
+  // output signal from various modules
+  sig z_out;
+  sig v_out;
+  sig n_out;
+  sig out_intermediate[16];
+  
+  
+  always {
+  //connections for adder module 
+    case(alufn_signal){
+      b000011: //increment A 
+        adderUnit.alufn0 = b0;
+        adderUnit.a = a;
+        adderUnit.b = h0001;
+      b000100: // increment B 
+        adderUnit.alufn0 = b0;
+        adderUnit.a = h0001;
+        adderUnit.b = b;
+      default:
+        // default case use of the adder unit  
+        adderUnit.alufn0 = alufn_signal[0];
+        adderUnit.a = a;
+        adderUnit.b = b;
+    }    
+    // output connections for adder Module 
+    // Note these are used for the comparator unit 
+    z = adderUnit.z;
+    v = adderUnit.v;
+    n = adderUnit.n; 
+
+    // connection for multipler module     
+    multiplyUnit.a = a;
+    multiplyUnit.b = b;
+     
+    // connections for comparator modules     
+    compareUnit.alufn_signal_2_1 = alufn_signal[2:1];
+    compareUnit.z = z;
+    compareUnit.v = v;
+    compareUnit.n = n;
+    
+    // connections for boolean modules     
+    booleanUnit.alufn_signal_3_0 = alufn_signal[3:0];
+    booleanUnit.a = a;
+    booleanUnit.b = b;
+    
+    // connections for shifter module 
+    shifterUnit.alufn_signal_1_0 = alufn_signal[1:0];
+    shifterUnit.a = a;
+    shifterUnit.b = b[3:0];
+    
+    
+    // the set up for the ALUFN assigned for each distinct ALUFN code 
+    // to ease testing and also set output value of 16b0 if invalid ALUFN code given 
+    case(alufn_signal[5:3]){
+      b000: // ALUFN 000XXX refer to either the adder unit operations (adding and subtraction)
+        case(alufn_signal[5:0]){
+          b000010 : 
+            out_intermediate = multiplyUnit.out; // multiply
+            z_out = b0;
+            v_out = b0;
+            n_out = b0;
+          default:
+            z_out = adderUnit.z;
+            v_out = adderUnit.v;
+            n_out = adderUnit.n; 
+            out_intermediate = adderUnit.out;
+        }
+      default:
+        z_out = b0;
+        v_out = b0;
+        n_out = b0;
+        case(alufn_signal){
+          b011010 : out_intermediate = booleanUnit.out; // A
+          b011100 : out_intermediate = booleanUnit.out; // B
+          b011000 : out_intermediate = booleanUnit.out; // AND
+          b010111 : out_intermediate = booleanUnit.out; // NAND    
+          b011110 : out_intermediate = booleanUnit.out; // OR
+          b010001 : out_intermediate = booleanUnit.out; // NOR
+          b010110 : out_intermediate = booleanUnit.out; // XOR
+          b011001 : out_intermediate = booleanUnit.out; // XNOR
+          b100000 : out_intermediate = shifterUnit.out; // SHL
+          b100001 : out_intermediate = shifterUnit.out; // SHR
+          b100011 : out_intermediate = shifterUnit.out; // SRA
+          b110011 : out_intermediate = compareUnit.out; // CMPEQ
+          b110101 : out_intermediate = compareUnit.out; // CMPLT
+          b110111 : out_intermediate = compareUnit.out; // COMPEQ
+          default: out_intermediate = 16b0;
+        }
+    }
+    // the following mux is used to inverse output after computation
+    // to ensure that the tester module can detect an error
+    // when the wrong value(i.e the inverse value) is outputted by ALU
+    case(inv) {  
+      b1:
+        out = ~ out_intermediate;
+        zvn[0] = ~ n_out;
+        zvn[1] = ~ v_out;
+        zvn[2] = ~ z_out;
+        
+      default:
+        out = out_intermediate;
+        zvn[0] = n_out;
+        zvn[1] = v_out;
+        zvn[2] = z_out;
+  }
+}

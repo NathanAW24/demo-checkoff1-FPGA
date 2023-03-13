@@ -1,0 +1,243 @@
+module boolean_autotester (
+    input clk,  // clock
+    input rst,  // reset
+    input button_next_test_case[1], // down btn press 
+    input button_speed_through[1], // up button press 
+    input button_reset,
+    input inv[1],
+    output current_test_case[5],
+    output current_statusPF[2],
+    output out[16]
+  ) {
+  
+  // register to store the current test case  number 
+  dff current_test_case_register[5](#INIT(b00000), .clk(clk) , .rst(rst));
+  
+  // register to store the current out value in each test cse 
+  dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
+  
+  
+  //register tot store current test status 
+  dff reg_current_statusPF[2](#INIT(b00),.clk(clk) , .rst(rst));
+  
+  // register to set the tester on speed through tests all
+  // test cases at once no waiting for button 
+  dff speed_through[1](.clk(clk) , .rst(rst));
+  
+  // Declare the fsm states
+  fsm state (.clk(clk), .rst(rst)) = {IDLE, TESTING, PASS};
+  fsm track_failure (.clk(clk), .rst(rst)) = {NULL, FAIL_BEFORE};
+  
+  test_case_enum enum(.clk(clk), .rst(button_reset));
+  
+  //import alu
+  alu aluUnit;
+  
+  always {
+    // Declare initial values
+    current_test_case = 5b0;
+    aluUnit.a = 16b0;
+    aluUnit.b = 16b0;
+    aluUnit.inv = inv ; 
+    aluUnit.alufn_signal = 6b0; // default adder 
+    state.d = state.IDLE;
+    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
+
+    
+    if(button_speed_through){
+      speed_through.d = b1; 
+      }
+    
+    case(state.q){
+      state.IDLE:
+        if(speed_through.q){
+          state.d = state.TESTING; 
+          current_test_case_register.d = enum.sel;
+        }
+        
+        if(button_next_test_case){
+          state.d = state.TESTING; 
+          current_test_case_register.d = current_test_case_register.q + b00001;
+        }
+        if(button_reset){ // ADDED BY ANSAR TO FIX RESET BUTTON
+          state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
+          current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
+          reg_current_out.d = 16b0; // change output register back to 0
+          reg_current_statusPF.d = 2b00;
+        }
+        
+      // Using a = 16hFFC1 and b = 16hFFF6 as test case
+        
+      state.TESTING: // Test for all operations
+        case(current_test_case_register.q){
+        
+        // A
+        5b00001:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b011010; // A
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                    
+            if (aluUnit.out != 16hFFC1){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE;  
+        
+        // B
+        5b00010:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b011100; // B
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                    
+            if (aluUnit.out != 16hFFF6){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE;  
+        
+        // AND
+        5b00011:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b011000; // AND
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                    
+            if (aluUnit.out != 16b1111111111000000){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE;        
+        
+        // NAND       
+        5b00100:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b010111; // NAND
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                    
+            if (aluUnit.out != 16b0000000000111111){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE;       
+          }
+        
+        // OR
+        5b00101:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b011110; // OR
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                    
+            if (aluUnit.out != 16b1111111111110111){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE; 
+        
+        // NOR
+        5b00110:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b010001; // NOR
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                    
+            if (aluUnit.out != 16b0000000000001000){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE;   
+        
+        // XOR
+        5b00111:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b010110; // XOR
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                 
+            if (aluUnit.out != 16b0000000000110111){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE;   
+        
+        // XNOR
+        5b01000:
+            aluUnit.a = 16hFFC1;
+            aluUnit.b = 16hFFF6;
+            aluUnit.alufn_signal = 6b011001; // XNOR
+            current_test_case = current_test_case_register.q;
+            reg_current_statusPF.d = b01;
+            reg_current_out.d = aluUnit.out;
+                 
+                    
+            if (aluUnit.out != 16b1111111111001000){
+              track_failure.d = track_failure.FAIL_BEFORE;
+              reg_current_statusPF.d = b10;
+  
+            }
+            
+            state.d = state.IDLE;  
+        
+        // PASS ALL CASE
+        default:
+            current_test_case_register.d = 5b01001;
+            state.d = state.PASS;
+        
+        state.PASS:
+      if(track_failure.q == track_failure.FAIL_BEFORE){
+            reg_current_statusPF.d = b10 ;
+            }
+      else{
+            reg_current_statusPF.d = b11;
+            }
+      if(button_reset){
+            state.d = state.IDLE;
+            current_test_case_register.d = 5b0;
+            reg_current_out.d = 16b0;
+            reg_current_statusPF.d = 2b00;
+          }
+          
+      }
+    
+    // Increment the input terminal by 1 for speed speed_through
+    current_test_case_register.d = enum.sel;
+    
+    //used to display on 7 seg display 
+    out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
+    current_test_case = current_test_case_register.q;
+    current_statusPF = reg_current_statusPF.q;      
+      
+        
+  }
+}

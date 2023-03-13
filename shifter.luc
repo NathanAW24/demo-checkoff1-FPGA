@@ -1,0 +1,21 @@
+module shifter (
+    input a[16],
+    input b[4], // number of bit shifts 0 to 15 -- takes 4 bits to represent 
+    input alufn_signal_1_0[2],
+    output out[16]
+  ) {
+  var unsigned_b; //  intepret b_unsigned as an integer
+  always {
+    unsigned_b = $unsigned(b) ; // interpret b as an unsigned value
+    case(alufn_signal_1_0) {
+      b00 : // shift left 
+        out = a << unsigned_b;
+      b01 : // shift right
+        out = a >> unsigned_b;
+      b11 :  // shift right arithmatic
+        out = $signed(a) >>> unsigned_b ;
+      default : // invalid alufn leave input unchanged 
+        out = a;
+    }
+  }
+}

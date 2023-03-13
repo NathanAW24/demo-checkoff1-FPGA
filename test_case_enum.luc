@@ -1,0 +1,18 @@
+module test_case_enum #(
+    NUM_CASES = 15 : NUM_CASES > 0,
+    SIZE = 5 : SIZE > 0,
+    DIV = 27 : DIV >= 0
+  )(
+    input clk,                // clock
+    input rst,                // reset
+    output sel [SIZE]       // Num case to select
+  ) {
+ 
+  .clk(clk), .rst(rst) {
+    counter ctr (#DIV(DIV), #SIZE(SIZE), #TOP(NUM_CASES)); 
+  }
+ 
+  always {
+    sel = ctr.value;                  // output the active digit
+  }
+}
