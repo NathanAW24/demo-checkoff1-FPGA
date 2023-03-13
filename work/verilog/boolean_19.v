@@ -40,7 +40,7 @@ module boolean_19 (
       4'h1: begin
         s = ~(a | b);
       end
-      10'h3e9: begin
+      4'h9: begin
         s = ~(a ^ b);
       end
       default: begin

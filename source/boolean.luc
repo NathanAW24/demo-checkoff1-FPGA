@@ -33,7 +33,7 @@ module boolean (
        s = ~(a & b);
       b0001: //NOR
         s = ~(a | b);
-      1001: // XNOR
+      b1001: // XNOR
         s = ~(a ^ b); 
       
       default: s = 16b0;

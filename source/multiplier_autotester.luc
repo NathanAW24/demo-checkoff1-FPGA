@@ -16,6 +16,9 @@ module multiplier_autotester (
   // register to store the current out value in each test cse 
   dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
   
+  //register tot store current test status 
+  dff reg_current_statusPF[2](#INIT(b00),.clk(clk) , .rst(rst));
+  
   // register to set the tester on speed through tests all
   // test cases at once no waiting for button 
   dff speed_through[1](.clk(clk) , .rst(rst));
@@ -27,9 +30,6 @@ module multiplier_autotester (
   
   // import alu
   alu alu_unit;
-  
-  // adding a var for test current_statusPF
-  sig sig_current_statusPF[2];
 
   always {
     // declare initial values
@@ -40,8 +40,6 @@ module multiplier_autotester (
     alu_unit.alufn_signal = 6b000010; // SIGNAL FOR MULTIPLIER
     // starts at idle state, before testing
     state.d = state.IDLE;
-    // status starts from never start
-    sig_current_statusPF = b00;
     track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
 
     
@@ -67,6 +65,7 @@ module multiplier_autotester (
           state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
           reg_current_out.d = 16b0;
+          reg_current_statusPF.d = 2b00;
         }
         
        
@@ -79,7 +78,7 @@ module multiplier_autotester (
             alu_unit.a = 16h0000; 
             alu_unit.b = 16h0000;                       
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
             
             
@@ -89,7 +88,7 @@ module multiplier_autotester (
               // track
               track_failure.d = track_failure.FAIL_BEFORE;
               // current status is fail
-              sig_current_statusPF = 2;  
+              reg_current_statusPF.d = 2b10;  
             }
             state.d = state.IDLE;
             
@@ -99,12 +98,12 @@ module multiplier_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b = 16h0001;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
             
             if (alu_unit.out != 16h0001) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
             state.d = state.IDLE;
@@ -114,12 +113,12 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hFFFF;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h0001) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -131,12 +130,12 @@ module multiplier_autotester (
             alu_unit.a = 16h0000;
             alu_unit.b = 16h00FF;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h0000) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -148,12 +147,12 @@ module multiplier_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b = 16h00FF;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h00FF) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -166,12 +165,12 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16h00FF;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16hFF01) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -182,12 +181,12 @@ module multiplier_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -199,12 +198,12 @@ module multiplier_autotester (
             alu_unit.a = 16h1;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16hF000) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -215,12 +214,12 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -232,12 +231,12 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hF000;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -248,12 +247,12 @@ module multiplier_autotester (
             alu_unit.a = 16h0F00;
             alu_unit.b = 16h00F0;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -266,12 +265,12 @@ module multiplier_autotester (
             alu_unit.a = 16hFFFE;
             alu_unit.b = 16hFFF8;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h0010) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -283,12 +282,12 @@ module multiplier_autotester (
             alu_unit.a = 16hFF00;
             alu_unit.b = 16hF0F0;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -300,12 +299,12 @@ module multiplier_autotester (
             alu_unit.a = 16h2;
             alu_unit.b = 16hFFF8;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16hFFF0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -318,12 +317,12 @@ module multiplier_autotester (
             alu_unit.a = 16h0F00;
             alu_unit.b = 16hF0F0;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = alu_unit.out;
           
             if (alu_unit.out != 16h1000) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
               
               }
           
@@ -333,7 +332,8 @@ module multiplier_autotester (
             
          // ***************************
          // all above test cases passed
-          b10000:
+          default:
+            current_test_case_register.d = b10000;
             state.d = state.PASS;
       }
       
@@ -341,13 +341,15 @@ module multiplier_autotester (
       // when state is at PASS
       state.PASS:
         if(track_failure.q == track_failure.FAIL_BEFORE){
-          sig_current_statusPF = 2 ;
+          reg_current_statusPF.d = 2b10 ;
           }else{
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b11;
           }
         if(button_reset){
           state.d = state.IDLE;
           reg_current_out.d = 16b0; // set back to 0 when reset button is pressed
+          reg_current_statusPF.d = 2b00;
+
         }
               
       
@@ -355,6 +357,6 @@ module multiplier_autotester (
     //used to display on 7 seg display 
     out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
     current_test_case = current_test_case_register.q;
-    current_statusPF = sig_current_statusPF;      
+    current_statusPF = reg_current_statusPF.q;      
 
 }

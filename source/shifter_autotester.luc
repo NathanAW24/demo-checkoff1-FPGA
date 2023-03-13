@@ -16,6 +16,9 @@ module shifter_autotester (
   // register to store the current out value in each test cse 
   dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
   
+  //register tot store current test status 
+  dff reg_current_statusPF[2](#INIT(b00),.clk(clk) , .rst(rst));
+  
   // register to set the tester on speed through tests all
   // test cases at once no waiting for button 
   dff speed_through[1](.clk(clk) , .rst(rst));
@@ -27,8 +30,7 @@ module shifter_autotester (
   //import alu
   alu aluUnit; 
   
-  // adding a var for test status 
-  sig sig_current_statusPF[2];
+
   
   always {
     // Declare initial values
@@ -38,7 +40,6 @@ module shifter_autotester (
     aluUnit.inv = inv ; 
     aluUnit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
-    sig_current_statusPF = 0 ; 
     track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
 
     
@@ -60,6 +61,7 @@ module shifter_autotester (
           state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
           reg_current_out.d = 16b0; // set back to 0 when reset button is pressed
+          reg_current_statusPF.d = 2b00;
         }
 
         
@@ -73,12 +75,12 @@ module shifter_autotester (
             aluUnit.b = 16h0008;
             aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16hFF00){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -90,12 +92,12 @@ module shifter_autotester (
             aluUnit.b = 16h0000;
             aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16hFFFF){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -108,12 +110,12 @@ module shifter_autotester (
             aluUnit.b = 16h0004;
             aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16h0F00){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -125,12 +127,12 @@ module shifter_autotester (
             aluUnit.b = 16h000F;
             aluUnit.alufn_signal = 6b100000; // Shift Left ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16h8000){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -143,12 +145,12 @@ module shifter_autotester (
             aluUnit.b = 16h0008;
             aluUnit.alufn_signal = 6b100001; // Shift Right ALUFn
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16h00FF){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -160,12 +162,12 @@ module shifter_autotester (
             aluUnit.b = 16h0000;
             aluUnit.alufn_signal = 6b100001; // Shift Right ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16hFFFF){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -178,12 +180,12 @@ module shifter_autotester (
             aluUnit.b = 16h0004;
             aluUnit.alufn_signal = 6b100001; // Shift Right ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16h0F0F){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -195,12 +197,12 @@ module shifter_autotester (
             aluUnit.b = 16h000F;
             aluUnit.alufn_signal = 6b100001; // Shift Left ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16h0001){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -214,12 +216,12 @@ module shifter_autotester (
             aluUnit.b = 16h0008;
             aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetic ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16hFFFF){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -231,12 +233,12 @@ module shifter_autotester (
             aluUnit.b = 16h0000;
             aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16hFFFF){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -249,12 +251,12 @@ module shifter_autotester (
             aluUnit.b = 16h0004;
             aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16hFF0F){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -266,12 +268,12 @@ module shifter_autotester (
             aluUnit.b = 16h000F;
             aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16hFFFF){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
@@ -283,33 +285,35 @@ module shifter_autotester (
             aluUnit.b = 16h0004;
             aluUnit.alufn_signal = 6b100011; // Shift Right Arithmetically ALUFN
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b01;
             reg_current_out.d = aluUnit.out;
                     
             if (aluUnit.out != 16h0123){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = 2;
+              reg_current_statusPF.d = 2b10;
   
             }
             
             state.d = state.IDLE;
             
             // If all no fail, return pass
-            5b01110:
+            default:
+            current_test_case_register.d = 5b01110;
             state.d = state.PASS;
           
         }
     
     state.PASS:
       if(track_failure.q == track_failure.FAIL_BEFORE){
-            sig_current_statusPF = 2 ;
+            reg_current_statusPF.d = 2b10 ;
             }
       else{
-            sig_current_statusPF = 1;
+            reg_current_statusPF.d = 2b11;
             }
       if(button_reset){
             state.d = state.IDLE;
             reg_current_out.d = 16b0; // set back to 0 when reset button is pressed
+          reg_current_statusPF.d = 2b00;
           
       }
     
@@ -318,7 +322,7 @@ module shifter_autotester (
     //used to display on 7 seg display 
     out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
     current_test_case = current_test_case_register.q;
-    current_statusPF = sig_current_statusPF; 
+    current_statusPF = reg_current_statusPF.q; 
     
     
     
