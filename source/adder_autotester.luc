@@ -16,6 +16,9 @@ module adder_autotester (
   // register to store the current out value in each test cse 
   dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX OUTPUT ON 7 SEGMENT
   
+  //register tot store current test status 
+  dff reg_current_statusPF[2](#INIT(b00),.clk(clk) , .rst(rst));
+  
   // register to set the tester on speed through tests all
   // test cases at once no waiting for button 
   dff speed_through[1](#INIT(b0), .clk(clk) , .rst(rst));
@@ -26,9 +29,7 @@ module adder_autotester (
   
   //import alu
   alu alu_unit; 
-  
-  // adding a var for test status 
-  sig sig_current_statusPF[2]; 
+
   always {
     // Declare initial values
     //current_test_case = 5b0; removed log 1
@@ -37,7 +38,6 @@ module adder_autotester (
     alu_unit.inv = inv ; 
     alu_unit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
-    sig_current_statusPF = b00 ; 
     track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
     
     if(button_speed_through){
@@ -58,6 +58,7 @@ module adder_autotester (
           state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
           reg_current_out.d = 16b0;// change output register back to 0
+          reg_current_statusPF.d = 2b00; // register status to 0
         }
         
       state.TESTING: 
@@ -68,13 +69,13 @@ module adder_autotester (
             alu_unit.b= 16h0000;
             alu_unit.alufn_signal = 6b0;
             current_test_case = current_test_case_register.q;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             reg_current_out.d = alu_unit.out; 
 
        
             if (alu_unit.out != 16h0000){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE;  
@@ -84,14 +85,14 @@ module adder_autotester (
             alu_unit.a = 16h8001;
             alu_unit.b= 16h8000;
             alu_unit.alufn_signal = 6b0;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
 
                   
             if (alu_unit.out != 16h0001){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE;  
@@ -102,14 +103,14 @@ module adder_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b0;
-            sig_current_statusPF = b01;            
+            reg_current_statusPF.d = b01;            
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
                  
             
             if (alu_unit.out != 16h0002){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE; 
@@ -121,14 +122,14 @@ module adder_autotester (
             alu_unit.a = 16h0004;
             alu_unit.b= 16hFFFF;
             alu_unit.alufn_signal = 6b0;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
             
                     
             if (alu_unit.out != 16h0003){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE; 
@@ -138,14 +139,14 @@ module adder_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b= 16hF000;
             alu_unit.alufn_signal = 6b0;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
 
                                 
             if (alu_unit.out != 16hF001){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE; 
@@ -156,14 +157,14 @@ module adder_autotester (
             alu_unit.a = 16h0000;
             alu_unit.b= 16h0000;
             alu_unit.alufn_signal = 6b000001;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
 
                                
             if (alu_unit.out != 16h0000){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE; 
@@ -176,14 +177,14 @@ module adder_autotester (
             alu_unit.a = 16h0002;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b000001;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
 
                     
             if (alu_unit.out != 16h0001){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE;    
@@ -194,13 +195,13 @@ module adder_autotester (
             alu_unit.a = 16h7FFF;
             alu_unit.b= 16h8001;
             alu_unit.alufn_signal = 6b000001;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
                     
             if (alu_unit.out != 16hFFFE){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE;       
@@ -212,13 +213,13 @@ module adder_autotester (
             alu_unit.a = 16h0001;
             alu_unit.b= 16hFFFF;
             alu_unit.alufn_signal = 6b000001;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
                     
             if (alu_unit.out != 16h0002){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE;        
@@ -228,13 +229,13 @@ module adder_autotester (
             alu_unit.a = 16h8000;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b000001;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
                     
             if (alu_unit.out != 16h7FFF){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE;      
@@ -246,13 +247,13 @@ module adder_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b000001;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
                     
             if (alu_unit.out != 16hFFFE){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.IDLE;      
@@ -264,13 +265,13 @@ module adder_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b= 16hFFFF;
             alu_unit.alufn_signal = 6b000001;
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b01;
             current_test_case = current_test_case_register.q;
             reg_current_out.d = alu_unit.out; 
                     
             if (alu_unit.out != 16h0000){
               track_failure.d = track_failure.FAIL_BEFORE;
-              sig_current_statusPF = b10;
+              reg_current_statusPF.d = b10;
   
             }
             state.d =state.PASS; 
@@ -285,19 +286,20 @@ module adder_autotester (
         }
       state.PASS:
         if(track_failure.q == track_failure.FAIL_BEFORE){
-          sig_current_statusPF = b10 ;
+          reg_current_statusPF.d = b10 ;
           }else{
-            sig_current_statusPF = b01;
+            reg_current_statusPF.d = b11;
           }
         if(button_reset){
             state.d = state.IDLE;
             current_test_case_register.d = 5b0; 
             reg_current_out.d = 16b0; 
+            reg_current_statusPF.d = 2b00;
           }
       }
     //used to display on 7 seg display 
     out = reg_current_out.q ; // ADDED BY ANSAR TO FIX OUTPUT ON 7 SEGMENT
     current_test_case = current_test_case_register.q;
-    current_statusPF = sig_current_statusPF;
+    current_statusPF = reg_current_statusPF.q;
   }
 }
