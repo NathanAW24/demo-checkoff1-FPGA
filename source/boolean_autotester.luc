@@ -62,6 +62,8 @@ module boolean_autotester (
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
           reg_current_out.d = 16b0; // change output register back to 0
           reg_current_statusPF.d = 2b00;
+          speed_through.d = b0;
+
         }
         
       // Using a = 16hFFC1 and b = 16hFFF6 as test case
@@ -224,6 +226,8 @@ module boolean_autotester (
             current_test_case_register.d = 5b0;
             reg_current_out.d = 16b0;
             reg_current_statusPF.d = 2b00;
+            speed_through.d = b0;
+
           }
           
       }

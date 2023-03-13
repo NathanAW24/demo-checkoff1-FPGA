@@ -88,6 +88,7 @@ module shifter_autotester_11 (
           M_current_test_case_register_d = 5'h00;
           M_reg_current_out_d = 16'h0000;
           M_reg_current_statusPF_d = 2'h0;
+          M_speed_through_d = 1'h0;
         end
       end
       TESTING_state: begin
@@ -278,6 +279,7 @@ module shifter_autotester_11 (
           M_state_d = IDLE_state;
           M_reg_current_out_d = 16'h0000;
           M_reg_current_statusPF_d = 2'h0;
+          M_speed_through_d = 1'h0;
         end
       end
     endcase
@@ -285,24 +287,6 @@ module shifter_autotester_11 (
     current_test_case = M_current_test_case_register_q;
     current_statusPF = M_reg_current_statusPF_q;
   end
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
-    end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_current_test_case_register_q <= 5'h00;
-    end else begin
-      M_current_test_case_register_q <= M_current_test_case_register_d;
-    end
-  end
-  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -324,9 +308,9 @@ module shifter_autotester_11 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_statusPF_q <= 2'h0;
+      M_current_test_case_register_q <= 5'h00;
     end else begin
-      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
+      M_current_test_case_register_q <= M_current_test_case_register_d;
     end
   end
   
@@ -336,6 +320,24 @@ module shifter_autotester_11 (
       M_track_failure_q <= 1'h0;
     end else begin
       M_track_failure_q <= M_track_failure_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_out_q <= 1'h0;
+    end else begin
+      M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_statusPF_q <= 2'h0;
+    end else begin
+      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
     end
   end
   

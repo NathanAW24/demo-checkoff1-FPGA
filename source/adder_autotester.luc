@@ -59,6 +59,7 @@ module adder_autotester (
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
           reg_current_out.d = 16b0;// change output register back to 0
           reg_current_statusPF.d = 2b00; // register status to 0
+          speed_through.d = b0;
         }
         
       state.TESTING: 
@@ -244,7 +245,7 @@ module adder_autotester (
             
           // SUB: neg - pos with NO overflow
           b01011:
-            alu_unit.a = 16hFFFF;
+            alu_unit.a = 16hFFFF; 
             alu_unit.b= 16h0001;
             alu_unit.alufn_signal = 6b000001;
             reg_current_statusPF.d = b01;
@@ -295,6 +296,8 @@ module adder_autotester (
             current_test_case_register.d = 5b0; 
             reg_current_out.d = 16b0; 
             reg_current_statusPF.d = 2b00;
+            speed_through.d = b0;
+
           }
       }
     //used to display on 7 seg display 

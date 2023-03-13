@@ -66,7 +66,7 @@ module compare_autotester_9 (
     M_alu_unit_a = 16'h0000;
     M_alu_unit_b = 16'h0000;
     M_alu_unit_inv = inv;
-    M_alu_unit_alufn_signal = 6'h37;
+    M_alu_unit_alufn_signal = 6'h33;
     M_state_d = IDLE_state;
     M_track_failure_d = NULL_track_failure;
     if (button_speed_through) begin
@@ -88,6 +88,7 @@ module compare_autotester_9 (
           M_current_test_case_register_d = 5'h00;
           M_reg_current_out_d = 16'h0000;
           M_reg_current_statusPF_d = 2'h0;
+          M_speed_through_d = 1'h0;
         end
       end
       TESTING_state: begin
@@ -96,7 +97,7 @@ module compare_autotester_9 (
           5'h01: begin
             M_alu_unit_a = 16'h0000;
             M_alu_unit_b = 16'h0000;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
@@ -109,7 +110,7 @@ module compare_autotester_9 (
           5'h02: begin
             M_alu_unit_a = 16'h0008;
             M_alu_unit_b = 16'h000a;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
@@ -122,11 +123,11 @@ module compare_autotester_9 (
           5'h03: begin
             M_alu_unit_a = 16'hffff;
             M_alu_unit_b = 16'hffff;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 1'h0) begin
+            if (M_alu_unit_out != 1'h1) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               M_reg_current_statusPF_d = 2'h2;
             end
@@ -135,7 +136,7 @@ module compare_autotester_9 (
           5'h04: begin
             M_alu_unit_a = 16'hffff;
             M_alu_unit_b = 16'h0001;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
@@ -148,7 +149,7 @@ module compare_autotester_9 (
           5'h05: begin
             M_alu_unit_a = 16'h0001;
             M_alu_unit_b = 16'h0001;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
@@ -161,7 +162,7 @@ module compare_autotester_9 (
           5'h06: begin
             M_alu_unit_a = 16'h8000;
             M_alu_unit_b = 16'h7fff;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
@@ -174,7 +175,7 @@ module compare_autotester_9 (
           5'h07: begin
             M_alu_unit_a = 16'hfffe;
             M_alu_unit_b = 16'hffff;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
@@ -187,7 +188,7 @@ module compare_autotester_9 (
           5'h08: begin
             M_alu_unit_a = 16'h0000;
             M_alu_unit_b = 16'hffff;
-            M_alu_unit_alufn_signal = 6'h37;
+            M_alu_unit_alufn_signal = 6'h33;
             M_reg_current_statusPF_d = 2'h1;
             current_test_case = M_current_test_case_register_q;
             M_reg_current_out_d = M_alu_unit_out;
@@ -413,6 +414,7 @@ module compare_autotester_9 (
           M_state_d = IDLE_state;
           M_reg_current_out_d = 16'h0000;
           M_reg_current_statusPF_d = 2'h0;
+          M_speed_through_d = 1'h0;
         end
       end
     endcase
@@ -423,36 +425,18 @@ module compare_autotester_9 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_speed_through_q <= 1'h0;
-    end else begin
-      M_speed_through_q <= M_speed_through_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
-    end else begin
-      M_state_q <= M_state_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_track_failure_q <= 1'h0;
-    end else begin
-      M_track_failure_q <= M_track_failure_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
       M_current_test_case_register_q <= 5'h00;
     end else begin
       M_current_test_case_register_q <= M_current_test_case_register_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_speed_through_q <= 1'h0;
+    end else begin
+      M_speed_through_q <= M_speed_through_d;
     end
   end
   
@@ -468,9 +452,27 @@ module compare_autotester_9 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
+      M_state_q <= 1'h0;
+    end else begin
+      M_state_q <= M_state_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
       M_reg_current_out_q <= 1'h0;
     end else begin
       M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_track_failure_q <= 1'h0;
+    end else begin
+      M_track_failure_q <= M_track_failure_d;
     end
   end
   
