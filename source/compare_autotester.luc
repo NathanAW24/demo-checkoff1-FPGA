@@ -3,7 +3,7 @@ module compare_autotester (
     input rst,  // reset
     input button_next_test_case[1], // down btn press 
     input button_speed_through[1], // up button press 
-    input reset_button,
+    input button_reset,
     input inv[1],
     output current_test_case[5],
     output current_statusPF[2],
@@ -12,6 +12,9 @@ module compare_autotester (
   
   // register to store the current test case  number 
   dff current_test_case_register[5](.clk(clk) , .rst(rst));
+  
+  // register to store the current out value in each test cse 
+  dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
   
   // register to set the tester on speed through tests all
   // test cases at once no waiting for button 
@@ -24,6 +27,8 @@ module compare_autotester (
   //import alu
   alu alu_unit; 
   
+  // adding a var for test current_statusPF
+  sig sig_current_statusPF[2];
 
   always {
   
@@ -35,8 +40,9 @@ module compare_autotester (
     alu_unit.inv = inv;
     alu_unit.alufn_signal = 6b110111; // CMPEQ
     state.d = state.IDLE;
-    current_statusPF = 0;
-    
+    sig_current_statusPF = 0;
+    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
+
     
     if (button_speed_through) {
       speed_through.d = b1;
@@ -51,7 +57,11 @@ module compare_autotester (
         if(button_next_test_case){
           state.d = state.TESTING; 
           current_test_case_register.d = current_test_case_register.q +1 ;
-          }
+        }
+        if(button_reset){ // ADDED BY ANSAR TO FIX RESET BUTTON
+          state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
+          current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
+        }
         
       state.TESTING:
         case(current_test_case_register.q) {
@@ -63,13 +73,13 @@ module compare_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16h0;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -80,13 +90,13 @@ module compare_autotester (
             alu_unit.a = 16h8;
             alu_unit.b = 16hA;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -97,13 +107,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -115,13 +125,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16h1;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -134,13 +144,13 @@ module compare_autotester (
             alu_unit.a = 16h1;
             alu_unit.b = 16h1;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -152,13 +162,13 @@ module compare_autotester (
             alu_unit.a = 16h8000;
             alu_unit.b = 16h7FFF;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -169,13 +179,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFE;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -188,13 +198,13 @@ module compare_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110111; // CMPEQ
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -210,13 +220,13 @@ module compare_autotester (
             alu_unit.a = 16h8;
             alu_unit.b = 16hA;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -228,13 +238,13 @@ module compare_autotester (
             alu_unit.a = 16h1;
             alu_unit.b = 16h1;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -245,13 +255,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16h1;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -262,13 +272,13 @@ module compare_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16h0;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -280,13 +290,13 @@ module compare_autotester (
             alu_unit.a = 16h8000;
             alu_unit.b = 16h7FFF;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -299,13 +309,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -319,13 +329,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFE;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -339,13 +349,13 @@ module compare_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110101; // CMPLT
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -359,13 +369,13 @@ module compare_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16h0;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -378,13 +388,13 @@ module compare_autotester (
             alu_unit.a = 16h0;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 0) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -396,13 +406,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -415,13 +425,13 @@ module compare_autotester (
             alu_unit.a = 16h8;
             alu_unit.b = 16hA;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -434,13 +444,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFF;
             alu_unit.b = 16h1;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -453,13 +463,13 @@ module compare_autotester (
             alu_unit.a = 16h8000;
             alu_unit.b = 16h7FFF;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -472,13 +482,13 @@ module compare_autotester (
             alu_unit.a = 16hFFFE;
             alu_unit.b = 16hFFFF;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -491,13 +501,13 @@ module compare_autotester (
             alu_unit.a = 16h1;
             alu_unit.b = 16h1;
             alu_unit.alufn_signal = 6b110111; // CMPLE
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
             current_test_case = current_test_case_register.q;
 
             
             if (alu_unit.out != 1) {
               track_failure.d = track_failure.FAIL_BEFORE;
-              current_statusPF = 2;  
+              sig_current_statusPF = 2;  
         
             }
             
@@ -519,11 +529,11 @@ module compare_autotester (
         
       state.PASS:
         if(track_failure.q == track_failure.FAIL_BEFORE){
-          current_statusPF = 2 ;
+          sig_current_statusPF = 2 ;
           }else{
-            current_statusPF = 1;
+            sig_current_statusPF = 1;
           }
-        if(reset_button){
+        if(button_reset){
           state.d = state.IDLE;
         }
         
@@ -533,6 +543,10 @@ module compare_autotester (
     
     
     
-    out = alu_unit.out;
+    //used to display on 7 seg display 
+    reg_current_out.d = alu_unit.out; // ADDED BY ANSAR TO FIX RESET BUTTON
+    out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
+    current_test_case = current_test_case_register.q;
+    current_statusPF = sig_current_statusPF;     
   }
 }

@@ -46,7 +46,7 @@ module auto_tester (
     
     // connections for the auto comparator tester unit
     test_compare.inv = inv;
-    test_compare.reset_button = button[1];
+    test_compare.button_reset = button[1];
     test_compare.button_next_test_case = button[2];
     test_compare.button_speed_through = button[0];
     

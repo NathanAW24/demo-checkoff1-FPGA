@@ -41,14 +41,14 @@ module auto_tester_2 (
   wire [16-1:0] M_test_compare_out;
   reg [1-1:0] M_test_compare_button_next_test_case;
   reg [1-1:0] M_test_compare_button_speed_through;
-  reg [1-1:0] M_test_compare_reset_button;
+  reg [1-1:0] M_test_compare_button_reset;
   reg [1-1:0] M_test_compare_inv;
   compare_autotester_9 test_compare (
     .clk(clk),
     .rst(rst),
     .button_next_test_case(M_test_compare_button_next_test_case),
     .button_speed_through(M_test_compare_button_speed_through),
-    .reset_button(M_test_compare_reset_button),
+    .button_reset(M_test_compare_button_reset),
     .inv(M_test_compare_inv),
     .current_test_case(M_test_compare_current_test_case),
     .current_statusPF(M_test_compare_current_statusPF),
@@ -131,7 +131,7 @@ module auto_tester_2 (
     M_test_adder_button_next_test_case = button[2+0-:1];
     M_test_adder_button_speed_through = button[0+0-:1];
     M_test_compare_inv = inv;
-    M_test_compare_reset_button = button[1+0-:1];
+    M_test_compare_button_reset = button[1+0-:1];
     M_test_compare_button_next_test_case = button[2+0-:1];
     M_test_compare_button_speed_through = button[0+0-:1];
     M_test_boolean_inv = inv;
