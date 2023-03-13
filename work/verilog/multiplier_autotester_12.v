@@ -301,18 +301,27 @@ module multiplier_autotester_12 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
+      M_state_q <= 1'h0;
     end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
+      M_state_q <= M_state_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
+      M_reg_current_statusPF_q <= 2'h0;
     end else begin
-      M_state_q <= M_state_d;
+      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_track_failure_q <= 1'h0;
+    end else begin
+      M_track_failure_q <= M_track_failure_d;
     end
   end
   
@@ -337,18 +346,9 @@ module multiplier_autotester_12 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_statusPF_q <= 2'h0;
+      M_reg_current_out_q <= 1'h0;
     end else begin
-      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_track_failure_q <= 1'h0;
-    end else begin
-      M_track_failure_q <= M_track_failure_d;
+      M_reg_current_out_q <= M_reg_current_out_d;
     end
   end
   

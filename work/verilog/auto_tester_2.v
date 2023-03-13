@@ -156,14 +156,15 @@ module auto_tester_2 (
         out_test_statusPF = 2'h0;
         if (button[3+0-:1]) begin
           M_tester_function_state_d = MULTIPLIER_tester_function_state;
+          M_test_multiply_button_reset = 1'h1;
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = M_tester_function_state_q + 1'h1;
+            M_test_adder_button_reset = 1'h1;
           end
         end
       end
       ADDER_tester_function_state: begin
-        M_test_adder_inv = inv;
         out_test_statusPF = M_test_adder_current_statusPF;
         out_current_test_case = M_test_adder_current_test_case;
         out = M_test_adder_out;
@@ -172,6 +173,7 @@ module auto_tester_2 (
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = M_tester_function_state_q + 1'h1;
+            M_test_compare_button_reset = 1'h1;
           end
         end
       end
@@ -182,9 +184,11 @@ module auto_tester_2 (
         out_current_test_case = M_test_compare_current_test_case;
         if (button[3+0-:1]) begin
           M_tester_function_state_d = M_tester_function_state_q - 1'h1;
+          M_test_adder_button_reset = 1'h1;
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = M_tester_function_state_q + 1'h1;
+            M_test_boolean_button_reset = 1'h1;
           end
         end
       end
@@ -195,9 +199,11 @@ module auto_tester_2 (
         out = M_test_boolean_out;
         if (button[3+0-:1]) begin
           M_tester_function_state_d = M_tester_function_state_q - 1'h1;
+          M_test_compare_button_reset = 1'h1;
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = M_tester_function_state_q + 1'h1;
+            M_test_shifter_button_reset = 1'h1;
           end
         end
       end
@@ -208,9 +214,11 @@ module auto_tester_2 (
         out = M_test_shifter_out;
         if (button[3+0-:1]) begin
           M_tester_function_state_d = M_tester_function_state_q - 1'h1;
+          M_test_boolean_button_reset = 1'h1;
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = M_tester_function_state_q + 1'h1;
+            M_test_multiply_button_reset = 1'h1;
           end
         end
       end
@@ -221,6 +229,7 @@ module auto_tester_2 (
         out = M_test_multiply_out;
         if (button[3+0-:1]) begin
           M_tester_function_state_d = M_tester_function_state_q - 1'h1;
+          M_test_shifter_button_reset = 1'h1;
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = IDLE_tester_function_state;

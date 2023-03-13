@@ -33,7 +33,7 @@ module boolean_autotester (
   
   always {
     // Declare initial values
-    current_test_case = 5b0;
+    // current_test_case = 5b0;
     aluUnit.a = 16b0;
     aluUnit.b = 16b0;
     aluUnit.inv = inv ; 
@@ -114,7 +114,7 @@ module boolean_autotester (
             reg_current_statusPF.d = b01;
             reg_current_out.d = aluUnit.out;
                     
-            if (aluUnit.out != 16b1111111111000000){
+            if (aluUnit.out != 16hFFC0){
               track_failure.d = track_failure.FAIL_BEFORE;
               reg_current_statusPF.d = b10;
   
@@ -131,25 +131,27 @@ module boolean_autotester (
             reg_current_statusPF.d = b01;
             reg_current_out.d = aluUnit.out;
                     
-            if (aluUnit.out != 16b0000000000111111){
+            if (aluUnit.out != 16h003F){
               track_failure.d = track_failure.FAIL_BEFORE;
               reg_current_statusPF.d = b10;
   
             }
             
             state.d = state.IDLE;       
-          }
+          
         
         // OR
-        5b00101:
+        5b00101: // 5
             aluUnit.a = 16hFFC1;
             aluUnit.b = 16hFFF6;
             aluUnit.alufn_signal = 6b011110; // OR
             current_test_case = current_test_case_register.q;
             reg_current_statusPF.d = b01;
             reg_current_out.d = aluUnit.out;
+        
+            // STARTING HERE, the out value displayed in seven segment is wrong
                     
-            if (aluUnit.out != 16b1111111111110111){
+            if (aluUnit.out != 16hFFF7){
               track_failure.d = track_failure.FAIL_BEFORE;
               reg_current_statusPF.d = b10;
   
@@ -166,7 +168,7 @@ module boolean_autotester (
             reg_current_statusPF.d = b01;
             reg_current_out.d = aluUnit.out;
                     
-            if (aluUnit.out != 16b0000000000001000){
+            if (aluUnit.out != 16h0008){
               track_failure.d = track_failure.FAIL_BEFORE;
               reg_current_statusPF.d = b10;
   
@@ -183,7 +185,7 @@ module boolean_autotester (
             reg_current_statusPF.d = b01;
             reg_current_out.d = aluUnit.out;
                  
-            if (aluUnit.out != 16b0000000000110111){
+            if (aluUnit.out != 16h0037){
               track_failure.d = track_failure.FAIL_BEFORE;
               reg_current_statusPF.d = b10;
   
@@ -201,7 +203,7 @@ module boolean_autotester (
             reg_current_out.d = aluUnit.out;
                  
                     
-            if (aluUnit.out != 16b1111111111001000){
+            if (aluUnit.out != 16hFFC8){
               track_failure.d = track_failure.FAIL_BEFORE;
               reg_current_statusPF.d = b10;
   
@@ -213,6 +215,8 @@ module boolean_autotester (
         default:
             current_test_case_register.d = 5b01001;
             state.d = state.PASS;
+        }
+        
         
         state.PASS:
       if(track_failure.q == track_failure.FAIL_BEFORE){
@@ -235,8 +239,7 @@ module boolean_autotester (
     //used to display on 7 seg display 
     out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
     current_test_case = current_test_case_register.q;
-    current_statusPF = reg_current_statusPF.q;      
-      
+    current_statusPF = reg_current_statusPF.q;   
         
   }
 }

@@ -317,6 +317,8 @@ module shifter_autotester (
             reg_current_out.d = 16b0; // set back to 0 when reset button is pressed
           reg_current_statusPF.d = 2b00;
           speed_through.d = b0;
+          current_test_case_register.d = 5b0;
+
 
           
       }
