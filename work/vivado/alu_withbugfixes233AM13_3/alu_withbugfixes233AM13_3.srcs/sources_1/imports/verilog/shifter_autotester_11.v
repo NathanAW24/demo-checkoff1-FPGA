@@ -20,6 +20,8 @@ module shifter_autotester_11 (
   
   reg [4:0] M_current_test_case_register_d, M_current_test_case_register_q = 1'h0;
   
+  reg [15:0] M_reg_current_out_d, M_reg_current_out_q = 1'h0;
+  
   reg [0:0] M_speed_through_d, M_speed_through_q = 1'h0;
   
   
@@ -50,11 +52,14 @@ module shifter_autotester_11 (
     .zvn(M_aluUnit_zvn)
   );
   
+  reg [1:0] sig_current_statusPF;
+  
   always @* begin
     M_track_failure_d = M_track_failure_q;
     M_state_d = M_state_q;
     M_speed_through_d = M_speed_through_q;
     M_current_test_case_register_d = M_current_test_case_register_q;
+    M_reg_current_out_d = M_reg_current_out_q;
     
     current_test_case = 5'h00;
     M_aluUnit_a = 16'h0000;
@@ -62,7 +67,8 @@ module shifter_autotester_11 (
     M_aluUnit_inv = inv;
     M_aluUnit_alufn_signal = 6'h00;
     M_state_d = IDLE_state;
-    current_statusPF = 1'h0;
+    sig_current_statusPF = 1'h0;
+    M_track_failure_d = NULL_track_failure;
     if (button_speed_through) begin
       M_speed_through_d = 1'h1;
     end
@@ -77,6 +83,10 @@ module shifter_autotester_11 (
           M_state_d = TESTING_state;
           M_current_test_case_register_d = M_current_test_case_register_q + 1'h1;
         end
+        if (button_reset) begin
+          M_state_d = IDLE_state;
+          M_current_test_case_register_d = 5'h00;
+        end
       end
       TESTING_state: begin
         
@@ -86,10 +96,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0008;
             M_aluUnit_alufn_signal = 6'h20;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'hff00) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -98,10 +108,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0000;
             M_aluUnit_alufn_signal = 6'h20;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'hffff) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -110,10 +120,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0004;
             M_aluUnit_alufn_signal = 6'h20;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'h0f00) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -122,10 +132,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h000f;
             M_aluUnit_alufn_signal = 6'h20;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'h8000) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -134,10 +144,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0008;
             M_aluUnit_alufn_signal = 6'h21;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'h00ff) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -146,10 +156,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0000;
             M_aluUnit_alufn_signal = 6'h21;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'hffff) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -158,10 +168,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0004;
             M_aluUnit_alufn_signal = 6'h21;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'h0f0f) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -170,10 +180,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h000f;
             M_aluUnit_alufn_signal = 6'h21;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'h0001) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -182,10 +192,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0008;
             M_aluUnit_alufn_signal = 6'h23;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'hffff) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -194,10 +204,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0000;
             M_aluUnit_alufn_signal = 6'h23;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'hffff) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -206,10 +216,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0004;
             M_aluUnit_alufn_signal = 6'h23;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'hff0f) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -218,10 +228,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h000f;
             M_aluUnit_alufn_signal = 6'h23;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'hffff) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -230,10 +240,10 @@ module shifter_autotester_11 (
             M_aluUnit_b = 16'h0004;
             M_aluUnit_alufn_signal = 6'h23;
             current_test_case = M_current_test_case_register_q;
-            current_statusPF = 1'h1;
+            sig_current_statusPF = 1'h1;
             if (M_aluUnit_out != 16'h0123) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
-              current_statusPF = 2'h2;
+              sig_current_statusPF = 2'h2;
             end
             M_state_d = IDLE_state;
           end
@@ -244,35 +254,20 @@ module shifter_autotester_11 (
       end
       PASS_state: begin
         if (M_track_failure_q == FAIL_BEFORE_track_failure) begin
-          current_statusPF = 2'h2;
+          sig_current_statusPF = 2'h2;
         end else begin
-          current_statusPF = 1'h1;
+          sig_current_statusPF = 1'h1;
         end
         if (button_reset) begin
           M_state_d = IDLE_state;
         end
       end
     endcase
-    out = M_aluUnit_out;
+    M_reg_current_out_d = M_aluUnit_out;
+    out = M_reg_current_out_q;
+    current_test_case = M_current_test_case_register_q;
+    current_statusPF = sig_current_statusPF;
   end
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_speed_through_q <= 1'h0;
-    end else begin
-      M_speed_through_q <= M_speed_through_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_track_failure_q <= 1'h0;
-    end else begin
-      M_track_failure_q <= M_track_failure_d;
-    end
-  end
-  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -288,6 +283,33 @@ module shifter_autotester_11 (
       M_state_q <= 1'h0;
     end else begin
       M_state_q <= M_state_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_track_failure_q <= 1'h0;
+    end else begin
+      M_track_failure_q <= M_track_failure_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_out_q <= 1'h0;
+    end else begin
+      M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_speed_through_q <= 1'h0;
+    end else begin
+      M_speed_through_q <= M_speed_through_d;
     end
   end
   
