@@ -85,6 +85,7 @@ module adder_autotester_8 (
         if (button_reset) begin
           M_state_d = IDLE_state;
           M_current_test_case_register_d = 5'h00;
+          M_reg_current_out_d = 16'h0000;
         end
       end
       TESTING_state: begin
@@ -96,6 +97,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h00;
             current_test_case = M_current_test_case_register_q;
             sig_current_statusPF = 2'h1;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0000) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -108,6 +110,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h00;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0001) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -120,6 +123,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h00;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0002) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -132,6 +136,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h00;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0003) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -144,6 +149,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h00;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'hf001) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -156,6 +162,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h01;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0000) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -168,6 +175,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h01;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0001) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -180,6 +188,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h01;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'hfffe) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -192,6 +201,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h01;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0002) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -204,6 +214,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h01;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h7fff) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -216,6 +227,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h01;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'hfffe) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -228,6 +240,7 @@ module adder_autotester_8 (
             M_alu_unit_alufn_signal = 6'h01;
             sig_current_statusPF = 2'h1;
             current_test_case = M_current_test_case_register_q;
+            M_reg_current_out_d = M_alu_unit_out;
             if (M_alu_unit_out != 16'h0000) begin
               M_track_failure_d = FAIL_BEFORE_track_failure;
               sig_current_statusPF = 2'h2;
@@ -249,14 +262,23 @@ module adder_autotester_8 (
         if (button_reset) begin
           M_state_d = IDLE_state;
           M_current_test_case_register_d = 5'h00;
+          M_reg_current_out_d = 16'h0000;
         end
       end
     endcase
-    M_reg_current_out_d = M_alu_unit_out;
     out = M_reg_current_out_q;
     current_test_case = M_current_test_case_register_q;
     current_statusPF = sig_current_statusPF;
   end
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_current_test_case_register_q <= 5'h00;
+    end else begin
+      M_current_test_case_register_q <= M_current_test_case_register_d;
+    end
+  end
+  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -281,15 +303,6 @@ module adder_autotester_8 (
       M_track_failure_q <= 1'h0;
     end else begin
       M_track_failure_q <= M_track_failure_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_current_test_case_register_q <= 5'h00;
-    end else begin
-      M_current_test_case_register_q <= M_current_test_case_register_d;
     end
   end
   

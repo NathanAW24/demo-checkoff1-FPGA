@@ -11,7 +11,7 @@ module shifter_autotester (
   ) {
   
   // register to store the current test case  number 
-  dff current_test_case_register[5](.clk(clk) , .rst(rst));
+  dff current_test_case_register[5](#INIT(b00000),.clk(clk) , .rst(rst));
   
   // register to store the current out value in each test cse 
   dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
