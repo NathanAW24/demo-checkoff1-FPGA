@@ -174,11 +174,7 @@ module auto_tester_2 (
         out = M_test_adder_out;
         if (button[3+0-:1]) begin
           M_tester_function_state_d = M_tester_function_state_q - 1'h1;
-          M_test_compare_button_reset = 1'h1;
-          M_test_boolean_button_reset = 1'h1;
-          M_test_compare_button_reset = 1'h1;
           M_test_multiply_button_reset = 1'h1;
-          M_test_shifter_button_reset = 1'h1;
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = M_tester_function_state_q + 1'h1;
@@ -239,18 +235,10 @@ module auto_tester_2 (
         if (button[3+0-:1]) begin
           M_tester_function_state_d = M_tester_function_state_q - 1'h1;
           M_test_shifter_button_reset = 1'h1;
-          M_test_adder_button_reset = 1'h1;
-          M_test_boolean_button_reset = 1'h1;
-          M_test_compare_button_reset = 1'h1;
-          M_test_multiply_button_reset = 1'h1;
         end else begin
           if (button[4+0-:1]) begin
             M_tester_function_state_d = IDLE_tester_function_state;
             M_test_adder_button_reset = 1'h1;
-            M_test_boolean_button_reset = 1'h1;
-            M_test_compare_button_reset = 1'h1;
-            M_test_multiply_button_reset = 1'h1;
-            M_test_shifter_button_reset = 1'h1;
           end
         end
       end

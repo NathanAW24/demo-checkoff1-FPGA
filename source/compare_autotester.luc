@@ -136,6 +136,8 @@ module compare_autotester (
       reg_current_out.d = 16b0;
       reg_current_statusPF.d = 2b00; 
       speed_through.d = b0;
+      track_failure.d = track_failure.NULL;
+
         }
     
      if(button_speed_through){ 
@@ -144,6 +146,8 @@ module compare_autotester (
        current_test_case_register.d = 5b0;
        reg_current_out.d = 16b0;
        reg_current_statusPF.d = 2b00; 
+       track_failure.d = track_failure.NULL;
+
       }
     
     case(state.q){
