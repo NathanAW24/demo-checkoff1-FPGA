@@ -54,7 +54,7 @@ module boolean_autotester_10 (
     .zvn(M_alu_unit_zvn)
   );
   
-  localparam TEST_CASE_ROM = 504'h17ffc1fff6ffc816ffc1fff6003711ffc1fff600081effc1fff6fff717ffc1fff6003f18ffc1fff6ffc01cffc1fff6fff61affc1fff6ffc100000000000000;
+  localparam TEST_CASE_ROM = 504'h19ffc1fff6ffc816ffc1fff6003711ffc1fff600081effc1fff6fff717ffc1fff6003f18ffc1fff6ffc01cffc1fff6fff61affc1fff6ffc100000000000000;
   
   always @* begin
     M_track_failure_d = M_track_failure_q;
@@ -99,7 +99,7 @@ module boolean_autotester_10 (
         
         case (M_current_test_case_register_q)
           M_current_test_case_register_q: begin
-            if (M_current_test_case_register_q == 5'h0d) begin
+            if (M_current_test_case_register_q == 5'h09) begin
               M_state_d = PASS_state;
             end else begin
               M_alu_unit_a = TEST_CASE_ROM[(M_current_test_case_register_q)*56+32+15-:16];
@@ -139,24 +139,6 @@ module boolean_autotester_10 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_speed_through_q <= 1'h0;
-    end else begin
-      M_speed_through_q <= M_speed_through_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_reg_current_statusPF_q <= 2'h0;
-    end else begin
-      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
       M_state_q <= 1'h0;
     end else begin
       M_state_q <= M_state_d;
@@ -166,9 +148,9 @@ module boolean_autotester_10 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_current_test_case_register_q <= 5'h00;
+      M_track_failure_q <= 1'h0;
     end else begin
-      M_current_test_case_register_q <= M_current_test_case_register_d;
+      M_track_failure_q <= M_track_failure_d;
     end
   end
   
@@ -184,9 +166,27 @@ module boolean_autotester_10 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_track_failure_q <= 1'h0;
+      M_current_test_case_register_q <= 5'h00;
     end else begin
-      M_track_failure_q <= M_track_failure_d;
+      M_current_test_case_register_q <= M_current_test_case_register_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_speed_through_q <= 1'h0;
+    end else begin
+      M_speed_through_q <= M_speed_through_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_statusPF_q <= 2'h0;
+    end else begin
+      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
     end
   end
   

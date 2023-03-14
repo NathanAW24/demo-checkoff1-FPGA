@@ -9,7 +9,7 @@ module multiplier_autotester_12 (
     input rst,
     input [0:0] button_next_test_case,
     input [0:0] button_speed_through,
-    input button_reset,
+    input [0:0] button_reset,
     input [0:0] inv,
     output reg [4:0] current_test_case,
     output reg [1:0] current_statusPF,
@@ -54,6 +54,8 @@ module multiplier_autotester_12 (
     .zvn(M_alu_unit_zvn)
   );
   
+  localparam TEST_CASE_ROM = 896'h020f00f0f01000020002fff8fff002ff00f0f0100002fffefff80010020f0000f010000200020008001002fffff0001000020001f000f000020000ffff000002ffff00ffff0102000100ff00ff02000000ff000002ffffffff0001020001000100010200000000000000000000000000;
+  
   always @* begin
     M_track_failure_d = M_track_failure_q;
     M_state_d = M_state_q;
@@ -65,7 +67,7 @@ module multiplier_autotester_12 (
     M_alu_unit_a = 16'h0000;
     M_alu_unit_b = 16'h0000;
     M_alu_unit_inv = inv;
-    M_alu_unit_alufn_signal = 6'h02;
+    M_alu_unit_alufn_signal = 6'h00;
     M_state_d = IDLE_state;
     if (button_speed_through) begin
       M_speed_through_d = 1'h1;
@@ -74,12 +76,16 @@ module multiplier_autotester_12 (
     case (M_state_q)
       IDLE_state: begin
         if (M_speed_through_q) begin
-          M_state_d = TESTING_state;
-          M_current_test_case_register_d = M_current_test_case_register_q + 1'h1;
+          if (M_current_test_case_register_q < 5'h10) begin
+            M_state_d = TESTING_state;
+            M_current_test_case_register_d = M_current_test_case_register_q + 5'h01;
+          end
         end
         if (button_next_test_case) begin
-          M_state_d = TESTING_state;
-          M_current_test_case_register_d = M_current_test_case_register_q + 1'h1;
+          if (M_current_test_case_register_q < 5'h10) begin
+            M_state_d = TESTING_state;
+            M_current_test_case_register_d = M_current_test_case_register_q + 5'h01;
+          end
         end
         if (button_reset) begin
           M_state_d = IDLE_state;
@@ -92,189 +98,22 @@ module multiplier_autotester_12 (
       TESTING_state: begin
         
         case (M_current_test_case_register_q)
-          5'h01: begin
-            M_alu_unit_a = 16'h0000;
-            M_alu_unit_b = 16'h0000;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
+          M_current_test_case_register_q: begin
+            if (M_current_test_case_register_q == 5'h10) begin
+              M_state_d = PASS_state;
+            end else begin
+              M_alu_unit_a = TEST_CASE_ROM[(M_current_test_case_register_q)*56+32+15-:16];
+              M_alu_unit_b = TEST_CASE_ROM[(M_current_test_case_register_q)*56+16+15-:16];
+              M_alu_unit_alufn_signal = TEST_CASE_ROM[(M_current_test_case_register_q)*56+48+5-:6];
+              M_reg_current_statusPF_d = 2'h1;
+              current_test_case = M_current_test_case_register_q;
+              M_reg_current_out_d = M_alu_unit_out;
+              if (M_alu_unit_out != TEST_CASE_ROM[(M_current_test_case_register_q)*56+0+15-:16]) begin
+                M_track_failure_d = FAIL_BEFORE_track_failure;
+                M_reg_current_statusPF_d = 2'h2;
+              end
+              M_state_d = IDLE_state;
             end
-            M_state_d = IDLE_state;
-          end
-          5'h02: begin
-            M_alu_unit_a = 16'h0001;
-            M_alu_unit_b = 16'h0001;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0001) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h03: begin
-            M_alu_unit_a = 16'hffff;
-            M_alu_unit_b = 16'hffff;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0001) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h04: begin
-            M_alu_unit_a = 16'h0000;
-            M_alu_unit_b = 16'h00ff;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h05: begin
-            M_alu_unit_a = 16'h0001;
-            M_alu_unit_b = 16'h00ff;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h00ff) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h06: begin
-            M_alu_unit_a = 16'hffff;
-            M_alu_unit_b = 16'h00ff;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'hff01) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h07: begin
-            M_alu_unit_a = 16'h0000;
-            M_alu_unit_b = 16'hf000;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h08: begin
-            M_alu_unit_a = 16'h0001;
-            M_alu_unit_b = 16'hf000;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'hf000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h09: begin
-            M_alu_unit_a = 16'hffff;
-            M_alu_unit_b = 16'hf000;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h1000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0a: begin
-            M_alu_unit_a = 16'hffff;
-            M_alu_unit_b = 16'hf000;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h1000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0b: begin
-            M_alu_unit_a = 16'h0f00;
-            M_alu_unit_b = 16'h00f0;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h1000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0c: begin
-            M_alu_unit_a = 16'hfffe;
-            M_alu_unit_b = 16'hfff8;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0010) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0d: begin
-            M_alu_unit_a = 16'hff00;
-            M_alu_unit_b = 16'hf0f0;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h1000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0e: begin
-            M_alu_unit_a = 16'h0002;
-            M_alu_unit_b = 16'hfff8;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'hfff0) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0f: begin
-            M_alu_unit_a = 16'h0f00;
-            M_alu_unit_b = 16'hf0f0;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h1000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          default: begin
-            M_current_test_case_register_d = 5'h10;
-            M_state_d = PASS_state;
           end
         endcase
       end
@@ -286,10 +125,10 @@ module multiplier_autotester_12 (
         end
         if (button_reset) begin
           M_state_d = IDLE_state;
+          M_current_test_case_register_d = 5'h00;
           M_reg_current_out_d = 16'h0000;
           M_reg_current_statusPF_d = 2'h0;
           M_speed_through_d = 1'h0;
-          M_current_test_case_register_d = 5'h00;
         end
       end
     endcase
@@ -297,15 +136,6 @@ module multiplier_autotester_12 (
     current_test_case = M_current_test_case_register_q;
     current_statusPF = M_reg_current_statusPF_q;
   end
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_speed_through_q <= 1'h0;
-    end else begin
-      M_speed_through_q <= M_speed_through_d;
-    end
-  end
-  
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
@@ -327,15 +157,6 @@ module multiplier_autotester_12 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_statusPF_q <= 2'h0;
-    end else begin
-      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
       M_current_test_case_register_q <= 5'h00;
     end else begin
       M_current_test_case_register_q <= M_current_test_case_register_d;
@@ -348,6 +169,24 @@ module multiplier_autotester_12 (
       M_reg_current_out_q <= 1'h0;
     end else begin
       M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_speed_through_q <= 1'h0;
+    end else begin
+      M_speed_through_q <= M_speed_through_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_statusPF_q <= 2'h0;
+    end else begin
+      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
     end
   end
   

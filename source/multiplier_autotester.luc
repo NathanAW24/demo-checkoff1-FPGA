@@ -1,4 +1,3 @@
-
 module multiplier_autotester (
     input clk,  // clock
     input rst,  // reset
@@ -34,55 +33,55 @@ module multiplier_autotester (
   
   const TEST_CASE_ROM = {     
 
-    //test case 15: test 0xFFFE < 0xFFFF  neg<neg no overflow
-    56h02FFFEFFFF0001,
+    //test case 15: 2*0xFFF8 = 2*-8 = -16 pos*neg no overflow
+    56h020F00F0F01000,
     
 
-    //test case 14: test 0xFFFF < 0xFFFF neg=neg
-    56h02FFFFFFFF0000,
+    //test case 14: 2*0xFFF8 = 2*-8 = -16 pos*neg no overflow
+    56h020002FFF8FFF0,
     
 
-    //test case 13: test 0x8000 < 0x7FFF  neg<pos overflow
-    56h0280007FFF0001,
+    //test case 13: 0xFF00 * 0xF0F0 = -256*-3856= 987136 dec
+    56h02FF00F0F01000,
     
 
-    //test case 12: test 0 < 0  a=b
-    56h02000000000000,
+    //test case 12: 0xFFFE*0xFFFC = -2*-8 = 16 neg*neg no overflow
+    56h02FFFEFFF80010,
     
 
-    //test case 11: test 0xFFFF < 1 neg<pos no overflow
-    56h02FFFF00010001,
+    //test case 11: h0F00 * h00F0 = 921600 dec (hE1000)
+    56h020F0000F01000,
     
 
-    //test case 10: test 1 < 1 pos=pos
-    56h02000100010000,
+    //test case 10: 2*8 = 16 pos*pos no overflow
+    56h02000200080010,
     
-    //test case 9: test 0x8 < 0xA pos<pos no overflow
-    56h020008000A0001,
+    //test case 9: -1*0xF000
+    56h02FFFFF0001000,
     
-    //test case 8: test 0 == 0xFFFF a>b
-    56h330000FFFF0000,
+    //test case 8: 1*0xF000
+    56h020001F000F000,
     
-    //test case 7: test 0xFFFE == 0xFFFF  neg<neg no overflow
-    56h33FFFEFFFF0000,
+    //test case 7: 0 x 0xF000
+    56h020000FFFF0000,
     
-    //test case 6: test 0x8000 == 0x7FFF  neg<pos overflow
-    56h3380007FFF0000,
+    //test case 6: -1 * 0x00FF
+    56h02FFFF00FFFF01,
     
-    //test case 5: test 1 == 1 pos=pos
-    56h33000100010001,
+    //test case 5: 1 * 0x00FF
+    56h02000100FF00FF,
     
-    //test case 4: test 0xFFFF == 1 neg<pos no overflow
-    56h33FFFF00010000,
+    //test case 4: 0 * 0x00FF
+    56h02000000FF0000,
     
-    //test case 3: test 0xFFFF == 0xFFFF neg=neg
-    56h33FFFFFFFF0001,
+    //test case 3: -1 * -1 (neg * neg)
+    56h02FFFFFFFF0001,
     
-    //test case 2: test 0x8 == 0xA pos<pos no overflow 
-    56h330008000A0000,       
+    //test case 2: 1 * 1
+    56h02000100010001,       
     
     //test case 1: test 0 == 0  a=b
-    56h33000000000001,
+    56h02000000000000,
     
     //test case 0: 
     56h00000000000000 
@@ -130,7 +129,7 @@ module multiplier_autotester (
       state.TESTING:
         case(current_test_case_register.q){
           current_test_case_register.q: 
-            if(current_test_case_register.q == b01101 ){
+            if(current_test_case_register.q == b10000 ){
               state.d = state.PASS ;
             }else{
             

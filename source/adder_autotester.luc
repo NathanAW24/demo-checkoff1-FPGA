@@ -80,7 +80,7 @@ module adder_autotester (
       state.IDLE:
       
         if(speed_through.q){
-          if( current_test_case_register.q < b01101){
+          if( current_test_case_register.q < b01101){ // 13
             state.d = state.TESTING; 
             current_test_case_register.d = current_test_case_register.q + b00001;
           }

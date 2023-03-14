@@ -35,7 +35,7 @@ module boolean_autotester (
   const TEST_CASE_ROM = { 
     
     //test case 8: XNOR
-    56h17FFC1FFF6FFC8,
+    56h19FFC1FFF6FFC8,
     
     //test case 7: XOR
     56h16FFC1FFF60037,
@@ -104,7 +104,7 @@ module boolean_autotester (
       state.TESTING:
         case(current_test_case_register.q){
           current_test_case_register.q: 
-            if(current_test_case_register.q == b01101 ){
+            if(current_test_case_register.q == 5b01001 ){
               state.d = state.PASS ;
             }else{
             

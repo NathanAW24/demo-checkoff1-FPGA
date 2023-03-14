@@ -54,16 +54,16 @@ module shifter_autotester (
     56h23FFFF0008FFFF,
     
     //test case 8: shift F00F right by 15
-    56h12F00F000F0001,
+    56h21F00F000F0001,
     
     //test case 7: shift F0F0 right by 4
-    56h12F0F000040F0F,
+    56h21F0F000040F0F,
     
     //test case 6: shift FFFF right by 0
-    56h12FFFF0000FFFF,
+    56h21FFFF0000FFFF,
     
     //test case 5: shift FFFF right by 8
-    56h12FFFF000800FF,
+    56h21FFFF000800FF,
     
     //test case 4: shift F00F left by 15
     56h20F00F000F8000,
@@ -123,7 +123,7 @@ module shifter_autotester (
       state.TESTING:
         case(current_test_case_register.q){
           current_test_case_register.q: 
-            if(current_test_case_register.q == b01101 ){
+            if(current_test_case_register.q == 5b01110 ){
               state.d = state.PASS ;
             }else{
             

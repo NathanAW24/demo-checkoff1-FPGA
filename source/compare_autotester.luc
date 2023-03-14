@@ -162,7 +162,7 @@ module compare_autotester (
       state.TESTING:
         case(current_test_case_register.q){
           current_test_case_register.q: 
-            if(current_test_case_register.q == b01101 ){
+            if(current_test_case_register.q == b11001 ){
               state.d = state.PASS ;
             }else{
             
