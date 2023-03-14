@@ -6,54 +6,29 @@
 
 /*
    Parameters:
+     NUM_CASES = 16
      SIZE = 5
      DIV = 27
-     TOP = 16
-     UP = 1
 */
 module custom_counter_26 (
     input clk,
     input rst,
-    input manual_reset,
-    output reg [4:0] value
+    output reg [4:0] sel
   );
   
+  localparam NUM_CASES = 5'h10;
   localparam SIZE = 3'h5;
   localparam DIV = 5'h1b;
-  localparam TOP = 5'h10;
-  localparam UP = 1'h1;
   
   
-  reg [31:0] M_ctr_d, M_ctr_q = 1'h0;
-  
-  localparam MAX_VALUE = 32'h87ffffff;
+  wire [5-1:0] M_ctr_value;
+  counter_31 ctr (
+    .clk(clk),
+    .rst(rst),
+    .value(M_ctr_value)
+  );
   
   always @* begin
-    M_ctr_d = M_ctr_q;
-    
-    value = M_ctr_q[27+4-:5];
-    if (manual_reset == 1'h1) begin
-      M_ctr_d = 1'h0;
-    end
-    if (1'h1) begin
-      M_ctr_d = M_ctr_q + 1'h1;
-      if (1'h1 && M_ctr_q == 32'h87ffffff) begin
-        M_ctr_d = 1'h0;
-      end
-    end else begin
-      M_ctr_d = M_ctr_q - 1'h1;
-      if (1'h1 && M_ctr_q == 1'h0) begin
-        M_ctr_d = 32'h87ffffff;
-      end
-    end
+    sel = M_ctr_value;
   end
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_ctr_q <= 1'h0;
-    end else begin
-      M_ctr_q <= M_ctr_d;
-    end
-  end
-  
 endmodule

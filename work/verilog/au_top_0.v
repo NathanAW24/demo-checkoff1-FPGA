@@ -182,18 +182,18 @@ module au_top_0 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_auto_mode_register_q <= 1'h0;
+      M_mode_q <= 1'h0;
     end else begin
-      M_auto_mode_register_q <= M_auto_mode_register_d;
+      M_mode_q <= M_mode_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_mode_q <= 1'h0;
+      M_auto_mode_register_q <= 1'h0;
     end else begin
-      M_mode_q <= M_mode_d;
+      M_auto_mode_register_q <= M_auto_mode_register_d;
     end
   end
   
