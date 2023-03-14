@@ -1,5 +1,5 @@
 
-module multiplier_autotester (
+module shifter_autotester (
     input clk,  // clock
     input rst,  // reset
     input button_next_test_case[1], // down btn press 
