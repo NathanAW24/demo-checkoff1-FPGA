@@ -1,577 +1,204 @@
+
 module compare_autotester (
     input clk,  // clock
     input rst,  // reset
     input button_next_test_case[1], // down btn press 
     input button_speed_through[1], // up button press 
-    input button_reset,
+    input button_reset[1],
     input inv[1],
     output current_test_case[5],
     output current_statusPF[2],
     output out[16]
   ) {
   
-  // register to store the current test case  number 
-  dff current_test_case_register[5](#INIT(b00000), .clk(clk) , .rst(rst));
+  // register to store the current test case number 
+  dff current_test_case_register[5](#INIT(b00000),.clk(clk) , .rst(rst));
   
   // register to store the current out value in each test cse 
-  dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX RESET BUTTON
+  dff reg_current_out[16](.clk(clk) , .rst(rst)); // ADDED BY ANSAR TO FIX OUTPUT ON 7 SEGMENT
   
   //register tot store current test status 
   dff reg_current_statusPF[2](#INIT(b00),.clk(clk) , .rst(rst));
   
   // register to set the tester on speed through tests all
   // test cases at once no waiting for button 
-  dff speed_through[1](.clk(clk) , .rst(rst));
+  dff speed_through[1](#INIT(b0), .clk(clk) , .rst(rst));
   
   // Declare the fsm states
   fsm state (.clk(clk), .rst(rst)) = {IDLE, TESTING, PASS};
   fsm track_failure (.clk(clk), .rst(rst)) = {NULL, FAIL_BEFORE};
+  // dff track_failure[1] (.clk(clk), .rst(rst));
   
   //import alu
   alu alu_unit; 
   
+  const TEST_CASE_ROM = { 
+    //test case 24: test 1 <= 1 pos=pos
+    56h37000100010001,
+    
+    //test case 23: test 0xFFFE <= 0xFFFF  neg<neg no overflow
+    56h37FFFEFFFF0001,
+    
+    //test case 22: test 0x8000 <= 0x7FFF  neg<pos overflow
+    56h3780007FFF0001,
+    
+    //test case 21: test 0xFFFF <=1 neg<pos no overflow
+    56h37FFFF00010001,
+    
 
+    //test case 20: test 0x8 <=0xA pos<pos no overflow
+    56h370008000A0001,
+    
+
+    //test case 19: test 0xFFFF <= 0xFFFF neg=neg
+    56h37FFFFFFFF0001,
+    
+
+    //test case 18: test 0 <= 0xFFFF a>b
+    56h370000FFFF0000,
+    
+
+    //test case 17: test 0 <= 0  a=b
+    56h37000000000001,
+    
+
+    //test case 16: test 0 < 0xFFFF a>b
+    56h350000FFFF0000,
+    
+
+    //test case 15: test 0xFFFE < 0xFFFF  neg<neg no overflow
+    56h35FFFEFFFF0001,
+    
+
+    //test case 14: test 0xFFFF < 0xFFFF neg=neg
+    56h35FFFFFFFF0000,
+    
+
+    //test case 13: test 0x8000 < 0x7FFF  neg<pos overflow
+    56h3580007FFF0001,
+    
+
+    //test case 12: test 0 < 0  a=b
+    56h35000000000000,
+    
+
+    //test case 11: test 0xFFFF < 1 neg<pos no overflow
+    56h35FFFF00010001,
+    
+
+    //test case 10: test 1 < 1 pos=pos
+    56h35000100010000,
+    
+    //test case 9: test 0x8 < 0xA pos<pos no overflow
+    56h350008000A0001,
+    
+    //test case 8: test 0 == 0xFFFF a>b
+    56h330000FFFF0000,
+    
+    //test case 7: test 0xFFFE == 0xFFFF  neg<neg no overflow
+    56h33FFFEFFFF0000,
+    
+    //test case 6: test 0x8000 == 0x7FFF  neg<pos overflow
+    56h3380007FFF0000,
+    
+    //test case 5: test 1 == 1 pos=pos
+    56h33000100010001,
+    
+    //test case 4: test 0xFFFF == 1 neg<pos no overflow
+    56h33FFFF00010000,
+    
+    //test case 3: test 0xFFFF == 0xFFFF neg=neg
+    56h33FFFFFFFF0001,
+    
+    //test case 2: test 0x8 == 0xA pos<pos no overflow 
+    56h330008000A0000,       
+    
+    //test case 1: test 0 == 0  a=b
+    56h33000000000001,
+    
+    //test case 0: 
+    56h00000000000000 
+         
+    }; 
   always {
-  
-    // declare initial values
-    // current_test_case = 5b0;
-    // a b and alufn_signal
+    // Declare initial values
+    //current_test_case = 5b0; removed log 1
     alu_unit.a = 16b0;
     alu_unit.b = 16b0;
-    alu_unit.inv = inv;
-    alu_unit.alufn_signal = 6b110011; // CMPEQ
+    alu_unit.inv = inv ; 
+    alu_unit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
-
+    // ADDED BY ANSAR TO FIX RESET BUTTON
     
-    if (button_speed_through) {
-      speed_through.d = b1;
-    } 
+     if(button_speed_through){
+       speed_through.d = b1; 
+      }
     
-    case(state.q) {
+    case(state.q){
       state.IDLE:
+      
         if(speed_through.q){
-          state.d = state.TESTING; 
-          current_test_case_register.d = current_test_case_register.q + 1;
+          if( current_test_case_register.q < b11001){
+            state.d = state.TESTING; 
+            current_test_case_register.d = current_test_case_register.q + b00001;
+          }
         }
+
         if(button_next_test_case){
-          state.d = state.TESTING; 
-          current_test_case_register.d = current_test_case_register.q +1 ;
+          if( current_test_case_register.q < b11001){
+            state.d = state.TESTING; 
+            current_test_case_register.d = current_test_case_register.q + b00001;
+          }
         }
+        
         if(button_reset){ // ADDED BY ANSAR TO FIX RESET BUTTON
           state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
-          reg_current_out.d = 16b0;
-          reg_current_statusPF.d = 2b00;
+          reg_current_out.d = 16b0;// change output register back to 0
+          reg_current_statusPF.d = 2b00; // register status to 0
           speed_through.d = b0;
-
         }
         
       state.TESTING:
-        case(current_test_case_register.q) {
-          // all the 25 conditions
-          
-          // ********************* COMPARE EQUALS
-          // test 0 == 0  a=b 
-          b00001:
-            alu_unit.a = 16h0;
-            alu_unit.b = 16h0;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
+        case(current_test_case_register.q){
+          current_test_case_register.q: 
+            if(current_test_case_register.q == b01101 ){
+              state.d = state.PASS ;
+            }else{
             
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
+              alu_unit.a = TEST_CASE_ROM[current_test_case_register.q][47:32];
+              alu_unit.b = TEST_CASE_ROM[current_test_case_register.q][31:16];
+              alu_unit.alufn_signal = TEST_CASE_ROM[current_test_case_register.q][53:48];
+              
+              reg_current_statusPF.d = b01;
+              current_test_case = current_test_case_register.q;
+              reg_current_out.d = alu_unit.out; 
+              
+              if (alu_unit.out != TEST_CASE_ROM[current_test_case_register.q][15:0]){
+                track_failure.d = track_failure.FAIL_BEFORE;
+                reg_current_statusPF.d = b10;
+              }
+              state.d =state.IDLE; 
             }
-            
-            state.d = state.IDLE;
-          
-          //test 0x8 == 0xA pos<pos no overflow
-          b00010:// 2
-            alu_unit.a = 16h8;
-            alu_unit.b = 16hA;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;
-          
-          //test 0xFFFF == 0xFFFF neg=neg
-          b00011: // 3
-            alu_unit.a = 16hFFFF;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;
-          
-         
-          //test 0xFFFF == 1 neg<pos no overflow
-          b00100: // 4
-            alu_unit.a = 16hFFFF;
-            alu_unit.b = 16h1;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;  
-            
-            
-            
-          //test 1 == 1 pos=pos
-          b00101: // 5
-            alu_unit.a = 16h1;
-            alu_unit.b = 16h1;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;       
-            
-            
-          //test 0x8000 == 0x7FFF  neg<pos overflow
-          b00110: // 6
-            alu_unit.a = 16h8000;
-            alu_unit.b = 16h7FFF;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;       
-            
-          //test 0xFFFE == 0xFFFF  neg<neg no overflow
-          b00111: // 7
-            alu_unit.a = 16hFFFE;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;     
-            
-            
-            
-          //test 0xFFFE == 0xFFFF  neg<neg no overflow
-          b01000: // 8
-            alu_unit.a = 16h0;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110011; // CMPEQ
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;       
-            
-          
-            
-            
-            
-          // ********************* COMPARE LESS THAN
-          //test 0xFFFE == 0xFFFF  neg<neg no overflow
-          b01001: // 9
-            alu_unit.a = 16h8;
-            alu_unit.b = 16hA;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;      
-            
-            
-          //test 1 < 1 pos=pos
-          b01010: // 10
-            alu_unit.a = 16h1;
-            alu_unit.b = 16h1;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;          
-            
-          //test 0xFFFF < 1 neg<pos no overflow
-          b01011: // 11
-            alu_unit.a = 16hFFFF;
-            alu_unit.b = 16h1;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;      
-            
-          // test 0 < 0  a=b 
-          b01100: // 12
-            alu_unit.a = 16h0;
-            alu_unit.b = 16h0;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;             
-            
-            
-          //test 0x8000 < 0x7FFF  neg<pos overflow
-          b01101: // 13
-            alu_unit.a = 16h8000;
-            alu_unit.b = 16h7FFF;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;  
-            
-            
-            
-          //test 0xFFFF < 0xFFFF neg=neg
-          b01110: // 14
-            alu_unit.a = 16hFFFF;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;         
-            
-            
-            
-             
-          // test 0xFFFE < 0xFFFF  neg<neg no overflow
-          b01111: // 15
-            alu_unit.a = 16hFFFE;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;        
-            
-            
-            
-            
-          // test 0 < 0xFFFF a>b
-          b10000: // 16
-            alu_unit.a = 16h0;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110101; // CMPLT
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;        
-            
-            
-            
-          // ********************* COMPARE LESS THAN EQUALS
-          // test 0 <= 0  a=b 
-          b10001: // 17
-            alu_unit.a = 16h0;
-            alu_unit.b = 16h0;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;       
-            
-
-            
-          // test 0 <= 0xFFFF a>b
-          b10010:// 18
-            alu_unit.a = 16h0;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b0) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;          
-            
-            
-          // test 0xFFFF <= 0xFFFF neg=neg
-          b10011:// 19
-            alu_unit.a = 16hFFFF;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;      
-            
-            
-            
-          // test 0x8 <=0xA pos<pos no overflow
-          b10100: // 20
-            alu_unit.a = 16h8;
-            alu_unit.b = 16hA;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;      
-            
-            
-            
-          // test 0xFFFF <=1 neg<pos no overflow
-          b10101: // 21
-            alu_unit.a = 16hFFFF;
-            alu_unit.b = 16h1;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;      
-            
-            
-            
-          // test 0x8000 <= 0x7FFF  neg<pos overflow
-          b10110: // 22
-            alu_unit.a = 16h8000;
-            alu_unit.b = 16h7FFF;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;      
-            
-            
-            
-          // test 0xFFFE <= 0xFFFF  neg<neg no overflow
-          b10111: // 23
-            alu_unit.a = 16hFFFE;
-            alu_unit.b = 16hFFFF;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;         
-            
-            
-            
-          // test 1 <= 1 pos=pos
-          b11000: // 24
-            alu_unit.a = 16h1;
-            alu_unit.b = 16h1;
-            alu_unit.alufn_signal = 6b110111; // CMPLE
-            reg_current_statusPF.d = 2b01;
-            current_test_case = current_test_case_register.q;
-
-            
-            if (alu_unit.out != b1) {
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = 2b10;  
-        
-            }
-            
-            state.d = state.IDLE;   
-            
-            
-            
-          //****************************************  
-          //if all test cases passed up to here, pass
-          // test 1 <= 1 pos=pos
-          default: // 25
-            current_test_case_register.d = b11001;
-            state.d = state.PASS;   
-            
-      
-        }         
-        
-        
-        
-        
+        }
       state.PASS:
         if(track_failure.q == track_failure.FAIL_BEFORE){
-          reg_current_statusPF.d = 2b10 ;
+          reg_current_statusPF.d = b10 ;
           }else{
-            reg_current_statusPF.d = 2b11;
+            reg_current_statusPF.d = b11;
           }
         if(button_reset){
-          state.d = state.IDLE;
-          reg_current_out.d = 16b0;
-          reg_current_statusPF.d = 2b00;
-          speed_through.d = b0;
-          current_test_case_register.d = 5b0;
+            state.d = state.IDLE;
+            current_test_case_register.d = 5b0; 
+            reg_current_out.d = 16b0; 
+            reg_current_statusPF.d = 2b00;
+            speed_through.d = b0;
 
-
-        }
-        
-      
-    }
-    
-    
-    
-    
+          }
+      }
     //used to display on 7 seg display 
-    out = reg_current_out.q ; // ADDED BY ANSAR TO FIX RESET BUTTON
+    out = reg_current_out.q ; // ADDED BY ANSAR TO FIX OUTPUT ON 7 SEGMENT
     current_test_case = current_test_case_register.q;
-    current_statusPF = reg_current_statusPF.q;     
+    current_statusPF = reg_current_statusPF.q;
   }
 }
