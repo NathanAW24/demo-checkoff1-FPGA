@@ -10,6 +10,7 @@
     <src>compare_autotester.luc</src>
     <component>decoder.luc</component>
     <src>shifter.luc</src>
+    <src>custom_counter.luc</src>
     <src>boolean.luc</src>
     <src>multiply.luc</src>
     <src>alu.luc</src>

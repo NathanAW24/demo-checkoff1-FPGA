@@ -10,6 +10,10 @@ module compare_autotester (
     output current_statusPF[2],
     output out[16]
   ) {
+  .clk(clk), .rst(rst) {// LUCAS ADD
+    custom_counter ctr (#DIV(27), #SIZE(5), #TOP(25)); 
+  }
+  
   
   // register to store the current test case number 
   dff current_test_case_register[5](#INIT(b00000),.clk(clk) , .rst(rst));
@@ -128,10 +132,17 @@ module compare_autotester (
     alu_unit.inv = inv ; 
     alu_unit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
+    ctr.manual_reset = button_speed_through; // LUCAS ADD
     // ADDED BY ANSAR TO FIX RESET BUTTON
     
      if(button_speed_through){
        speed_through.d = b1; 
+       // Reset all values // LUCAS ADD
+       current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
+       reg_current_out.d = 16b0;// change output register back to 0
+       reg_current_statusPF.d = 2b00; // register status to 0
+       ctr.manual_reset = button_speed_through;
+
       }
     
     case(state.q){
@@ -157,6 +168,7 @@ module compare_autotester (
           reg_current_out.d = 16b0;// change output register back to 0
           reg_current_statusPF.d = 2b00; // register status to 0
           speed_through.d = b0;
+          ctr.manual_reset = b1; // LUCAS ADD
         }
         
       state.TESTING:
@@ -193,9 +205,21 @@ module compare_autotester (
             reg_current_out.d = 16b0; 
             reg_current_statusPF.d = 2b00;
             speed_through.d = b0;
+            ctr.manual_reset = b1; // LUCAS ADD
 
           }
       }
+    
+    // Increment the input terminal by 1 for speed_through module // LUCAS ADD
+    if (speed_through.q) {
+      if (current_test_case_register.q != b11001) {
+        current_test_case_register.d = ctr.value;
+      }
+      else {
+        state.d = state.PASS;
+      }
+    }
+    
     //used to display on 7 seg display 
     out = reg_current_out.q ; // ADDED BY ANSAR TO FIX OUTPUT ON 7 SEGMENT
     current_test_case = current_test_case_register.q;

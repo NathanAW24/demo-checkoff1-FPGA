@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Tue Mar 14 18:20:51 2023
+| Date         : Tue Mar 14 20:22:55 2023
 | Host         : LAPTOP-P3RR15PA running 64-bit major release  (build 9200)
 | Command      : report_methodology -file au_top_0_methodology_drc_routed.rpt -pb au_top_0_methodology_drc_routed.pb -rpx au_top_0_methodology_drc_routed.rpx
 | Design       : au_top_0
@@ -23,17 +23,23 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 72
+             Violations found: 74
 +-----------+----------+-------------------------------+------------+
 | Rule      | Severity | Description                   | Violations |
 +-----------+----------+-------------------------------+------------+
-| SYNTH-13  | Warning  | combinational multiplier      | 3          |
+| SYNTH-11  | Warning  | DSP output not registered     | 1          |
+| SYNTH-13  | Warning  | combinational multiplier      | 4          |
 | TIMING-18 | Warning  | Missing input or output delay | 66         |
 | TIMING-20 | Warning  | Non-clocked latch             | 3          |
 +-----------+----------+-------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
+SYNTH-11#1 Warning
+DSP output not registered  
+DSP instance manual/aluUnit/multiplyUnit/out0 is not fully pipelined on the output side. MREG/PREG are not used.
+Related violations: <none>
+
 SYNTH-13#1 Warning
 combinational multiplier  
 Detected combinational multiplier in DSP instance auto/test_adder/alu_unit/multiplyUnit/out0.
@@ -41,10 +47,15 @@ Related violations: <none>
 
 SYNTH-13#2 Warning
 combinational multiplier  
-Detected combinational multiplier in DSP instance auto/test_multiply/alu_unit/multiplyUnit/out0.
+Detected combinational multiplier in DSP instance auto/test_compare/alu_unit/multiplyUnit/out0.
 Related violations: <none>
 
 SYNTH-13#3 Warning
+combinational multiplier  
+Detected combinational multiplier in DSP instance auto/test_multiply/alu_unit/multiplyUnit/out0.
+Related violations: <none>
+
+SYNTH-13#4 Warning
 combinational multiplier  
 Detected combinational multiplier in DSP instance auto/test_shifter/alu_unit/multiplyUnit/out0.
 Related violations: <none>

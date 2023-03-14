@@ -2,8 +2,8 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Tue Mar 14 18:19:19 2023
-# Process ID: 25648
+# Start of session at: Tue Mar 14 20:21:22 2023
+# Process ID: 26424
 # Current directory: A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1
 # Command line: vivado.exe -log au_top_0.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source au_top_0.tcl -notrace
 # Log file: A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1/au_top_0.vdi
@@ -14,8 +14,8 @@ Command: link_design -top au_top_0 -part xc7a35tftg256-1
 Design is defaulting to srcset: sources_1
 Design is defaulting to constrset: constrs_1
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.026 . Memory (MB): peak = 1018.629 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 68 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 1018.578 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 109 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2020.2
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -26,13 +26,13 @@ Finished Parsing XDC File [A:/FPGA/demo-checkoff1-FPGA/work/constraint/io.xdc]
 Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc]
 Finished Parsing XDC File [C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc]
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1018.629 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1018.578 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 7 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 link_design completed successfully
-link_design: Time (s): cpu = 00:00:06 ; elapsed = 00:00:10 . Memory (MB): peak = 1018.629 ; gain = 18.250
+link_design: Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 1018.578 ; gain = 18.551
 Command: opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a35t'
@@ -43,54 +43,54 @@ INFO: [DRC 23-27] Running DRC with 2 threads
 INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1018.629 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1018.578 ; gain = 0.000
 
 Starting Cache Timing Information Task
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-Ending Cache Timing Information Task | Checksum: 166ce5c7a
+Ending Cache Timing Information Task | Checksum: 164253feb
 
-Time (s): cpu = 00:00:06 ; elapsed = 00:00:09 . Memory (MB): peak = 1185.207 ; gain = 166.578
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:08 . Memory (MB): peak = 1191.969 ; gain = 173.391
 
 Starting Logic Optimization Task
 
 Phase 1 Retarget
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Opt 31-49] Retargeted 0 cell(s).
-Phase 1 Retarget | Checksum: 166ce5c7a
+Phase 1 Retarget | Checksum: 1c71666f3
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.079 . Memory (MB): peak = 1397.516 ; gain = 0.000
-INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 0 cells
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.090 . Memory (MB): peak = 1404.773 ; gain = 0.000
+INFO: [Opt 31-389] Phase Retarget created 2 cells and removed 2 cells
 
 Phase 2 Constant propagation
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Phase 2 Constant propagation | Checksum: 166ce5c7a
+Phase 2 Constant propagation | Checksum: 1c71666f3
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.094 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.106 . Memory (MB): peak = 1404.773 ; gain = 0.000
 INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
 
 Phase 3 Sweep
-Phase 3 Sweep | Checksum: 1b22ba81c
+Phase 3 Sweep | Checksum: 2422a2cf0
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.116 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.133 . Memory (MB): peak = 1404.773 ; gain = 0.000
 INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 0 cells
 
 Phase 4 BUFG optimization
-Phase 4 BUFG optimization | Checksum: 1b22ba81c
+Phase 4 BUFG optimization | Checksum: 2422a2cf0
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.134 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.165 . Memory (MB): peak = 1404.773 ; gain = 0.000
 INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
 
 Phase 5 Shift Register Optimization
 INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
-Phase 5 Shift Register Optimization | Checksum: 1b22ba81c
+Phase 5 Shift Register Optimization | Checksum: 2422a2cf0
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.137 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.169 . Memory (MB): peak = 1404.773 ; gain = 0.000
 INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
 
 Phase 6 Post Processing Netlist
-Phase 6 Post Processing Netlist | Checksum: 1b22ba81c
+Phase 6 Post Processing Netlist | Checksum: 2422a2cf0
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.142 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.174 . Memory (MB): peak = 1404.773 ; gain = 0.000
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
 Opt_design Change Summary
 =========================
@@ -99,7 +99,7 @@ Opt_design Change Summary
 -------------------------------------------------------------------------------------------------------------------------
 |  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
 -------------------------------------------------------------------------------------------------------------------------
-|  Retarget                     |               0  |               0  |                                              0  |
+|  Retarget                     |               2  |               2  |                                              0  |
 |  Constant propagation         |               0  |               0  |                                              0  |
 |  Sweep                        |               0  |               0  |                                              0  |
 |  BUFG optimization            |               0  |               0  |                                              0  |
@@ -111,37 +111,37 @@ Opt_design Change Summary
 
 Starting Connectivity Check Task
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1397.516 ; gain = 0.000
-Ending Logic Optimization Task | Checksum: 107e6c26e
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1404.773 ; gain = 0.000
+Ending Logic Optimization Task | Checksum: 1756bc3c9
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.180 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.221 . Memory (MB): peak = 1404.773 ; gain = 0.000
 
 Starting Power Optimization Task
 INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
-Ending Power Optimization Task | Checksum: 107e6c26e
+Ending Power Optimization Task | Checksum: 1756bc3c9
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1404.773 ; gain = 0.000
 
 Starting Final Cleanup Task
-Ending Final Cleanup Task | Checksum: 107e6c26e
+Ending Final Cleanup Task | Checksum: 1756bc3c9
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1404.773 ; gain = 0.000
 
 Starting Netlist Obfuscation Task
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1397.516 ; gain = 0.000
-Ending Netlist Obfuscation Task | Checksum: 107e6c26e
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1404.773 ; gain = 0.000
+Ending Netlist Obfuscation Task | Checksum: 1756bc3c9
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1404.773 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
 24 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 opt_design completed successfully
-opt_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:13 . Memory (MB): peak = 1397.516 ; gain = 378.887
+opt_design: Time (s): cpu = 00:00:08 ; elapsed = 00:00:12 . Memory (MB): peak = 1404.773 ; gain = 386.195
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.046 . Memory (MB): peak = 1397.516 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 1404.773 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1/au_top_0_opt.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_drc -file au_top_0_drc_opted.rpt -pb au_top_0_drc_opted.pb -rpx au_top_0_drc_opted.rpx
 Command: report_drc -file au_top_0_drc_opted.rpt -pb au_top_0_drc_opted.pb -rpx au_top_0_drc_opted.rpx
@@ -169,48 +169,48 @@ INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 
 Phase 1 Placer Initialization
 
 Phase 1.1 Placer Initialization Netlist Sorting
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 1.1 Placer Initialization Netlist Sorting | Checksum: d5b6b898
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: bf8bf16e
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
-Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: b8968253
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 15557379a
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.667 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.620 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 1.3 Build Placer Netlist Model
-Phase 1.3 Build Placer Netlist Model | Checksum: e05e9a26
+Phase 1.3 Build Placer Netlist Model | Checksum: 2044ff6aa
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 1.4 Constrain Clocks/Macros
-Phase 1.4 Constrain Clocks/Macros | Checksum: e05e9a26
+Phase 1.4 Constrain Clocks/Macros | Checksum: 2044ff6aa
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 1 Placer Initialization | Checksum: e05e9a26
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 1 Placer Initialization | Checksum: 2044ff6aa
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 2 Global Placement
 
 Phase 2.1 Floorplanning
-Phase 2.1 Floorplanning | Checksum: 18fdecc74
+Phase 2.1 Floorplanning | Checksum: 18782eb9b
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 2.2 Update Timing before SLR Path Opt
-Phase 2.2 Update Timing before SLR Path Opt | Checksum: 127243bd5
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 233fb2b15
 
-Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 2.3 Global Placement Core
 
 Phase 2.3.1 Physical Synthesis In Placer
-INFO: [Physopt 32-1035] Found 21 LUTNM shape to break, 64 LUT instances to create LUTNM shape
-INFO: [Physopt 32-1044] Break lutnm for timing: one critical 12, two critical 9, total 21, new lutff created 0
-INFO: [Physopt 32-775] End 1 Pass. Optimized 42 nets or cells. Created 21 new cells, deleted 21 existing cells and moved 0 existing cell
+INFO: [Physopt 32-1035] Found 1 LUTNM shape to break, 54 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 1, two critical 0, total 1, new lutff created 0
+INFO: [Physopt 32-775] End 1 Pass. Optimized 18 nets or cells. Created 1 new cell, deleted 17 existing cells and moved 0 existing cell
 INFO: [Physopt 32-65] No nets found for high-fanout optimization.
 INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
@@ -226,7 +226,7 @@ INFO: [Physopt 32-846] No candidate cells for URAM register optimization found i
 INFO: [Physopt 32-775] End 2 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
 INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Summary of Physical Synthesis Optimizations
 ============================================
@@ -235,7 +235,7 @@ Summary of Physical Synthesis Optimizations
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 |  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-|  LUT Combining                                    |           21  |             21  |                    42  |           0  |           1  |  00:00:00  |
+|  LUT Combining                                    |            1  |             17  |                    18  |           0  |           1  |  00:00:00  |
 |  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  DSP Register                                     |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
@@ -243,69 +243,69 @@ Summary of Physical Synthesis Optimizations
 |  BRAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  URAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
-|  Total                                            |           21  |             21  |                    42  |           0  |           8  |  00:00:00  |
+|  Total                                            |            1  |             17  |                    18  |           0  |           8  |  00:00:00  |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Phase 2.3.1 Physical Synthesis In Placer | Checksum: 19f26275b
+Phase 2.3.1 Physical Synthesis In Placer | Checksum: 17bce4383
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 2.3 Global Placement Core | Checksum: 22998b16e
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 2.3 Global Placement Core | Checksum: dc08a729
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 2 Global Placement | Checksum: 22998b16e
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 2 Global Placement | Checksum: dc08a729
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3 Detail Placement
 
 Phase 3.1 Commit Multi Column Macros
-Phase 3.1 Commit Multi Column Macros | Checksum: 1791c4a34
+Phase 3.1 Commit Multi Column Macros | Checksum: b32b5dee
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.2 Commit Most Macros & LUTRAMs
-Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 1b0d9f48b
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 1c2530334
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.3 Area Swap Optimization
-Phase 3.3 Area Swap Optimization | Checksum: 243adac90
+Phase 3.3 Area Swap Optimization | Checksum: 1dd26e297
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.4 Pipeline Register Optimization
-Phase 3.4 Pipeline Register Optimization | Checksum: 1763aed2c
+Phase 3.4 Pipeline Register Optimization | Checksum: 10ef8ec37
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.5 Fast Optimization
-Phase 3.5 Fast Optimization | Checksum: 2061c1d69
+Phase 3.5 Fast Optimization | Checksum: 18830b10e
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:09 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.6 Small Shape Detail Placement
-Phase 3.6 Small Shape Detail Placement | Checksum: 16f972afc
+Phase 3.6 Small Shape Detail Placement | Checksum: 1a0d541d4
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.7 Re-assign LUT pins
-Phase 3.7 Re-assign LUT pins | Checksum: 1086deae9
+Phase 3.7 Re-assign LUT pins | Checksum: 18f5fdf2e
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.8 Pipeline Register Optimization
-Phase 3.8 Pipeline Register Optimization | Checksum: 11ba3ae72
+Phase 3.8 Pipeline Register Optimization | Checksum: eae2cc01
 
-Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3.9 Fast Optimization
-Phase 3.9 Fast Optimization | Checksum: 159d8fd1d
+Phase 3.9 Fast Optimization | Checksum: e22baf93
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:13 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 3 Detail Placement | Checksum: 159d8fd1d
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:13 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 3 Detail Placement | Checksum: e22baf93
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:13 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:13 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 4 Post Placement Optimization and Clean-Up
 
@@ -313,7 +313,7 @@ Phase 4.1 Post Commit Optimization
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 4.1.1 Post Placement Optimization
-Post Placement Optimization Initialization | Checksum: 135c2b8f4
+Post Placement Optimization Initialization | Checksum: 17d49c63a
 
 Phase 4.1.1.1 BUFG Insertion
 
@@ -321,28 +321,28 @@ Starting Physical Synthesis Task
 
 Phase 1 Physical Synthesis Initialization
 INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 2 CPUs
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-1.820 | TNS=-6.425 |
-Phase 1 Physical Synthesis Initialization | Checksum: 10b7f7180
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-1.549 | TNS=-8.518 |
+Phase 1 Physical Synthesis Initialization | Checksum: 1f07b21c1
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.065 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.076 . Memory (MB): peak = 1452.828 ; gain = 0.000
 INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to Illegal Netlist: 0.
-Ending Physical Synthesis Task | Checksum: 167eb5f82
+Ending Physical Synthesis Task | Checksum: 1b1f5d7ac
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.071 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 4.1.1.1 BUFG Insertion | Checksum: 135c2b8f4
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.082 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 4.1.1.1 BUFG Insertion | Checksum: 17d49c63a
 
-Time (s): cpu = 00:00:05 ; elapsed = 00:00:14 . Memory (MB): peak = 1442.594 ; gain = 0.000
-INFO: [Place 30-746] Post Placement Timing Summary WNS=-0.736. For the most accurate timing information please run report_timing.
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:13 . Memory (MB): peak = 1452.828 ; gain = 0.000
+INFO: [Place 30-746] Post Placement Timing Summary WNS=-0.500. For the most accurate timing information please run report_timing.
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 4.1 Post Commit Optimization | Checksum: 1cda77b43
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 4.1 Post Commit Optimization | Checksum: 1f44d0fe6
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 4.2 Post Placement Cleanup
-Phase 4.2 Post Placement Cleanup | Checksum: 1cda77b43
+Phase 4.2 Post Placement Cleanup | Checksum: 1f44d0fe6
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 4.3 Placer Reporting
 
@@ -361,268 +361,214 @@ INFO: [Place 30-612] Post-Placement Estimated Congestion
 |       West|                1x1|                1x1|
 |___________|___________________|___________________|
 
-Phase 4.3.1 Print Estimated Congestion | Checksum: 1cda77b43
+Phase 4.3.1 Print Estimated Congestion | Checksum: 1f44d0fe6
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 4.3 Placer Reporting | Checksum: 1cda77b43
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 4.3 Placer Reporting | Checksum: 1f44d0fe6
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 4.4 Final Placement Cleanup
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Phase 4 Post Placement Optimization and Clean-Up | Checksum: 10374ddb0
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1eea0f9d5
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Ending Placer Task | Checksum: 1fdd430d
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Ending Placer Task | Checksum: 1a02c3240
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:20 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1452.828 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
 66 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 place_design completed successfully
-place_design: Time (s): cpu = 00:00:08 ; elapsed = 00:00:22 . Memory (MB): peak = 1442.594 ; gain = 0.016
+place_design: Time (s): cpu = 00:00:11 ; elapsed = 00:00:25 . Memory (MB): peak = 1452.828 ; gain = 1.996
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.185 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.227 . Memory (MB): peak = 1452.828 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1/au_top_0_placed.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_io -file au_top_0_io_placed.rpt
-report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.058 . Memory (MB): peak = 1442.594 ; gain = 0.000
+report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.056 . Memory (MB): peak = 1452.828 ; gain = 0.000
 INFO: [runtcl-4] Executing : report_utilization -file au_top_0_utilization_placed.rpt -pb au_top_0_utilization_placed.pb
 INFO: [runtcl-4] Executing : report_control_sets -verbose -file au_top_0_control_sets_placed.rpt
-report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1442.594 ; gain = 0.000
+report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1452.828 ; gain = 0.000
 Command: phys_opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a35t'
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Starting Physical Synthesis Task
 
 Phase 1 Physical Synthesis Initialization
 INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 2 CPUs
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.736 | TNS=-2.577 |
-Phase 1 Physical Synthesis Initialization | Checksum: 1c9a6a52d
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.500 | TNS=-2.728 |
+Phase 1 Physical Synthesis Initialization | Checksum: 2549d1a67
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.185 . Memory (MB): peak = 1442.594 ; gain = 0.000
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.736 | TNS=-2.577 |
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.245 . Memory (MB): peak = 1452.828 ; gain = 0.000
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.500 | TNS=-2.728 |
 
 Phase 2 DSP Register Optimization
 INFO: [Physopt 32-456] No candidate cells for DSP register optimization found in the design.
 INFO: [Physopt 32-775] End 2 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
-Phase 2 DSP Register Optimization | Checksum: 1c9a6a52d
+Phase 2 DSP Register Optimization | Checksum: 2549d1a67
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.198 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.263 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 3 Critical Path Optimization
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.736 | TNS=-2.577 |
-INFO: [Physopt 32-702] Processed net auto/test_shifter/M_test_shifter_current_statusPF[0]. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[2]. Replicated 2 times.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[2]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.686 | TNS=-2.427 |
-INFO: [Physopt 32-663] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[2].  Re-placed instance auto/test_shifter/M_current_test_case_register_q_reg[2]
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[2]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.660 | TNS=-2.349 |
-INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[4]. Replicated 2 times.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[4]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.638 | TNS=-2.283 |
-INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]. Replicated 2 times.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.604 | TNS=-2.181 |
-INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]_repN. Replicated 2 times.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]_repN. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.588 | TNS=-2.133 |
-INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[3]. Replicated 2 times.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[3]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.564 | TNS=-2.061 |
-INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[2]_repN. Replicated 1 times.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[2]_repN. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.553 | TNS=-2.028 |
-INFO: [Physopt 32-572] Net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]_repN_2 was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]_repN_2.  Did not re-place instance auto/test_shifter/M_current_test_case_register_q_reg[1]_replica_2
-INFO: [Physopt 32-572] Net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]_repN_2 was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-702] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_0[1]_repN_2. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/M_reg_current_statusPF_q[0]_i_2__2_n_0.  Did not re-place instance auto/test_shifter/M_reg_current_statusPF_q[0]_i_2__2
-INFO: [Physopt 32-710] Processed net auto/test_shifter/M_reg_current_statusPF_q[0]_i_1__3_n_0. Critical path length was reduced through logic transformation on cell auto/test_shifter/M_reg_current_statusPF_q[0]_i_1__3_comp.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/M_reg_current_statusPF_q[0]_i_2__2_n_0. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.354 | TNS=-1.816 |
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.500 | TNS=-2.728 |
 INFO: [Physopt 32-702] Processed net auto/test_adder/M_test_adder_current_statusPF[0]. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-663] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[3].  Re-placed instance auto/test_adder/M_current_test_case_register_q_reg[3]
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[3]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.341 | TNS=-1.707 |
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/O56. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q_reg[1]_i_4_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_8__0_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_18__1_n_0.  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_18__1
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_18__1_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[8].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[8]_i_2__0
-INFO: [Physopt 32-710] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_18__1_n_0. Critical path length was reduced through logic transformation on cell auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_18__1_comp.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[8]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.309 | TNS=-1.551 |
-INFO: [Physopt 32-81] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[4]. Replicated 1 times.
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[4]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.301 | TNS=-1.527 |
-INFO: [Physopt 32-663] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[4].  Re-placed instance auto/test_adder/M_current_test_case_register_q_reg[4]
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[4]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.289 | TNS=-1.407 |
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_10__1_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_22__0_n_0.  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_22__0
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_22__0_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0
-INFO: [Physopt 32-710] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_22__0_n_0. Critical path length was reduced through logic transformation on cell auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_22__0_comp.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.278 | TNS=-1.374 |
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_9__0_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[3].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[3] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[3]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.275 | TNS=-1.365 |
-INFO: [Physopt 32-663] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2].  Re-placed instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.272 | TNS=-1.356 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.261 | TNS=-1.314 |
-INFO: [Physopt 32-81] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[2]. Replicated 1 times.
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[2]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.258 | TNS=-1.162 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_17__1_n_0.  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_17__1
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_17__1_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[8].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[8]_i_2__0
-INFO: [Physopt 32-710] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_17__1_n_0. Critical path length was reduced through logic transformation on cell auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_17__1_comp.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[8]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.202 | TNS=-0.999 |
-INFO: [Physopt 32-81] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]. Replicated 1 times.
+INFO: [Physopt 32-663] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1].  Re-placed instance auto/test_adder/M_current_test_case_register_q_reg[1]
 INFO: [Physopt 32-735] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.202 | TNS=-0.857 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_19__0_n_0.  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_19__0
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_19__0_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_4__1_n_0.  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_4__1
-INFO: [Physopt 32-710] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_19__0_n_0. Critical path length was reduced through logic transformation on cell auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_19__0_comp.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_4__1_n_0. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.173 | TNS=-0.799 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[0].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[0]_i_2__2
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[0] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[0]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.133 | TNS=-0.685 |
-INFO: [Physopt 32-702] Processed net auto/test_multiply/M_test_multiply_current_statusPF[0]. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-81] Processed net auto/test_multiply/M_current_test_case_register_q_reg[4]_0[3]. Replicated 1 times.
-INFO: [Physopt 32-735] Processed net auto/test_multiply/M_current_test_case_register_q_reg[4]_0[3]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.131 | TNS=-0.345 |
-INFO: [Physopt 32-663] Processed net auto/test_adder/M_state_q[0].  Re-placed instance auto/test_adder/M_state_q_reg[0]
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_state_q[0]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.129 | TNS=-0.341 |
-INFO: [Physopt 32-81] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[3]. Replicated 1 times.
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[3]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.127 | TNS=-0.318 |
-INFO: [Physopt 32-601] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]_repN. Net driver auto/test_adder/M_current_test_case_register_q_reg[1]_replica was replaced.
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]_repN. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.116 | TNS=-0.301 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[4].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[4]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[4] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[4]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.109 | TNS=-0.287 |
-INFO: [Physopt 32-572] Net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]_repN was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-662] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]_repN.  Did not re-place instance auto/test_adder/M_current_test_case_register_q_reg[1]_replica
-INFO: [Physopt 32-572] Net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]_repN was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-702] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]_repN. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_adder/M_reg_current_statusPF_q[0]_i_2_n_0.  Did not re-place instance auto/test_adder/M_reg_current_statusPF_q[0]_i_2
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.359 | TNS=-2.384 |
+INFO: [Physopt 32-662] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1].  Did not re-place instance auto/test_adder/M_current_test_case_register_q_reg[1]
+INFO: [Physopt 32-571] Net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1] was not replicated.
+INFO: [Physopt 32-702] Processed net auto/test_adder/M_current_test_case_register_q_reg[4]_0[1]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_adder/M_reg_current_statusPF_q[0]_i_2__1_n_0.  Did not re-place instance auto/test_adder/M_reg_current_statusPF_q[0]_i_2__1
 INFO: [Physopt 32-710] Processed net auto/test_adder/M_reg_current_statusPF_q[0]_i_1_n_0. Critical path length was reduced through logic transformation on cell auto/test_adder/M_reg_current_statusPF_q[0]_i_1_comp.
-INFO: [Physopt 32-735] Processed net auto/test_adder/M_reg_current_statusPF_q[0]_i_2_n_0. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.109 | TNS=-0.266 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_21__0_n_0.  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_21__0
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_21__0_n_0. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.088 | TNS=-0.210 |
-INFO: [Physopt 32-702] Processed net auto/test_adder/M_reg_current_statusPF_q_reg[1]_i_2_n_2. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-702] Processed net auto/test_adder/M_reg_current_statusPF_q_reg[1]_i_4_n_0. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-735] Processed net auto/test_adder/M_reg_current_statusPF_q[0]_i_2__1_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.355 | TNS=-2.071 |
+INFO: [Physopt 32-702] Processed net auto/test_adder/M_test_adder_current_statusPF[1]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_adder/M_reg_current_statusPF_q[1]_i_2__2_n_0.  Did not re-place instance auto/test_adder/M_reg_current_statusPF_q[1]_i_2__2
+INFO: [Physopt 32-710] Processed net auto/test_adder/M_reg_current_statusPF_q[1]_i_1__2_n_0. Critical path length was reduced through logic transformation on cell auto/test_adder/M_reg_current_statusPF_q[1]_i_1__2_comp.
+INFO: [Physopt 32-735] Processed net auto/test_adder/M_reg_current_statusPF_q[1]_i_2__2_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.349 | TNS=-1.899 |
+INFO: [Physopt 32-702] Processed net auto/test_multiply/M_test_multiply_current_statusPF[1]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_multiply/M_current_test_case_register_q_reg[4]_0[2].  Did not re-place instance auto/test_multiply/M_current_test_case_register_q_reg[2]
+INFO: [Physopt 32-81] Processed net auto/test_multiply/M_current_test_case_register_q_reg[4]_0[2]. Replicated 1 times.
+INFO: [Physopt 32-735] Processed net auto/test_multiply/M_current_test_case_register_q_reg[4]_0[2]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.348 | TNS=-1.676 |
+INFO: [Physopt 32-702] Processed net auto/test_shifter/M_test_shifter_current_statusPF[0]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_1[4]. Replicated 1 times.
+INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_1[4]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.290 | TNS=-1.558 |
+INFO: [Physopt 32-663] Processed net auto/test_shifter/M_state_q[1].  Re-placed instance auto/test_shifter/M_state_q_reg[1]
+INFO: [Physopt 32-735] Processed net auto/test_shifter/M_state_q[1]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.288 | TNS=-1.554 |
+INFO: [Physopt 32-662] Processed net auto/test_shifter/M_state_q[1].  Did not re-place instance auto/test_shifter/M_state_q_reg[1]
+INFO: [Physopt 32-81] Processed net auto/test_shifter/M_state_q[1]. Replicated 1 times.
+INFO: [Physopt 32-735] Processed net auto/test_shifter/M_state_q[1]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.274 | TNS=-1.500 |
+INFO: [Physopt 32-662] Processed net auto/test_multiply/M_current_test_case_register_q_reg[4]_0[2]_repN.  Did not re-place instance auto/test_multiply/M_current_test_case_register_q_reg[2]_replica
+INFO: [Physopt 32-702] Processed net auto/test_multiply/M_current_test_case_register_q_reg[4]_0[2]_repN. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_multiply/M_reg_current_statusPF_q[1]_i_2__3_n_0.  Did not re-place instance auto/test_multiply/M_reg_current_statusPF_q[1]_i_2__3
+INFO: [Physopt 32-710] Processed net auto/test_multiply/M_reg_current_statusPF_q[1]_i_1__3_n_0. Critical path length was reduced through logic transformation on cell auto/test_multiply/M_reg_current_statusPF_q[1]_i_1__3_comp.
+INFO: [Physopt 32-735] Processed net auto/test_multiply/M_reg_current_statusPF_q[1]_i_2__3_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.270 | TNS=-1.339 |
+INFO: [Physopt 32-702] Processed net auto/test_multiply/M_test_multiply_current_statusPF[0]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_multiply/M_reg_current_statusPF_q[0]_i_2__2_n_0.  Did not re-place instance auto/test_multiply/M_reg_current_statusPF_q[0]_i_2__2
+INFO: [Physopt 32-710] Processed net auto/test_multiply/M_reg_current_statusPF_q[0]_i_1__1_n_0. Critical path length was reduced through logic transformation on cell auto/test_multiply/M_reg_current_statusPF_q[0]_i_1__1_comp.
+INFO: [Physopt 32-735] Processed net auto/test_multiply/M_reg_current_statusPF_q[0]_i_2__2_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.267 | TNS=-1.176 |
+INFO: [Physopt 32-702] Processed net auto/test_compare/M_test_compare_current_statusPF[0]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-663] Processed net auto/test_compare/M_state_q[0].  Re-placed instance auto/test_compare/M_state_q_reg[0]
+INFO: [Physopt 32-735] Processed net auto/test_compare/M_state_q[0]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.261 | TNS=-1.154 |
+INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_1[1]. Replicated 1 times.
+INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_1[1]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.257 | TNS=-1.146 |
+INFO: [Physopt 32-81] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_1[2]. Replicated 1 times.
+INFO: [Physopt 32-735] Processed net auto/test_shifter/M_current_test_case_register_q_reg[4]_1[2]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.245 | TNS=-1.116 |
+INFO: [Physopt 32-663] Processed net auto/test_compare/M_test_compare_current_test_case[3].  Re-placed instance auto/test_compare/M_current_test_case_register_q_reg[3]
+INFO: [Physopt 32-735] Processed net auto/test_compare/M_test_compare_current_test_case[3]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.242 | TNS=-1.085 |
+INFO: [Physopt 32-663] Processed net auto/test_shifter/M_state_q[0].  Re-placed instance auto/test_shifter/M_state_q_reg[0]
+INFO: [Physopt 32-735] Processed net auto/test_shifter/M_state_q[0]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.239 | TNS=-1.079 |
+INFO: [Physopt 32-662] Processed net auto/test_shifter/M_state_q[1]_repN.  Did not re-place instance auto/test_shifter/M_state_q_reg[1]_replica
+INFO: [Physopt 32-702] Processed net auto/test_shifter/M_state_q[1]_repN. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[0]_i_2__0_n_0.  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[0]_i_2__0
+INFO: [Physopt 32-710] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q_reg[0]. Critical path length was reduced through logic transformation on cell auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[0]_i_1__2_comp.
+INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[0]_i_2__0_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.214 | TNS=-0.840 |
+INFO: [Physopt 32-662] Processed net auto/test_compare/M_test_compare_current_test_case[4].  Did not re-place instance auto/test_compare/M_current_test_case_register_q_reg[4]
+INFO: [Physopt 32-572] Net auto/test_compare/M_test_compare_current_test_case[4] was not replicated.
+Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
+INFO: [Physopt 32-702] Processed net auto/test_compare/M_test_compare_current_test_case[4]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_compare/M_reg_current_statusPF_q[0]_i_2_n_0.  Did not re-place instance auto/test_compare/M_reg_current_statusPF_q[0]_i_2
+INFO: [Physopt 32-710] Processed net auto/test_compare/M_reg_current_statusPF_q[0]_i_1__0_n_0. Critical path length was reduced through logic transformation on cell auto/test_compare/M_reg_current_statusPF_q[0]_i_1__0_comp.
+INFO: [Physopt 32-735] Processed net auto/test_compare/M_reg_current_statusPF_q[0]_i_2_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.183 | TNS=-0.662 |
+INFO: [Physopt 32-702] Processed net auto/test_adder/p_1_in. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-702] Processed net auto/test_adder/M_track_failure_q_reg_i_3_n_0. Optimizations did not improve timing on the net.
 INFO: [Physopt 32-702] Processed net auto/test_adder/alu_unit/multiplyUnit/S[0]. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_33_n_0.  Did not re-place instance auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_33
-INFO: [Physopt 32-702] Processed net auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_33_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-663] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[0].  Re-placed instance auto/test_adder/alu_unit/multiplyUnit/M_reg_current_out_q[0]_i_2
-INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[0]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.087 | TNS=-0.208 |
+INFO: [Physopt 32-662] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[2].  Did not re-place instance auto/test_adder/alu_unit/multiplyUnit/M_track_failure_q_i_28
+INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[2]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.175 | TNS=-0.510 |
+INFO: [Physopt 32-702] Processed net auto/test_shifter/M_test_shifter_current_statusPF[1]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_shifter/M_reg_current_statusPF_q[1]_i_2__0_n_0.  Did not re-place instance auto/test_shifter/M_reg_current_statusPF_q[1]_i_2__0
+INFO: [Physopt 32-710] Processed net auto/test_shifter/M_reg_current_statusPF_q[1]_i_1__0_n_0. Critical path length was reduced through logic transformation on cell auto/test_shifter/M_reg_current_statusPF_q[1]_i_1__0_comp.
+INFO: [Physopt 32-735] Processed net auto/test_shifter/M_reg_current_statusPF_q[1]_i_2__0_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.113 | TNS=-0.334 |
+INFO: [Physopt 32-702] Processed net auto/test_multiply/p_1_in. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-702] Processed net auto/test_multiply/M_track_failure_q_reg_i_3_n_0. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-702] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_current_test_case_register_q_reg[0][1]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_2__1_n_0.  Did not re-place instance auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_2__1
+INFO: [Physopt 32-572] Net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_2__1_n_0 was not replicated.
+Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
+INFO: [Physopt 32-735] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[3]_i_2__1_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.077 | TNS=-0.254 |
+INFO: [Physopt 32-702] Processed net auto/test_adder/alu_unit/multiplyUnit/S[1]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[3].  Did not re-place instance auto/test_adder/alu_unit/multiplyUnit/M_track_failure_q_i_25
+INFO: [Physopt 32-710] Processed net auto/test_adder/alu_unit/multiplyUnit/S[1]. Critical path length was reduced through logic transformation on cell auto/test_adder/alu_unit/multiplyUnit/M_track_failure_q_i_8_comp.
+INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[3]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.073 | TNS=-0.245 |
+INFO: [Physopt 32-702] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_current_test_case_register_q_reg[0][0]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0_n_0.  Did not re-place instance auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0
+INFO: [Physopt 32-572] Net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0_n_0 was not replicated.
+Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
+INFO: [Physopt 32-735] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.068 | TNS=-0.235 |
+INFO: [Physopt 32-702] Processed net auto/test_adder/alu_unit/multiplyUnit/S[3]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-663] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[10].  Re-placed instance auto/test_adder/alu_unit/multiplyUnit/M_track_failure_q_i_15
+INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[10]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.068 | TNS=-0.220 |
+INFO: [Physopt 32-702] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_current_test_case_register_q_reg[0][3]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-662] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[9]_i_2__0_n_0.  Did not re-place instance auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[9]_i_2__0
+INFO: [Physopt 32-710] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_current_test_case_register_q_reg[0][3]. Critical path length was reduced through logic transformation on cell auto/test_multiply/alu_unit/multiplyUnit/M_track_failure_q_i_6__0_comp.
+INFO: [Physopt 32-735] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[9]_i_2__0_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.053 | TNS=-0.108 |
+INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/S[2]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.047 | TNS=-0.102 |
 INFO: [Physopt 32-702] Processed net auto/test_adder/alu_unit/multiplyUnit/S[2]. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-663] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[6].  Re-placed instance auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_23
+INFO: [Physopt 32-663] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[7].  Re-placed instance auto/test_adder/alu_unit/multiplyUnit/M_track_failure_q_i_21
+INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[7]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.036 | TNS=-0.067 |
+INFO: [Physopt 32-702] Processed net auto/test_compare/p_1_in. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-702] Processed net auto/test_compare/M_reg_current_statusPF_q_reg[1]_i_5_n_0. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-702] Processed net auto/test_compare/alu_unit/compareUnit/S[0]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-663] Processed net auto/test_compare/alu_unit/compareUnit/M_reg_current_out_q[0]_i_2_n_0.  Re-placed instance auto/test_compare/alu_unit/compareUnit/M_reg_current_out_q[0]_i_2
+INFO: [Physopt 32-735] Processed net auto/test_compare/alu_unit/compareUnit/M_reg_current_out_q[0]_i_2_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.012 | TNS=-0.031 |
+INFO: [Physopt 32-662] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[1]_i_2__0_n_0.  Did not re-place instance auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[1]_i_2__0
+INFO: [Physopt 32-572] Net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[1]_i_2__0_n_0 was not replicated.
+Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
+INFO: [Physopt 32-735] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[1]_i_2__0_n_0. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.012 | TNS=-0.014 |
+INFO: [Physopt 32-663] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[0].  Re-placed instance auto/test_adder/alu_unit/multiplyUnit/M_track_failure_q_i_29
+INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[0]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.010 | TNS=-0.012 |
+INFO: [Physopt 32-663] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[6].  Re-placed instance auto/test_adder/alu_unit/multiplyUnit/M_track_failure_q_i_20
 INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[6]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.081 | TNS=-0.188 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[1].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[1]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[1] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[1]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.078 | TNS=-0.182 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[7].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[7]_i_2__1
-INFO: [Physopt 32-710] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_8__0_n_0. Critical path length was reduced through logic transformation on cell auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_8__0_comp.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[7]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.077 | TNS=-0.160 |
-INFO: [Physopt 32-662] Processed net auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_24_n_0.  Did not re-place instance auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_24
-INFO: [Physopt 32-702] Processed net auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_24_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-663] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[7].  Re-placed instance auto/test_adder/alu_unit/multiplyUnit/M_reg_current_out_q[7]_i_2
-INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[7]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.067 | TNS=-0.088 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[2]. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-663] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_4_n_0.  Re-placed instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_4
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[2]_i_4_n_0. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.046 | TNS=-0.064 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[5].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[5]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[5] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[5]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.045 | TNS=-0.063 |
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_7__1_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-663] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[11].  Re-placed instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[11]_i_2__0
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[11]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.034 | TNS=-0.052 |
-INFO: [Physopt 32-702] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_6__1_n_0. Optimizations did not improve timing on the net.
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[12].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[12]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[12] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[12]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.028 | TNS=-0.046 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[11].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[11]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[11] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[11]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.023 | TNS=-0.041 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[10].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[10]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[10] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[10]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.017 | TNS=-0.033 |
-INFO: [Physopt 32-662] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[7].  Did not re-place instance auto/test_adder/alu_unit/multiplyUnit/M_reg_current_out_q[7]_i_2
-INFO: [Physopt 32-710] Processed net auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_24_n_0. Critical path length was reduced through logic transformation on cell auto/test_adder/alu_unit/multiplyUnit/M_reg_current_statusPF_q[1]_i_24_comp.
-INFO: [Physopt 32-735] Processed net auto/test_adder/alu_unit/multiplyUnit/M_alu_unit_out[7]. Optimization improves timing on the net.
-INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.015 | TNS=-0.015 |
-INFO: [Physopt 32-662] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[9].  Did not re-place instance auto/test_shifter/alu_unit/multiplyUnit/M_reg_current_out_q[9]_i_2__0
-INFO: [Physopt 32-572] Net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[9] was not replicated.
-Resolution: phys_opt_design can be forced to replicate a net driver using the option -force_replication_on_nets <list of net objects>.
-INFO: [Physopt 32-735] Processed net auto/test_shifter/alu_unit/multiplyUnit/M_alu_unit_out[9]. Optimization improves timing on the net.
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-0.001 | TNS=-0.001 |
+INFO: [Physopt 32-702] Processed net auto/test_multiply/alu_unit/multiplyUnit/S[0]. Optimizations did not improve timing on the net.
+INFO: [Physopt 32-663] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_alu_unit_out[14].  Re-placed instance auto/test_multiply/alu_unit/multiplyUnit/M_reg_current_out_q[14]_i_2
+INFO: [Physopt 32-735] Processed net auto/test_multiply/alu_unit/multiplyUnit/M_alu_unit_out[14]. Optimization improves timing on the net.
 INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.002 | TNS=0.000 |
 INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.002 | TNS=0.000 |
-Phase 3 Critical Path Optimization | Checksum: 1c9a6a52d
+Phase 3 Critical Path Optimization | Checksum: 2549d1a67
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1452.828 ; gain = 0.000
 
 Phase 4 Critical Path Optimization
 INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.002 | TNS=0.000 |
 INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.002 | TNS=0.000 |
-Phase 4 Critical Path Optimization | Checksum: 1c9a6a52d
+Phase 4 Critical Path Optimization | Checksum: 2549d1a67
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 1452.828 ; gain = 0.000
 INFO: [Physopt 32-603] Post Physical Optimization Timing Summary | WNS=0.002 | TNS=0.000 |
 
 Summary of Physical Synthesis Optimizations
@@ -633,25 +579,24 @@ Summary of Physical Synthesis Optimizations
 |  Optimization   |  WNS Gain (ns)  |  TNS Gain (ns)  |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 |  DSP Register   |          0.000  |          0.000  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
-|  Critical Path  |          0.738  |          2.577  |           16  |              0  |                    41  |           0  |           2  |  00:00:06  |
-|  Total          |          0.738  |          2.577  |           16  |              0  |                    41  |           0  |           3  |  00:00:06  |
+|  Critical Path  |          0.502  |          2.728  |            5  |              0  |                    30  |           0  |           2  |  00:00:03  |
+|  Total          |          0.502  |          2.728  |            5  |              0  |                    30  |           0  |           3  |  00:00:03  |
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1442.594 ; gain = 0.000
-Ending Physical Synthesis Task | Checksum: 16b2ba271
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1452.828 ; gain = 0.000
+Ending Physical Synthesis Task | Checksum: 26e487f34
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1452.828 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
-261 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+218 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 phys_opt_design completed successfully
-phys_opt_design: Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1442.594 ; gain = 0.000
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.308 . Memory (MB): peak = 1442.594 ; gain = 0.000
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.360 . Memory (MB): peak = 1453.699 ; gain = 0.871
 INFO: [Common 17-1381] The checkpoint 'A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1/au_top_0_physopt.dcp' has been generated.
 Command: route_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7a35t'
@@ -667,76 +612,75 @@ INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more in
 
 Starting Routing Task
 INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 2 CPUs
-Checksum: PlaceDB: cf35965f ConstDB: 0 ShapeSum: 2afe453b RouteDB: 0
+Checksum: PlaceDB: de345a22 ConstDB: 0 ShapeSum: cde1adf5 RouteDB: 0
 
 Phase 1 Build RT Design
-Phase 1 Build RT Design | Checksum: 16e11258d
+Phase 1 Build RT Design | Checksum: 05008d8a
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 1540.594 ; gain = 86.043
-Post Restoration Checksum: NetGraph: 99e5d173 NumContArr: d42b541a Constraints: 0 Timing: 0
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:20 . Memory (MB): peak = 1547.039 ; gain = 82.246
+Post Restoration Checksum: NetGraph: 2dc987a NumContArr: 223f510 Constraints: 0 Timing: 0
 
 Phase 2 Router Initialization
 
 Phase 2.1 Create Timer
-Phase 2.1 Create Timer | Checksum: 16e11258d
+Phase 2.1 Create Timer | Checksum: 05008d8a
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 1540.594 ; gain = 86.043
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:20 . Memory (MB): peak = 1547.039 ; gain = 82.246
 
 Phase 2.2 Fix Topology Constraints
-Phase 2.2 Fix Topology Constraints | Checksum: 16e11258d
+Phase 2.2 Fix Topology Constraints | Checksum: 05008d8a
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 1546.605 ; gain = 92.055
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:20 . Memory (MB): peak = 1553.043 ; gain = 88.250
 
 Phase 2.3 Pre Route Cleanup
-Phase 2.3 Pre Route Cleanup | Checksum: 16e11258d
+Phase 2.3 Pre Route Cleanup | Checksum: 05008d8a
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 1546.605 ; gain = 92.055
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:20 . Memory (MB): peak = 1553.043 ; gain = 88.250
  Number of Nodes with overlaps = 0
 
 Phase 2.4 Update Timing
-Phase 2.4 Update Timing | Checksum: bdd45870
+Phase 2.4 Update Timing | Checksum: 20e08e0ca
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 1553.270 ; gain = 98.719
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.045  | TNS=0.000  | WHS=-0.113 | THS=-3.398 |
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:20 . Memory (MB): peak = 1561.258 ; gain = 96.465
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.070  | TNS=0.000  | WHS=-0.089 | THS=-2.531 |
 
-Phase 2 Router Initialization | Checksum: 10ff1862a
+Phase 2 Router Initialization | Checksum: 1c445efea
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 1555.328 ; gain = 100.777
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:21 . Memory (MB): peak = 1562.609 ; gain = 97.816
 
 Router Utilization Summary
-  Global Vertical Routing Utilization    = 0.000637806 %
-  Global Horizontal Routing Utilization  = 0.00130141 %
+  Global Vertical Routing Utilization    = 0.000956709 %
+  Global Horizontal Routing Utilization  = 0.00247267 %
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
-  Number of Failed Nets               = 1606
+  Number of Failed Nets               = 1867
     (Failed Nets is the sum of unrouted and partially routed nets)
-  Number of Unrouted Nets             = 1601
+  Number of Unrouted Nets             = 1862
   Number of Partially Routed Nets     = 5
-  Number of Node Overlaps             = 2
+  Number of Node Overlaps             = 1
 
 
 Phase 3 Initial Routing
 
 Phase 3.1 Global Routing
-Phase 3.1 Global Routing | Checksum: 10ff1862a
+Phase 3.1 Global Routing | Checksum: 1c445efea
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 1558.594 ; gain = 104.043
-Phase 3 Initial Routing | Checksum: 1c31795eb
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:21 . Memory (MB): peak = 1565.898 ; gain = 101.105
+Phase 3 Initial Routing | Checksum: 1a25f48f5
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 1558.594 ; gain = 104.043
-INFO: [Route 35-580] Design has 7 pins with tight setup and hold constraints.
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:21 . Memory (MB): peak = 1565.898 ; gain = 101.105
+INFO: [Route 35-580] Design has 4 pins with tight setup and hold constraints.
 
 The top 5 pins with tight setup and hold constraints:
 
 +--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
 |       Launch Clock       |      Capture Clock       |                                                 Pin                                                      |
 +--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
-|                    clk_0 |                    clk_0 |                                                         auto/test_adder/M_reg_current_statusPF_q_reg[0]/D|
 |                    clk_0 |                    clk_0 |                                                       auto/test_shifter/M_reg_current_statusPF_q_reg[0]/D|
 |                    clk_0 |                    clk_0 |                                                      auto/test_multiply/M_reg_current_statusPF_q_reg[0]/D|
+|                    clk_0 |                    clk_0 |                                                                auto/test_multiply/M_track_failure_q_reg/D|
 |                    clk_0 |                    clk_0 |                                                      auto/test_multiply/M_reg_current_statusPF_q_reg[1]/D|
-|                    clk_0 |                    clk_0 |                                                                   auto/test_adder/M_track_failure_q_reg/D|
 +--------------------------+--------------------------+----------------------------------------------------------------------------------------------------------+
 
 File with complete list of pins: tight_setup_hold_pins.txt
@@ -745,85 +689,115 @@ File with complete list of pins: tight_setup_hold_pins.txt
 Phase 4 Rip-up And Reroute
 
 Phase 4.1 Global Iteration 0
- Number of Nodes with overlaps = 724
- Number of Nodes with overlaps = 315
- Number of Nodes with overlaps = 124
- Number of Nodes with overlaps = 74
- Number of Nodes with overlaps = 51
- Number of Nodes with overlaps = 36
- Number of Nodes with overlaps = 19
- Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 523
+ Number of Nodes with overlaps = 199
+ Number of Nodes with overlaps = 85
+ Number of Nodes with overlaps = 25
+ Number of Nodes with overlaps = 13
  Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 1
  Number of Nodes with overlaps = 1
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.506 | TNS=-1.969 | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.696 | TNS=-2.732 | WHS=N/A    | THS=N/A    |
 
-Phase 4.1 Global Iteration 0 | Checksum: 1ce1aa19a
+Phase 4.1 Global Iteration 0 | Checksum: 156218b37
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:28 . Memory (MB): peak = 1558.594 ; gain = 104.043
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:26 . Memory (MB): peak = 1565.898 ; gain = 101.105
 
 Phase 4.2 Global Iteration 1
- Number of Nodes with overlaps = 114
- Number of Nodes with overlaps = 59
+ Number of Nodes with overlaps = 71
  Number of Nodes with overlaps = 42
- Number of Nodes with overlaps = 19
- Number of Nodes with overlaps = 2
- Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 17
+ Number of Nodes with overlaps = 9
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.508 | TNS=-1.337 | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.523 | TNS=-1.548 | WHS=N/A    | THS=N/A    |
 
-Phase 4.2 Global Iteration 1 | Checksum: e110fe16
+Phase 4.2 Global Iteration 1 | Checksum: 1299f134e
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.594 ; gain = 104.043
-Phase 4 Rip-up And Reroute | Checksum: e110fe16
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:27 . Memory (MB): peak = 1565.898 ; gain = 101.105
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.594 ; gain = 104.043
+Phase 4.3 Global Iteration 2
+ Number of Nodes with overlaps = 97
+ Number of Nodes with overlaps = 42
+ Number of Nodes with overlaps = 10
+ Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.078 | TNS=-0.124 | WHS=N/A    | THS=N/A    |
+
+Phase 4.3 Global Iteration 2 | Checksum: 273343e5b
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:30 . Memory (MB): peak = 1565.898 ; gain = 101.105
+
+Phase 4.4 Global Iteration 3
+ Number of Nodes with overlaps = 94
+ Number of Nodes with overlaps = 45
+ Number of Nodes with overlaps = 16
+ Number of Nodes with overlaps = 10
+ Number of Nodes with overlaps = 6
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.295 | TNS=-0.476 | WHS=N/A    | THS=N/A    |
+
+Phase 4.4 Global Iteration 3 | Checksum: 1d41987f6
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
+Phase 4 Rip-up And Reroute | Checksum: 1d41987f6
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
 
 Phase 5 Delay and Skew Optimization
 
 Phase 5.1 Delay CleanUp
 
 Phase 5.1.1 Update Timing
-Phase 5.1.1 Update Timing | Checksum: f9eda54c
+Phase 5.1.1 Update Timing | Checksum: 19ba8dcbf
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.594 ; gain = 104.043
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.427 | TNS=-1.399 | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.015  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
- Number of Nodes with overlaps = 0
-Phase 5.1 Delay CleanUp | Checksum: bbbf6f0c
+Phase 5.1 Delay CleanUp | Checksum: 19ba8dcbf
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.594 ; gain = 104.043
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
 
 Phase 5.2 Clock Skew Optimization
-Phase 5.2 Clock Skew Optimization | Checksum: bbbf6f0c
+Phase 5.2 Clock Skew Optimization | Checksum: 19ba8dcbf
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.594 ; gain = 104.043
-Phase 5 Delay and Skew Optimization | Checksum: bbbf6f0c
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
+Phase 5 Delay and Skew Optimization | Checksum: 19ba8dcbf
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.594 ; gain = 104.043
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
 
 Phase 6 Post Hold Fix
 
 Phase 6.1 Hold Fix Iter
 
 Phase 6.1.1 Update Timing
-Phase 6.1.1 Update Timing | Checksum: 19a85cc9a
+Phase 6.1.1 Update Timing | Checksum: 19d5def3b
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1558.594 ; gain = 104.043
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.424 | TNS=-1.390 | WHS=0.085  | THS=0.000  |
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.015  | TNS=0.000  | WHS=0.155  | THS=0.000  |
 
-Phase 6.1 Hold Fix Iter | Checksum: 19a85cc9a
+Phase 6.1 Hold Fix Iter | Checksum: 19d5def3b
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1558.594 ; gain = 104.043
-Phase 6 Post Hold Fix | Checksum: 19a85cc9a
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
+Phase 6 Post Hold Fix | Checksum: 19d5def3b
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1558.594 ; gain = 104.043
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
 
 Phase 7 Route finalize
 
 Router Utilization Summary
-  Global Vertical Routing Utilization    = 0.676872 %
-  Global Horizontal Routing Utilization  = 0.745445 %
+  Global Vertical Routing Utilization    = 0.657339 %
+  Global Horizontal Routing Utilization  = 0.790994 %
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
@@ -833,71 +807,44 @@ Router Utilization Summary
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
-Congestion Report
-North Dir 1x1 Area, Max Cong = 37.8378%, No Congested Regions.
-South Dir 1x1 Area, Max Cong = 32.4324%, No Congested Regions.
-East Dir 1x1 Area, Max Cong = 57.3529%, No Congested Regions.
-West Dir 1x1 Area, Max Cong = 44.1176%, No Congested Regions.
+Phase 7 Route finalize | Checksum: 1b73a2156
 
-------------------------------
-Reporting congestion hotspots
-------------------------------
-Direction: North
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-Direction: South
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-Direction: East
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-Direction: West
-----------------
-Congested clusters found at Level 0
-Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
-
-Phase 7 Route finalize | Checksum: 15bf0f06c
-
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1558.594 ; gain = 104.043
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1565.898 ; gain = 101.105
 
 Phase 8 Verifying routed nets
 
  Verification completed successfully
-Phase 8 Verifying routed nets | Checksum: 15bf0f06c
+Phase 8 Verifying routed nets | Checksum: 1b73a2156
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1559.258 ; gain = 104.707
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:32 . Memory (MB): peak = 1566.566 ; gain = 101.773
 
 Phase 9 Depositing Routes
-Phase 9 Depositing Routes | Checksum: 1ec3040e0
+Phase 9 Depositing Routes | Checksum: 1f89f1b63
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1559.258 ; gain = 104.707
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:33 . Memory (MB): peak = 1566.566 ; gain = 101.773
 
 Phase 10 Post Router Timing
-INFO: [Route 35-57] Estimated Timing Summary | WNS=-0.424 | TNS=-1.390 | WHS=0.085  | THS=0.000  |
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.015  | TNS=0.000  | WHS=0.155  | THS=0.000  |
 
-WARNING: [Route 35-328] Router estimated timing not met.
-Resolution: For a complete and accurate timing signoff, report_timing_summary must be run after route_design. Alternatively, route_design can be run with the -timing_summary option to enable a complete timing signoff at the end of route_design.
-Phase 10 Post Router Timing | Checksum: 1ec3040e0
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 1f89f1b63
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1559.258 ; gain = 104.707
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:33 . Memory (MB): peak = 1566.566 ; gain = 101.773
 INFO: [Route 35-16] Router Completed Successfully
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:30 . Memory (MB): peak = 1559.258 ; gain = 104.707
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:33 . Memory (MB): peak = 1566.566 ; gain = 101.773
 
 Routing Is Done.
 INFO: [Common 17-83] Releasing license: Implementation
-280 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+240 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 route_design completed successfully
-route_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:32 . Memory (MB): peak = 1559.258 ; gain = 116.664
+route_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:35 . Memory (MB): peak = 1566.566 ; gain = 112.867
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.316 . Memory (MB): peak = 1569.152 ; gain = 9.895
+Write XDEF Complete: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.329 . Memory (MB): peak = 1576.434 ; gain = 9.867
 INFO: [Common 17-1381] The checkpoint 'A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1/au_top_0_routed.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_drc -file au_top_0_drc_routed.rpt -pb au_top_0_drc_routed.pb -rpx au_top_0_drc_routed.rpx
 Command: report_drc -file au_top_0_drc_routed.rpt -pb au_top_0_drc_routed.pb -rpx au_top_0_drc_routed.rpx
@@ -917,13 +864,12 @@ INFO: [Timing 38-35] Done setting XDC timing constraints.
 Running Vector-less Activity Propagation...
 
 Finished Running Vector-less Activity Propagation
-292 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+252 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 report_power completed successfully
 INFO: [runtcl-4] Executing : report_route_status -file au_top_0_route_status.rpt -pb au_top_0_route_status.pb
 INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file au_top_0_timing_summary_routed.rpt -pb au_top_0_timing_summary_routed.pb -rpx au_top_0_timing_summary_routed.rpx -warn_on_violation 
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
 INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
-CRITICAL WARNING: [Timing 38-282] The design failed to meet the timing requirements. Please see the timing summary report for details on the timing violations.
 INFO: [runtcl-4] Executing : report_incremental_reuse -file au_top_0_incremental_reuse_routed.rpt
 INFO: [Vivado_Tcl 4-1062] Incremental flow is disabled. No incremental reuse Info to report.
 INFO: [runtcl-4] Executing : report_clock_utilization -file au_top_0_clock_utilization_routed.rpt
@@ -938,22 +884,26 @@ INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 2 threads
 WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_adder/alu_unit/multiplyUnit/out0 input auto/test_adder/alu_unit/multiplyUnit/out0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_adder/alu_unit/multiplyUnit/out0 input auto/test_adder/alu_unit/multiplyUnit/out0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_compare/alu_unit/multiplyUnit/out0 input auto/test_compare/alu_unit/multiplyUnit/out0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_compare/alu_unit/multiplyUnit/out0 input auto/test_compare/alu_unit/multiplyUnit/out0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_multiply/alu_unit/multiplyUnit/out0 input auto/test_multiply/alu_unit/multiplyUnit/out0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_multiply/alu_unit/multiplyUnit/out0 input auto/test_multiply/alu_unit/multiplyUnit/out0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_shifter/alu_unit/multiplyUnit/out0 input auto/test_shifter/alu_unit/multiplyUnit/out0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
 WARNING: [DRC DPIP-1] Input pipelining: DSP auto/test_shifter/alu_unit/multiplyUnit/out0 input auto/test_shifter/alu_unit/multiplyUnit/out0/B[17:0] is not pipelined. Pipelining DSP48 input will improve performance.
 WARNING: [DRC DPOP-1] PREG Output pipelining: DSP auto/test_adder/alu_unit/multiplyUnit/out0 output auto/test_adder/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+WARNING: [DRC DPOP-1] PREG Output pipelining: DSP auto/test_compare/alu_unit/multiplyUnit/out0 output auto/test_compare/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
 WARNING: [DRC DPOP-1] PREG Output pipelining: DSP auto/test_multiply/alu_unit/multiplyUnit/out0 output auto/test_multiply/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
 WARNING: [DRC DPOP-1] PREG Output pipelining: DSP auto/test_shifter/alu_unit/multiplyUnit/out0 output auto/test_shifter/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
 WARNING: [DRC DPOP-1] PREG Output pipelining: DSP manual/aluUnit/multiplyUnit/out0 output manual/aluUnit/multiplyUnit/out0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
 WARNING: [DRC DPOP-2] MREG Output pipelining: DSP auto/test_adder/alu_unit/multiplyUnit/out0 multiplier stage auto/test_adder/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+WARNING: [DRC DPOP-2] MREG Output pipelining: DSP auto/test_compare/alu_unit/multiplyUnit/out0 multiplier stage auto/test_compare/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
 WARNING: [DRC DPOP-2] MREG Output pipelining: DSP auto/test_multiply/alu_unit/multiplyUnit/out0 multiplier stage auto/test_multiply/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
 WARNING: [DRC DPOP-2] MREG Output pipelining: DSP auto/test_shifter/alu_unit/multiplyUnit/out0 multiplier stage auto/test_shifter/alu_unit/multiplyUnit/out0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
 WARNING: [DRC DPOP-2] MREG Output pipelining: DSP manual/aluUnit/multiplyUnit/out0 multiplier stage manual/aluUnit/multiplyUnit/out0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
 WARNING: [DRC PDRC-153] Gated clock check: Net auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2_n_0 is a gated clock net sourced by a combinational pin auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2/O, cell auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 WARNING: [DRC PDRC-153] Gated clock check: Net auto/test_shifter/alu_unit/compareUnit/out_reg[0]_i_2__0_n_0 is a gated clock net sourced by a combinational pin auto/test_shifter/alu_unit/compareUnit/out_reg[0]_i_2__0/O, cell auto/test_shifter/alu_unit/compareUnit/out_reg[0]_i_2__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 WARNING: [DRC PDRC-153] Gated clock check: Net manual/aluUnit/compareUnit/out_reg[0]_i_2__1_n_0 is a gated clock net sourced by a combinational pin manual/aluUnit/compareUnit/out_reg[0]_i_2__1/O, cell manual/aluUnit/compareUnit/out_reg[0]_i_2__1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
-INFO: [Vivado 12-3199] DRC finished with 0 Errors, 17 Warnings
+INFO: [Vivado 12-3199] DRC finished with 0 Errors, 21 Warnings
 INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
 INFO: [Designutils 20-2272] Running write_bitstream with 2 threads.
 Loading data files...
@@ -962,14 +912,14 @@ Loading route data...
 Processing options...
 Creating bitmap...
 Creating bitstream...
-Bitstream compression saved 12845952 bits.
+Bitstream compression saved 12821952 bits.
 Writing bitstream ./au_top_0.bit...
 Writing bitstream ./au_top_0.bin...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-120] WebTalk data collection is mandatory when using a WebPACK part without a full Vivado license. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
-INFO: [Common 17-186] 'A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Tue Mar 14 18:21:09 2023. For additional details about this file, please refer to the WebTalk help file at C:/Xilinx/Vivado/2020.2/doc/webtalk_introduction.html.
+INFO: [Common 17-186] 'A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Tue Mar 14 20:23:14 2023. For additional details about this file, please refer to the WebTalk help file at C:/Xilinx/Vivado/2020.2/doc/webtalk_introduction.html.
 INFO: [Common 17-83] Releasing license: Implementation
-13 Infos, 17 Warnings, 0 Critical Warnings and 0 Errors encountered.
+13 Infos, 21 Warnings, 0 Critical Warnings and 0 Errors encountered.
 write_bitstream completed successfully
-write_bitstream: Time (s): cpu = 00:00:10 ; elapsed = 00:00:17 . Memory (MB): peak = 2029.027 ; gain = 427.633
-INFO: [Common 17-206] Exiting Vivado at Tue Mar 14 18:21:09 2023...
+write_bitstream: Time (s): cpu = 00:00:09 ; elapsed = 00:00:17 . Memory (MB): peak = 2036.129 ; gain = 426.719
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 14 20:23:14 2023...

@@ -95,6 +95,11 @@ read_verilog -library xil_defaultlib {
   A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_21.v
   A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_autotester_9.v
   A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/counter_13.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/custom_counter_22.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/custom_counter_23.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/custom_counter_24.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/custom_counter_25.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/custom_counter_26.v
   A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/decoder_15.v
   A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/edge_detector_5.v
   A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multi_seven_seg_3.v

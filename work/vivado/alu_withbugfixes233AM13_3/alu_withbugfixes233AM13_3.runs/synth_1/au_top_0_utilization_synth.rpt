@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Tue Mar 14 18:19:09 2023
+| Date         : Tue Mar 14 20:21:10 2023
 | Host         : LAPTOP-P3RR15PA running 64-bit major release  (build 9200)
 | Command      : report_utilization -file au_top_0_utilization_synth.rpt -pb au_top_0_utilization_synth.pb
 | Design       : au_top_0
@@ -30,11 +30,11 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 1061 |     0 |     20800 |  5.10 |
-|   LUT as Logic          | 1061 |     0 |     20800 |  5.10 |
+| Slice LUTs*             | 1187 |     0 |     20800 |  5.71 |
+|   LUT as Logic          | 1187 |     0 |     20800 |  5.71 |
 |   LUT as Memory         |    0 |     0 |      9600 |  0.00 |
-| Slice Registers         |  353 |     0 |     41600 |  0.85 |
-|   Register as Flip Flop |  350 |     0 |     41600 |  0.84 |
+| Slice Registers         |  513 |     0 |     41600 |  1.23 |
+|   Register as Flip Flop |  510 |     0 |     41600 |  1.23 |
 |   Register as Latch     |    3 |     0 |     41600 | <0.01 |
 | F7 Muxes                |    0 |     0 |     16300 |  0.00 |
 | F8 Muxes                |    0 |     0 |      8150 |  0.00 |
@@ -57,7 +57,7 @@ Table of Contents
 | 0     |          Yes |           - |          Set |
 | 3     |          Yes |           - |        Reset |
 | 4     |          Yes |         Set |            - |
-| 346   |          Yes |       Reset |            - |
+| 506   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -80,8 +80,8 @@ Table of Contents
 +----------------+------+-------+-----------+-------+
 |    Site Type   | Used | Fixed | Available | Util% |
 +----------------+------+-------+-----------+-------+
-| DSPs           |    4 |     0 |        90 |  4.44 |
-|   DSP48E1 only |    4 |       |           |       |
+| DSPs           |    5 |     0 |        90 |  5.56 |
+|   DSP48E1 only |    5 |       |           |       |
 +----------------+------+-------+-----------+-------+
 
 
@@ -147,18 +147,18 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     |  551 |                 LUT |
-| FDRE     |  346 |        Flop & Latch |
-| LUT5     |  265 |                 LUT |
-| LUT2     |  178 |                 LUT |
-| LUT4     |  133 |                 LUT |
-| LUT3     |  110 |                 LUT |
-| CARRY4   |   64 |          CarryLogic |
+| LUT6     |  586 |                 LUT |
+| FDRE     |  506 |        Flop & Latch |
+| LUT5     |  372 |                 LUT |
+| LUT4     |  159 |                 LUT |
+| LUT2     |  151 |                 LUT |
+| CARRY4   |  104 |          CarryLogic |
+| LUT3     |   77 |                 LUT |
 | OBUF     |   45 |                  IO |
 | IBUF     |   32 |                  IO |
-| LUT1     |   17 |                 LUT |
+| LUT1     |   18 |                 LUT |
+| DSP48E1  |    5 |    Block Arithmetic |
 | FDSE     |    4 |        Flop & Latch |
-| DSP48E1  |    4 |    Block Arithmetic |
 | LDCE     |    3 |        Flop & Latch |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
