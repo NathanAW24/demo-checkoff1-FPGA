@@ -1,3 +1,4 @@
+
 module adder_autotester (
     input clk,  // clock
     input rst,  // reset
@@ -30,6 +31,36 @@ module adder_autotester (
   
   //import alu
   alu alu_unit; 
+  
+  const TEST_CASE_ROM = { 
+    
+    //test case 12:
+    56h01FFFFFFFF0000,
+    //test case 11: 
+    56h01FFFF0001FFFE,
+    //test case 10:
+    56h01800000017FFF, 
+    //test case 9:
+    56h010001FFFF0002,
+    //test case 8:
+    56h017FFF8001FFFE,
+    // test case 7:
+    56h01000200010001,
+    //test case 6:
+    56h01000000000000,
+    //test case 5: 
+    56h000001F000F001,
+    // test case 4: 
+    56h000004FFFF0003,
+    // test case 3: 
+    56h00000100010002,
+    // test case 2:
+    56h00800180000001,
+    //test case 1: 
+    56h00000000000000,
+    //test case 0: 
+    56h00000000000000 
+    };
 
   always {
     // Declare initial values
@@ -47,14 +78,21 @@ module adder_autotester (
     
     case(state.q){
       state.IDLE:
+      
         if(speed_through.q){
-          state.d = state.TESTING; 
-          current_test_case_register.d = current_test_case_register.q + b00001;
-        }
-        if(button_next_test_case){
-          state.d = state.TESTING; 
-          current_test_case_register.d = current_test_case_register.q + b00001 ;
+          if( current_test_case_register.q < b01101){
+            state.d = state.TESTING; 
+            current_test_case_register.d = current_test_case_register.q + b00001;
           }
+        }
+
+        if(button_next_test_case){
+          if( current_test_case_register.q < b01101){
+            state.d = state.TESTING; 
+            current_test_case_register.d = current_test_case_register.q + b00001;
+          }
+        }
+        
         if(button_reset){ // ADDED BY ANSAR TO FIX RESET BUTTON
           state.d = state.IDLE; // ADDED BY ANSAR TO FIX RESET BUTTON
           current_test_case_register.d = 5b0; // ADDED BY ANSAR TO FIX RESET BUTTON
@@ -63,228 +101,27 @@ module adder_autotester (
           speed_through.d = b0;
         }
         
-      state.TESTING: 
+      state.TESTING:
         case(current_test_case_register.q){
-          // ADD: 0 + 0
-          b00001:
-            alu_unit.a = 16h0000;
-            alu_unit.b= 16h0000;
-            alu_unit.alufn_signal = 6b0;
-            current_test_case = current_test_case_register.q;
-            reg_current_statusPF.d = b01;
-            reg_current_out.d = alu_unit.out; 
-
-       
-            if (alu_unit.out != 16h0000){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
+          current_test_case_register.q: 
+            if(current_test_case_register.q == b01101 ){
+              state.d = state.PASS ;
+            }else{
+            
+              alu_unit.a = TEST_CASE_ROM[current_test_case_register.q][47:32];
+              alu_unit.b = TEST_CASE_ROM[current_test_case_register.q][31:16];
+              alu_unit.alufn_signal = TEST_CASE_ROM[current_test_case_register.q][53:48];
+              
+              reg_current_statusPF.d = b01;
+              current_test_case = current_test_case_register.q;
+              reg_current_out.d = alu_unit.out; 
+              
+              if (alu_unit.out != TEST_CASE_ROM[current_test_case_register.q][15:0]){
+                track_failure.d = track_failure.FAIL_BEFORE;
+                reg_current_statusPF.d = b10;
+              }
+              state.d =state.IDLE; 
             }
-            state.d =state.IDLE;  
-            
-          // ADD: pos + pos with overflow
-          b00010:
-            alu_unit.a = 16h8001;
-            alu_unit.b= 16h8000;
-            alu_unit.alufn_signal = 6b0;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-
-                  
-            if (alu_unit.out != 16h0001){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE;  
-            
-            
-          // ADD: pos + pos with NO overflow
-          b00011:
-            alu_unit.a = 16h0001;
-            alu_unit.b= 16h0001;
-            alu_unit.alufn_signal = 6b0;
-            reg_current_statusPF.d = b01;            
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-                 
-            
-            if (alu_unit.out != 16h0002){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE; 
-            
-            
-            
-          // ADD: pos + neg with overflow
-          b00100:
-            alu_unit.a = 16h0004;
-            alu_unit.b= 16hFFFF;
-            alu_unit.alufn_signal = 6b0;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-            
-                    
-            if (alu_unit.out != 16h0003){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE; 
-            
-          // ADD: pos + neg with NO overflow
-          b00101:
-            alu_unit.a = 16h0001;
-            alu_unit.b= 16hF000;
-            alu_unit.alufn_signal = 6b0;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-
-                                
-            if (alu_unit.out != 16hF001){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE; 
-            
-            
-          // SUB: 0 - 0
-          b00110:
-            alu_unit.a = 16h0000;
-            alu_unit.b= 16h0000;
-            alu_unit.alufn_signal = 6b000001;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-
-                               
-            if (alu_unit.out != 16h0000){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE; 
-            
-            
-            
-            
-          // SUB: pos - pos with NO overflow
-          b00111:
-            alu_unit.a = 16h0002;
-            alu_unit.b= 16h0001;
-            alu_unit.alufn_signal = 6b000001;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-
-                    
-            if (alu_unit.out != 16h0001){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE;    
-            
-            
-          // SUB: pos - neg with overflow
-          b01000:
-            alu_unit.a = 16h7FFF;
-            alu_unit.b= 16h8001;
-            alu_unit.alufn_signal = 6b000001;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-                    
-            if (alu_unit.out != 16hFFFE){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE;       
-            
-            
-            
-          // SUB: pos - neg with overflow
-          b01001:
-            alu_unit.a = 16h0001;
-            alu_unit.b= 16hFFFF;
-            alu_unit.alufn_signal = 6b000001;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-                    
-            if (alu_unit.out != 16h0002){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE;        
-            
-          // SUB: neg - pos with overflow
-          b01010:
-            alu_unit.a = 16h8000;
-            alu_unit.b= 16h0001;
-            alu_unit.alufn_signal = 6b000001;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-                    
-            if (alu_unit.out != 16h7FFF){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE;      
-            
-            
-            
-          // SUB: neg - pos with NO overflow
-          b01011:
-            alu_unit.a = 16hFFFF; 
-            alu_unit.b= 16h0001;
-            alu_unit.alufn_signal = 6b000001;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-                    
-            if (alu_unit.out != 16hFFFE){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.IDLE;      
-            
-            
-            
-          // SUB: neg - pos with NO overflow
-          b01100:
-            alu_unit.a = 16hFFFF;
-            alu_unit.b= 16hFFFF;
-            alu_unit.alufn_signal = 6b000001;
-            reg_current_statusPF.d = b01;
-            current_test_case = current_test_case_register.q;
-            reg_current_out.d = alu_unit.out; 
-                    
-            if (alu_unit.out != 16h0000){
-              track_failure.d = track_failure.FAIL_BEFORE;
-              reg_current_statusPF.d = b10;
-  
-            }
-            state.d =state.PASS; 
-            
-            
-          // ***********************************************
-          // TEST PASSED! After everything above run alr
-          default:
-            current_test_case_register.d = b01101;
-            state.d = state.PASS;
-           
         }
       state.PASS:
         if(track_failure.q == track_failure.FAIL_BEFORE){
