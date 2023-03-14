@@ -34,14 +34,13 @@ module compare_autotester (
   always {
   
     // declare initial values
-    current_test_case = 5b0;
+    // current_test_case = 5b0;
     // a b and alufn_signal
     alu_unit.a = 16b0;
     alu_unit.b = 16b0;
     alu_unit.inv = inv;
     alu_unit.alufn_signal = 6b110011; // CMPEQ
     state.d = state.IDLE;
-    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
 
     
     if (button_speed_through) {
@@ -559,6 +558,7 @@ module compare_autotester (
           reg_current_out.d = 16b0;
           reg_current_statusPF.d = 2b00;
           speed_through.d = b0;
+          current_test_case_register.d = 5b0;
 
 
         }

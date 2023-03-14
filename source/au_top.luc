@@ -71,7 +71,7 @@ module au_top (
     
     //Auto mode Inputs 
     auto.button = buttondetector.out; 
-    auto.inv = io_dip[0][0];
+    auto.inv = io_dip[2][6];
     
     case (mode.q) {
       mode.MANUAL: 

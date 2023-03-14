@@ -133,7 +133,7 @@ module au_top_0 (
     M_manual_dip[8+7-:8] = io_dip[8+7-:8];
     M_manual_dip[16+5-:6] = io_dip[16+0+5-:6];
     M_auto_button = M_buttondetector_out;
-    M_auto_inv = io_dip[0+0+0-:1];
+    M_auto_inv = io_dip[16+6+0-:1];
     
     case (M_mode_q)
       MANUAL_mode: begin
@@ -182,18 +182,18 @@ module au_top_0 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_auto_mode_register_q <= 1'h0;
+      M_mode_q <= 1'h0;
     end else begin
-      M_auto_mode_register_q <= M_auto_mode_register_d;
+      M_mode_q <= M_mode_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_mode_q <= 1'h0;
+      M_auto_mode_register_q <= 1'h0;
     end else begin
-      M_mode_q <= M_mode_d;
+      M_auto_mode_register_q <= M_auto_mode_register_d;
     end
   end
   

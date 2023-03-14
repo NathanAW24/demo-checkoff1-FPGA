@@ -39,7 +39,6 @@ module boolean_autotester (
     aluUnit.inv = inv ; 
     aluUnit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
-    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
 
     
     if(button_speed_through){
@@ -138,7 +137,6 @@ module boolean_autotester (
             }
             
             state.d = state.IDLE;       
-          
         
         // OR
         5b00101: // 5
@@ -216,7 +214,6 @@ module boolean_autotester (
             current_test_case_register.d = 5b01001;
             state.d = state.PASS;
         }
-        
         
         state.PASS:
       if(track_failure.q == track_failure.FAIL_BEFORE){

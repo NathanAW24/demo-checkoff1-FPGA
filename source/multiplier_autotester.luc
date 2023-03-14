@@ -33,14 +33,13 @@ module multiplier_autotester (
 
   always {
     // declare initial values
-    current_test_case = 5b0; // start from first case (5b0)
+    // current_test_case = 5b0; // start from first case (5b0)
     alu_unit.a = 16b0;
     alu_unit.b = 16b0;
     alu_unit.inv = inv;
     alu_unit.alufn_signal = 6b000010; // SIGNAL FOR MULTIPLIER
     // starts at idle state, before testing
     state.d = state.IDLE;
-    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
 
     
     // check if up button is pressed or not
@@ -352,7 +351,7 @@ module multiplier_autotester (
           reg_current_out.d = 16b0; // set back to 0 when reset button is pressed
           reg_current_statusPF.d = 2b00;
           speed_through.d = b0;
-
+          current_test_case_register.d = 5b0;
 
         }
               

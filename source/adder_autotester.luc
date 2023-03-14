@@ -26,6 +26,7 @@ module adder_autotester (
   // Declare the fsm states
   fsm state (.clk(clk), .rst(rst)) = {IDLE, TESTING, PASS};
   fsm track_failure (.clk(clk), .rst(rst)) = {NULL, FAIL_BEFORE};
+  // dff track_failure[1] (.clk(clk), .rst(rst));
   
   //import alu
   alu alu_unit; 
@@ -38,10 +39,10 @@ module adder_autotester (
     alu_unit.inv = inv ; 
     alu_unit.alufn_signal = 6b0; // default adder 
     state.d = state.IDLE;
-    track_failure.d = track_failure.NULL; // ADDED BY ANSAR TO FIX RESET BUTTON
+    // ADDED BY ANSAR TO FIX RESET BUTTON
     
-    if(button_speed_through){
-      speed_through.d = b1; 
+     if(button_speed_through){
+       speed_through.d = b1; 
       }
     
     case(state.q){

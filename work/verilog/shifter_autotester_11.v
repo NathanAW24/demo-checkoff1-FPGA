@@ -62,13 +62,11 @@ module shifter_autotester_11 (
     M_reg_current_out_d = M_reg_current_out_q;
     M_reg_current_statusPF_d = M_reg_current_statusPF_q;
     
-    current_test_case = 5'h00;
     M_aluUnit_a = 16'h0000;
     M_aluUnit_b = 16'h0000;
     M_aluUnit_inv = inv;
     M_aluUnit_alufn_signal = 6'h00;
     M_state_d = IDLE_state;
-    M_track_failure_d = NULL_track_failure;
     if (button_speed_through) begin
       M_speed_through_d = 1'h1;
     end
@@ -291,33 +289,6 @@ module shifter_autotester_11 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_statusPF_q <= 2'h0;
-    end else begin
-      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
-    end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_track_failure_q <= 1'h0;
-    end else begin
-      M_track_failure_q <= M_track_failure_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
       M_state_q <= 1'h0;
     end else begin
       M_state_q <= M_state_d;
@@ -339,6 +310,33 @@ module shifter_autotester_11 (
       M_speed_through_q <= 1'h0;
     end else begin
       M_speed_through_q <= M_speed_through_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_track_failure_q <= 1'h0;
+    end else begin
+      M_track_failure_q <= M_track_failure_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_out_q <= 1'h0;
+    end else begin
+      M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_statusPF_q <= 2'h0;
+    end else begin
+      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
     end
   end
   

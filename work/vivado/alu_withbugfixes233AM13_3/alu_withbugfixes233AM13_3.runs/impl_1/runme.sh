@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1'
+HD_PWD='C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

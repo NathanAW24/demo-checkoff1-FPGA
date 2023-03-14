@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Mon Mar 13 23:31:52 2023
-| Host         : LAPTOP-P3RR15PA running 64-bit major release  (build 9200)
+| Date         : Tue Mar 14 00:55:20 2023
+| Host         : LAPTOP-C9N1JGD5 running 64-bit major release  (build 9200)
 | Command      : report_drc -file au_top_0_drc_routed.rpt -pb au_top_0_drc_routed.pb -rpx au_top_0_drc_routed.rpx
 | Design       : au_top_0
 | Device       : xc7a35tftg256-1
@@ -68,7 +68,7 @@ Related violations: <none>
 
 PDRC-153#1 Warning
 Gated clock check  
-Net auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2_n_0 is a gated clock net sourced by a combinational pin auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2/O, cell auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Net auto/test_compare/alu_unit/compareUnit/FSM_sequential_M_state_q_reg[0] is a gated clock net sourced by a combinational pin auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2/O, cell auto/test_compare/alu_unit/compareUnit/out_reg[0]_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 PDRC-153#2 Warning

@@ -62,13 +62,11 @@ module compare_autotester_9 (
     M_reg_current_out_d = M_reg_current_out_q;
     M_reg_current_statusPF_d = M_reg_current_statusPF_q;
     
-    current_test_case = 5'h00;
     M_alu_unit_a = 16'h0000;
     M_alu_unit_b = 16'h0000;
     M_alu_unit_inv = inv;
     M_alu_unit_alufn_signal = 6'h33;
     M_state_d = IDLE_state;
-    M_track_failure_d = NULL_track_failure;
     if (button_speed_through) begin
       M_speed_through_d = 1'h1;
     end
@@ -415,6 +413,7 @@ module compare_autotester_9 (
           M_reg_current_out_d = 16'h0000;
           M_reg_current_statusPF_d = 2'h0;
           M_speed_through_d = 1'h0;
+          M_current_test_case_register_d = 5'h00;
         end
       end
     endcase
@@ -425,18 +424,9 @@ module compare_autotester_9 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
+      M_current_test_case_register_q <= 5'h00;
     end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
-    end else begin
-      M_state_q <= M_state_d;
+      M_current_test_case_register_q <= M_current_test_case_register_d;
     end
   end
   
@@ -452,18 +442,27 @@ module compare_autotester_9 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_speed_through_q <= 1'h0;
+      M_state_q <= 1'h0;
     end else begin
-      M_speed_through_q <= M_speed_through_d;
+      M_state_q <= M_state_d;
     end
   end
   
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_current_test_case_register_q <= 5'h00;
+      M_reg_current_out_q <= 1'h0;
     end else begin
-      M_current_test_case_register_q <= M_current_test_case_register_d;
+      M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_speed_through_q <= 1'h0;
+    end else begin
+      M_speed_through_q <= M_speed_through_d;
     end
   end
   

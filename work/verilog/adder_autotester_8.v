@@ -67,7 +67,6 @@ module adder_autotester_8 (
     M_alu_unit_inv = inv;
     M_alu_unit_alufn_signal = 6'h00;
     M_state_d = IDLE_state;
-    M_track_failure_d = NULL_track_failure;
     if (button_speed_through) begin
       M_speed_through_d = 1'h1;
     end
@@ -286,9 +285,9 @@ module adder_autotester_8 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_current_test_case_register_q <= 5'h00;
+      M_reg_current_out_q <= 1'h0;
     end else begin
-      M_current_test_case_register_q <= M_current_test_case_register_d;
+      M_reg_current_out_q <= M_reg_current_out_d;
     end
   end
   
@@ -313,9 +312,9 @@ module adder_autotester_8 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
+      M_current_test_case_register_q <= 5'h00;
     end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
+      M_current_test_case_register_q <= M_current_test_case_register_d;
     end
   end
   
