@@ -54,6 +54,8 @@ module adder_autotester_8 (
     .zvn(M_alu_unit_zvn)
   );
   
+  localparam TEST_CASE_ROM = 728'h01ffffffff000001ffff0001fffe01800000017fff010001ffff0002017fff8001fffe0100020001000101000000000000000001f000f001000004ffff000300000100010002008001800000010000000000000000000000000000;
+  
   always @* begin
     M_track_failure_d = M_track_failure_q;
     M_state_d = M_state_q;
@@ -74,12 +76,16 @@ module adder_autotester_8 (
     case (M_state_q)
       IDLE_state: begin
         if (M_speed_through_q) begin
-          M_state_d = TESTING_state;
-          M_current_test_case_register_d = M_current_test_case_register_q + 5'h01;
+          if (M_current_test_case_register_q < 5'h0d) begin
+            M_state_d = TESTING_state;
+            M_current_test_case_register_d = M_current_test_case_register_q + 5'h01;
+          end
         end
         if (button_next_test_case) begin
-          M_state_d = TESTING_state;
-          M_current_test_case_register_d = M_current_test_case_register_q + 5'h01;
+          if (M_current_test_case_register_q < 5'h0d) begin
+            M_state_d = TESTING_state;
+            M_current_test_case_register_d = M_current_test_case_register_q + 5'h01;
+          end
         end
         if (button_reset) begin
           M_state_d = IDLE_state;
@@ -92,165 +98,22 @@ module adder_autotester_8 (
       TESTING_state: begin
         
         case (M_current_test_case_register_q)
-          5'h01: begin
-            M_alu_unit_a = 16'h0000;
-            M_alu_unit_b = 16'h0000;
-            M_alu_unit_alufn_signal = 6'h00;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_statusPF_d = 2'h1;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
+          M_current_test_case_register_q: begin
+            if (M_current_test_case_register_q == 5'h0d) begin
+              M_state_d = PASS_state;
+            end else begin
+              M_alu_unit_a = TEST_CASE_ROM[(M_current_test_case_register_q)*56+32+15-:16];
+              M_alu_unit_b = TEST_CASE_ROM[(M_current_test_case_register_q)*56+16+15-:16];
+              M_alu_unit_alufn_signal = TEST_CASE_ROM[(M_current_test_case_register_q)*56+48+5-:6];
+              M_reg_current_statusPF_d = 2'h1;
+              current_test_case = M_current_test_case_register_q;
+              M_reg_current_out_d = M_alu_unit_out;
+              if (M_alu_unit_out != TEST_CASE_ROM[(M_current_test_case_register_q)*56+0+15-:16]) begin
+                M_track_failure_d = FAIL_BEFORE_track_failure;
+                M_reg_current_statusPF_d = 2'h2;
+              end
+              M_state_d = IDLE_state;
             end
-            M_state_d = IDLE_state;
-          end
-          5'h02: begin
-            M_alu_unit_a = 16'h8001;
-            M_alu_unit_b = 16'h8000;
-            M_alu_unit_alufn_signal = 6'h00;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0001) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h03: begin
-            M_alu_unit_a = 16'h0001;
-            M_alu_unit_b = 16'h0001;
-            M_alu_unit_alufn_signal = 6'h00;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0002) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h04: begin
-            M_alu_unit_a = 16'h0004;
-            M_alu_unit_b = 16'hffff;
-            M_alu_unit_alufn_signal = 6'h00;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0003) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h05: begin
-            M_alu_unit_a = 16'h0001;
-            M_alu_unit_b = 16'hf000;
-            M_alu_unit_alufn_signal = 6'h00;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'hf001) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h06: begin
-            M_alu_unit_a = 16'h0000;
-            M_alu_unit_b = 16'h0000;
-            M_alu_unit_alufn_signal = 6'h01;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h07: begin
-            M_alu_unit_a = 16'h0002;
-            M_alu_unit_b = 16'h0001;
-            M_alu_unit_alufn_signal = 6'h01;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0001) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h08: begin
-            M_alu_unit_a = 16'h7fff;
-            M_alu_unit_b = 16'h8001;
-            M_alu_unit_alufn_signal = 6'h01;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'hfffe) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h09: begin
-            M_alu_unit_a = 16'h0001;
-            M_alu_unit_b = 16'hffff;
-            M_alu_unit_alufn_signal = 6'h01;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0002) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0a: begin
-            M_alu_unit_a = 16'h8000;
-            M_alu_unit_b = 16'h0001;
-            M_alu_unit_alufn_signal = 6'h01;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h7fff) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0b: begin
-            M_alu_unit_a = 16'hffff;
-            M_alu_unit_b = 16'h0001;
-            M_alu_unit_alufn_signal = 6'h01;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'hfffe) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = IDLE_state;
-          end
-          5'h0c: begin
-            M_alu_unit_a = 16'hffff;
-            M_alu_unit_b = 16'hffff;
-            M_alu_unit_alufn_signal = 6'h01;
-            M_reg_current_statusPF_d = 2'h1;
-            current_test_case = M_current_test_case_register_q;
-            M_reg_current_out_d = M_alu_unit_out;
-            if (M_alu_unit_out != 16'h0000) begin
-              M_track_failure_d = FAIL_BEFORE_track_failure;
-              M_reg_current_statusPF_d = 2'h2;
-            end
-            M_state_d = PASS_state;
-          end
-          default: begin
-            M_current_test_case_register_d = 5'h0d;
-            M_state_d = PASS_state;
           end
         endcase
       end
@@ -276,36 +139,9 @@ module adder_autotester_8 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_state_q <= 1'h0;
+      M_track_failure_q <= 1'h0;
     end else begin
-      M_state_q <= M_state_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
-    end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_speed_through_q <= 1'h0;
-    end else begin
-      M_speed_through_q <= M_speed_through_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
-      M_reg_current_statusPF_q <= 2'h0;
-    end else begin
-      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
+      M_track_failure_q <= M_track_failure_d;
     end
   end
   
@@ -321,9 +157,36 @@ module adder_autotester_8 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_track_failure_q <= 1'h0;
+      M_reg_current_out_q <= 1'h0;
     end else begin
-      M_track_failure_q <= M_track_failure_d;
+      M_reg_current_out_q <= M_reg_current_out_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_statusPF_q <= 2'h0;
+    end else begin
+      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_state_q <= 1'h0;
+    end else begin
+      M_state_q <= M_state_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_speed_through_q <= 1'h0;
+    end else begin
+      M_speed_through_q <= M_speed_through_d;
     end
   end
   

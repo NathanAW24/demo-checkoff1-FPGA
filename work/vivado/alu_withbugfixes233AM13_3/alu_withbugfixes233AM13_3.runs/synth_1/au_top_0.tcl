@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/synth_1/au_top_0.tcl"
+  variable script "A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.runs/synth_1/au_top_0.tcl"
   variable category "vivado_synth"
 }
 
@@ -76,36 +76,36 @@ create_project -in_memory -part xc7a35tftg256-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.cache/wt [current_project]
-set_property parent.project_path C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.xpr [current_project]
+set_property webtalk.parent_dir A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.cache/wt [current_project]
+set_property parent.project_path A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/adder_17.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/adder_autotester_8.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/alu_7.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/alu_manual_tester_1.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/auto_tester_2.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/boolean_19.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/boolean_autotester_10.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/button_conditioner_4.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_21.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_autotester_9.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/counter_13.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/decoder_15.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/edge_detector_5.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multi_seven_seg_3.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiplier_autotester_12.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiply_18.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/pipeline_16.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/reset_conditioner_6.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/seven_seg_14.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_20.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_autotester_11.v
-  C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/au_top_0.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/adder_17.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/adder_autotester_8.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/alu_7.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/alu_manual_tester_1.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/auto_tester_2.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/boolean_19.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/boolean_autotester_10.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/button_conditioner_4.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_21.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/compare_autotester_9.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/counter_13.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/decoder_15.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/edge_detector_5.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multi_seven_seg_3.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiplier_autotester_12.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/multiply_18.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/pipeline_16.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/reset_conditioner_6.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/seven_seg_14.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_20.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/shifter_autotester_11.v
+  A:/FPGA/demo-checkoff1-FPGA/work/vivado/alu_withbugfixes233AM13_3/alu_withbugfixes233AM13_3.srcs/sources_1/imports/verilog/au_top_0.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -116,11 +116,11 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/constraint/alchitry.xdc
-set_property used_in_implementation false [get_files C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/constraint/alchitry.xdc]
+read_xdc A:/FPGA/demo-checkoff1-FPGA/work/constraint/alchitry.xdc
+set_property used_in_implementation false [get_files A:/FPGA/demo-checkoff1-FPGA/work/constraint/alchitry.xdc]
 
-read_xdc C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/constraint/io.xdc
-set_property used_in_implementation false [get_files C:/Users/ansar/Desktop/demo-checkoff1-FPGA/work/constraint/io.xdc]
+read_xdc A:/FPGA/demo-checkoff1-FPGA/work/constraint/io.xdc
+set_property used_in_implementation false [get_files A:/FPGA/demo-checkoff1-FPGA/work/constraint/io.xdc]
 
 read_xdc {{C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc}}
 set_property used_in_implementation false [get_files {{C:/Program Files/Alchitry/Alchitry Labs/library/components/au.xdc}}]

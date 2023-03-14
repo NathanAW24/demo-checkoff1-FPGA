@@ -424,15 +424,6 @@ module compare_autotester_9 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_current_test_case_register_q <= 5'h00;
-    end else begin
-      M_current_test_case_register_q <= M_current_test_case_register_d;
-    end
-  end
-  
-  
-  always @(posedge clk) begin
-    if (rst == 1'b1) begin
       M_track_failure_q <= 1'h0;
     end else begin
       M_track_failure_q <= M_track_failure_d;
@@ -451,9 +442,18 @@ module compare_autotester_9 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_out_q <= 1'h0;
+      M_current_test_case_register_q <= 5'h00;
     end else begin
-      M_reg_current_out_q <= M_reg_current_out_d;
+      M_current_test_case_register_q <= M_current_test_case_register_d;
+    end
+  end
+  
+  
+  always @(posedge clk) begin
+    if (rst == 1'b1) begin
+      M_reg_current_statusPF_q <= 2'h0;
+    end else begin
+      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
     end
   end
   
@@ -469,9 +469,9 @@ module compare_autotester_9 (
   
   always @(posedge clk) begin
     if (rst == 1'b1) begin
-      M_reg_current_statusPF_q <= 2'h0;
+      M_reg_current_out_q <= 1'h0;
     end else begin
-      M_reg_current_statusPF_q <= M_reg_current_statusPF_d;
+      M_reg_current_out_q <= M_reg_current_out_d;
     end
   end
   
