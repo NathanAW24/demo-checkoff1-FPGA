@@ -77,7 +77,6 @@ module auto_tester (
         }
         else if (button[4]) {  // pressed right
           tester_function_state.d = tester_function_state.q + 1;
-          //////
           test_adder.button_reset = b1;
           test_boolean.button_reset = b1; 
           test_compare.button_reset = b1; 
@@ -91,12 +90,8 @@ module auto_tester (
         out = test_adder.out;
         if (button[3]) {  // pressed left
           tester_function_state.d = tester_function_state.q - 1;
-          ///
-          test_compare.button_reset = b1; 
-          test_boolean.button_reset = b1; 
-          test_compare.button_reset = b1; 
+          //reset test_adder unit
           test_multiply.button_reset = b1; 
-          test_shifter.button_reset = b1; 
           
         }
         else if (button[4]) {  // pressed right
@@ -112,7 +107,7 @@ module auto_tester (
         out_current_test_case = test_compare.current_test_case;
         if (button[3]) {  // pressed left
           tester_function_state.d = tester_function_state.q - 1;
-          //reset test_adder unit 
+          //reset test_multiply unit 
           test_adder.button_reset = b1;
           
         }
@@ -163,19 +158,11 @@ module auto_tester (
           tester_function_state.d = tester_function_state.q - 1;
           //reset test shifter unit 
           test_shifter.button_reset = b1;
-          test_adder.button_reset = b1;
-          test_boolean.button_reset = b1; 
-          test_compare.button_reset = b1; 
-          test_multiply.button_reset = b1; 
         }
         else if (button[4]) {  // pressed right
           tester_function_state.d = tester_function_state.IDLE;
-          ////
+          //reset test adder unit
           test_adder.button_reset = b1;
-          test_boolean.button_reset = b1; 
-          test_compare.button_reset = b1; 
-          test_multiply.button_reset = b1; 
-          test_shifter.button_reset = b1; 
         }
 
     }
